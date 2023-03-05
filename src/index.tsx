@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { AuthenticateClientParams } from './types';
 
 const LINKING_ERROR =
   `The package 'react-native-cloud-ca' doesn't seem to be linked. Make sure: \n\n` +
@@ -19,4 +20,15 @@ const CloudCa = NativeModules.CloudCa
 
 export function multiply(a: number, b: number): Promise<number> {
   return CloudCa.multiply(a, b);
+}
+
+export function sdkSetup(): Promise<string> {
+  return CloudCa.sdkSetup();
+}
+
+export function authenticateClient(
+  params: AuthenticateClientParams
+): Promise<number> {
+  const { clientId, clientSecret, grantType } = params;
+  return CloudCa.authenticateClient(clientId, clientSecret, grantType);
 }
