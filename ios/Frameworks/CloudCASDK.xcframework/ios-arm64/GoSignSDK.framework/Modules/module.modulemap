@@ -1,0 +1,11 @@
+framework module GoSignSDK {
+  umbrella header "GoSignSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module GoSignSDK.Swift {
+  header "GoSignSDK-Swift.h"
+  requires objc
+}
