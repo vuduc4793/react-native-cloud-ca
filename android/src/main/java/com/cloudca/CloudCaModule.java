@@ -6,10 +6,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
 
 import com.viettel.sdk.gosignsdk.helpers.GoSignSDK;
@@ -34,6 +38,9 @@ import com.viettel.sdk.gosignsdk.network.response.ResponseError;
 import com.viettel.sdk.gosignsdk.network.response.TokenInfo;
 import com.viettel.sdk.gosignsdk.network.response.UserProfileAPIResponse;
 import com.viettel.sdk.gosignsdk.utils.StringUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,9 +71,9 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void sdkSetup(Promise promise) {
+  public void sdkSetup(String baseURL, Promise promise) {
     try {
-      SDKSetup.initialize((Application) reactContext.getApplicationContext());
+      SDKSetup.initialize((Application) reactContext.getApplicationContext(), baseURL);
       promise.resolve("SDK setup done");
     } catch(Exception e) {
       promise.reject(EVENT_ERROR, "SDK setup error");
@@ -79,12 +86,17 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
        new ServiceApiListener<AuthClientResponse>() {
          @Override
          public void onSuccess(AuthClientResponse data) {
-           promise.resolve(data);
+           WritableMap result = Arguments.createMap();
+           result.putString("access_token", data.getAccessToken());
+           result.putString("refresh_token", data.getRefreshToken());
+           result.putString("token_type", data.getTokenType());
+           result.putString("expires_in", data.getExpiresIn());
+           promise.resolve(result);
          }
          @Override
          public void onFail(ResponseError error) {
            CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-           promise.reject(EVENT_ERROR, e.getError());
+           promise.reject(EVENT_ERROR, e);
          }
        });
   }
@@ -95,7 +107,18 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       new ServiceApiListener<AuthUserResponse>() {
         @Override
         public void onSuccess(AuthUserResponse data) {
-          promise.resolve(data);
+          WritableMap result = Arguments.createMap();
+          result.putString("auth_type", data.getAuthType());
+          // get token info
+          AuthClientResponse tokenInfo = data.getTokenInfo();
+          WritableMap tokenInfoMap = Arguments.createMap();
+          tokenInfoMap.putString("access_token", tokenInfo.getAccessToken());
+          tokenInfoMap.putString("refresh_token", tokenInfo.getRefreshToken());
+          tokenInfoMap.putString("token_type", tokenInfo.getTokenType());
+          tokenInfoMap.putString("expires_in", tokenInfo.getExpiresIn());
+          // push token info to result
+          result.putMap("token_info", tokenInfoMap);
+          promise.resolve(result);
         }
         @Override
         public void onFail(ResponseError error) {
@@ -121,7 +144,13 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     GoSignSDK.get().verifyOTP(request, new ServiceApiListener<TokenInfo>() {
       @Override
       public void onSuccess(TokenInfo data) {
-        promise.resolve(data);
+        WritableMap result = Arguments.createMap();
+        result.putString("access_token", data.getAccessToken());
+        result.putString("refresh_token", data.getRefreshToken());
+        result.putString("token_type", data.getTokenType());
+        result.putDouble("expires_in", data.getExpiresIn());
+
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
@@ -137,7 +166,13 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       new ServiceApiListener<TokenInfo>() {
         @Override
         public void onSuccess(TokenInfo data) {
-          promise.resolve(data);
+          WritableMap result = Arguments.createMap();
+          result.putString("access_token", data.getAccessToken());
+          result.putString("refresh_token", data.getRefreshToken());
+          result.putString("token_type", data.getTokenType());
+          result.putDouble("expires_in", data.getExpiresIn());
+
+          promise.resolve(result);
         }
         @Override
         public void onFail(ResponseError error) {
@@ -148,11 +183,23 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.5 DeviceRegistration
   @ReactMethod
-  public void registerDevice(String clientId, String clientSecret, String grantType, Promise promise) {
+  public void registerDevice(Promise promise) {
     GoSignSDK.get().registerDevice(new ServiceApiListener<AuthUserResponse>() {
       @Override
       public void onSuccess(AuthUserResponse data) {
-        promise.resolve(data);
+        WritableMap result = Arguments.createMap();
+        result.putString("auth_type", data.getAuthType());
+        // get token info
+        AuthClientResponse tokenInfo = data.getTokenInfo();
+        WritableMap tokenInfoMap = Arguments.createMap();
+        tokenInfoMap.putString("access_token", tokenInfo.getAccessToken());
+        tokenInfoMap.putString("refresh_token", tokenInfo.getRefreshToken());
+        tokenInfoMap.putString("token_type", tokenInfo.getTokenType());
+        tokenInfoMap.putString("expires_in", tokenInfo.getExpiresIn());
+        // push token info to result
+        result.putMap("token_info", tokenInfoMap);
+
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
@@ -168,7 +215,21 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       new ServiceApiListener<List<DeviceInfo>>() {
         @Override
         public void onSuccess(List<DeviceInfo> data) {
-          promise.resolve(data);
+          DeviceInfo[] returnArray = new DeviceInfo[data.size()];
+          returnArray = data.toArray(returnArray);
+
+          WritableArray result = Arguments.createArray();
+          for(int i=0;i<returnArray.length;i++){
+            DeviceInfo deviceChildInfo = returnArray[i];
+            WritableMap deviceChildInfoMap = Arguments.createMap();
+            deviceChildInfoMap.putString("device_id", deviceChildInfo.getDeviceID());
+            deviceChildInfoMap.putString("device_name", deviceChildInfo.getDeviceName());
+            deviceChildInfoMap.putBoolean("secure_element", deviceChildInfo.isSecureElement());
+            deviceChildInfoMap.putBoolean("biometric", deviceChildInfo.isBiometric());
+
+            result.pushMap(deviceChildInfoMap);
+          }
+          promise.resolve(result);
         }
         @Override
         public void onFail(ResponseError error) {
@@ -179,8 +240,8 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.7 Delete Device
   @ReactMethod
-  public void deleteDevice(String deviceID, Promise promise) {
-    GoSignSDK.get().deleteDevice(deviceID,
+  public void deleteDevice(String deviceId, Promise promise) {
+    GoSignSDK.get().deleteDevice(deviceId,
       new ServiceApiListenerEmpty() {
         @Override
         public void onSuccess() {
@@ -199,7 +260,12 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     GoSignSDK.get().getPendingAuthorisationRequest(new ServiceApiListener<PendingAuthorisationAPIResponse>() {
       @Override
       public void onSuccess(PendingAuthorisationAPIResponse data) {
-        promise.resolve(data);
+        WritableMap result = Arguments.createMap();
+        result.putString("transaction_id", data.getTransactionID());
+        result.putString("request", data.getRequest());
+        result.putString("hash_algorithm", data.getHashAlgorithm());
+
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
@@ -225,7 +291,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.10 Cancel a Pending Authorisation Request
   @ReactMethod
-  public void cancelPendingRequest(String clientId, String clientSecret, String grantType, Promise promise) {
+  public void cancelPendingRequest(Promise promise) {
     GoSignSDK.get().cancelPendingRequest(new ServiceApiListenerEmpty() {
       @Override
       public void onSuccess() {
@@ -244,7 +310,14 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     GoSignSDK.get().getUserProfile(new ServiceApiListener<UserProfileAPIResponse>() {
       @Override
       public void onSuccess(UserProfileAPIResponse data) {
-        promise.resolve(data);
+        WritableMap result = Arguments.createMap();
+        result.putString("user_id", data.getUserID());
+        result.putString("user_name", data.getUserName());
+        result.putString("app_name", data.getAppName());
+        result.putString("user_email", data.getUserEmail());
+        result.putString("user_mobile", data.getUserMobile());
+
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
@@ -259,7 +332,15 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     GoSignSDK.get().getDeviceRegistrationSettings(new ServiceApiListener<DeviceRegistrationSettings>() {
       @Override
       public void onSuccess(DeviceRegistrationSettings data) {
-        promise.resolve(data);
+        WritableMap result = Arguments.createMap();
+        result.putString("device_key_type", data.getDeviceKeyType());
+        result.putInt("device_key_size", data.getDeviceKeySize());
+        result.putBoolean("secure_element_required", data.isSecureElementRequired());
+        result.putBoolean("biometric_required", data.isBiometricRequired());
+        result.putString("allowed_devices", data.getAllowedDevices());
+        result.putString("clock_tolerance_on_auth_cert", data.getClockToleranceOnAuthCERT());
+
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
@@ -270,12 +351,16 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.13 Generate QR Code
   @ReactMethod
-  public void generateQRCode(String clientID, String userID, QRFormat format, String size, Promise promise) {
-    GenerateQRCodeAPIRequest qrCodeAPIRequest = new GenerateQRCodeAPIRequest(clientID, userID, format, size);
+  public void generateQRCode(String clientId, String userId, QRFormat format, String size, Promise promise) {
+    GenerateQRCodeAPIRequest qrCodeAPIRequest = new GenerateQRCodeAPIRequest(clientId, userId, format, size);
     GoSignSDK.get().generateQRCode(qrCodeAPIRequest, new ServiceApiListener<GenerateQRCodeAPIResponse>() {
       @Override
       public void onSuccess(GenerateQRCodeAPIResponse data) {
-        promise.resolve(data);
+        WritableMap result = Arguments.createMap();
+        result.putString("size", data.getSize());
+        result.putString("qr_code", data.getQrCode());
+        result.putString("format", data.getFormat().toString());
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
@@ -286,12 +371,17 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.14 Verify QR Code
   @ReactMethod
-  public void verifyQRCode(String userID, String qrCode, Promise promise) {
-    GoSignSDK.get().verifyQRCode(new VerifyQRCodeAPIRequest(userID, qrCode),
+  public void verifyQRCode(String userId, String qrCode, Promise promise) {
+    GoSignSDK.get().verifyQRCode(new VerifyQRCodeAPIRequest(userId, qrCode),
       new ServiceApiListener<TokenInfo>() {
         @Override
         public void onSuccess(TokenInfo data) {
-          promise.resolve(data);
+          WritableMap result = Arguments.createMap();
+          result.putString("access_token", data.getAccessToken());
+          result.putString("refresh_token", data.getRefreshToken());
+          result.putString("token_type", data.getTokenType());
+          result.putDouble("expires_in", data.getExpiresIn());
+          promise.resolve(result);
         }
         @Override
         public void onFail(ResponseError error) {

@@ -1,32 +1,36 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-cloud-ca';
+import { authenticateClient, sdkSetup } from 'react-native-cloud-ca';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [lastResult, setResult] = React.useState<any>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-    // sdkSetup()
-    //   .then((result) => {
-    //     console.log('result', result);
-    //     authenticateClient({ clientId: '1', clientSecret: '', grantType: '' })
-    //       .then((result) => {
-    //         console.log('result', result);
-    //       })
-    //       .catch((error) => {
-    //         console.log('error', error);
-    //       });
-    //   })
-    //   .catch((error) => {
-    //     console.log('error', error);
-    //   });
+    sdkSetup({ baseUrl: 'https://remotesigning.viettel.vn' })
+      .then((sdkSetupResult) => {
+        console.log('sdkSetupResult', sdkSetupResult);
+        authenticateClient({
+          clientId: 'samples_test_client',
+          clientSecret: '205640fd6ea8c7d80bb91c630b52d286d21ee511',
+          grantType: 'client_credentials',
+        })
+          .then((result) => {
+            console.log('result', result);
+            setResult(result);
+          })
+          .catch((error) => {
+            console.log('authenticateClient error', error);
+          });
+      })
+      .catch((error) => {
+        console.log('sdkSetup error', error);
+      });
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result: {JSON.stringify(lastResult)}</Text>
     </View>
   );
 }
