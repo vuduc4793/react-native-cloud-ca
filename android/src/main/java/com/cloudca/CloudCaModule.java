@@ -106,7 +106,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.3 Verify OTP
   @ReactMethod
-  public void verifyOTP(String userId, String otpSms, String otmMail, Promise promise) {
+  public void verifyOTP(String userId, String otpSms, String otpMail, Promise promise) {
     VerifyOTPAPIRequest request = new VerifyOTPAPIRequest();
     request.setUserID(userId);
     List<VerifyOTPAPIRequest.OTPInfo> otpInfo = new ArrayList<>();
@@ -114,7 +114,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       otpInfo.add(new VerifyOTPAPIRequest.OTPInfo(otpSms, OTPType.SMS));
     }
     if(StringUtils.valid("OTP_MAIL")) {
-      otpInfo.add(new VerifyOTPAPIRequest.OTPInfo(otmMail, OTPType.MAIL));
+      otpInfo.add(new VerifyOTPAPIRequest.OTPInfo(otpMail, OTPType.MAIL));
     }
     request.setOtpInfo(otpInfo);
 

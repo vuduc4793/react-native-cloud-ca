@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GoSignSDK/PublicHeader.h>
+
 //! Project version number for GoSignSDK.
 FOUNDATION_EXPORT double GoSignSDKVersionNumber;
 

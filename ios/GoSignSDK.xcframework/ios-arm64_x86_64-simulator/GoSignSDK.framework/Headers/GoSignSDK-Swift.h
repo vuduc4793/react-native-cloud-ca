@@ -269,5 +269,5 @@ SWIFT_CLASS("_TtC9GoSignSDK25CertificateSigningRequest")
 #endif
 
 #else
-//#error unsupported Swift architecture
+#error unsupported Swift architecture
 #endif
