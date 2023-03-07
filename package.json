@@ -41,13 +41,13 @@
     "ios",
     "android"
   ],
-  "repository": "http://",
-  "author": "ducvt <vuduc4793@gmail.com> (http://)",
+  "repository": "https://github.com/vuduc4793/react-native-cloud-ca.git",
+  "author": "ducvt <vuduc4793@gmail.com> (https://github.com/vuduc4793)",
   "license": "MIT",
   "bugs": {
-    "url": "http:///issues"
+    "url": "https://github.com/vuduc4793/react-native-cloud-ca/issues"
   },
-  "homepage": "http://#readme",
+  "homepage": "https://github.com/vuduc4793/react-native-cloud-ca.git",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
