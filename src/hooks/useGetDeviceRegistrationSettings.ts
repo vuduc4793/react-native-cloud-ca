@@ -28,7 +28,7 @@ const useGetDeviceRegistrationSettings =
           const response = await getDeviceRegistrationSettings(params);
           setResult(response);
         } catch (e) {
-          setError((e as CustomError)?.error);
+          setError((e as CustomError)?.message);
         }
       },
       []

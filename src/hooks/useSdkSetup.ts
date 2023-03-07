@@ -15,7 +15,7 @@ const useSdkSetup = (): SdkSetupReturn => {
       const response = await sdkSetup(params);
       setResult(response);
     } catch (e) {
-      setError((e as CustomError)?.error);
+      setError((e as CustomError)?.message);
     }
   }, []);
 

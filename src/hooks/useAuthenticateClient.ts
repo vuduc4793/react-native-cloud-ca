@@ -24,7 +24,7 @@ const useAuthenticateClient = (): AuthenticateClientReturn => {
         const response = await authenticateClient(params);
         setResult(response);
       } catch (e) {
-        setError((e as CustomError)?.error);
+        setError((e as CustomError)?.message);
       }
     },
     []

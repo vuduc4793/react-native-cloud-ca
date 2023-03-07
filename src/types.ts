@@ -154,7 +154,7 @@ export interface DeleteDeviceForPushNotificationParams {
 }
 
 export interface CustomError {
-  error: string;
+  message: string;
 }
 
 export type BaseResponse = string;

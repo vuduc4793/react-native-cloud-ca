@@ -25,7 +25,7 @@ const useGetUserProfile = (): GetUserProfileReturn => {
         const response = await getUserProfile(params);
         setResult(response);
       } catch (e) {
-        setError((e as CustomError)?.error);
+        setError((e as CustomError)?.message);
       }
     },
     []

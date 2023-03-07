@@ -25,7 +25,7 @@ const useGenerateQRCode = (): GenerateQRCodeReturn => {
         const response = await generateQRCode(params);
         setResult(response);
       } catch (e) {
-        setError((e as CustomError)?.error);
+        setError((e as CustomError)?.message);
       }
     },
     []

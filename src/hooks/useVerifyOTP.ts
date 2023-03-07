@@ -19,7 +19,7 @@ const useVerifyOTP = (): VerifyOTPReturn => {
       const response = await verifyOTP(params);
       setResult(response);
     } catch (e) {
-      setError((e as CustomError)?.error);
+      setError((e as CustomError)?.message);
     }
   }, []);
 

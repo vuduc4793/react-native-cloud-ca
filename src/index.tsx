@@ -85,9 +85,9 @@ export function renewAccessToken(
 
 // 4.5 DeviceRegistration
 export function registerDevice(
-  params: RegisterDeviceParams
+  params?: RegisterDeviceParams
 ): Promise<RegisterDeviceResponse> {
-  const {} = params;
+  const {} = params ?? {};
   return CloudCa.registerDevice();
 }
 
@@ -180,3 +180,5 @@ export function deleteDeviceForPushNotification(
 }
 
 export * from './hooks';
+
+export * from './types';

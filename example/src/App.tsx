@@ -1,33 +1,36 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import {
-  useAuthenticateClient,
-  useAuthenticateUser,
-  useSdkSetup,
-} from 'react-native-cloud-ca';
+import { StyleSheet, View, TextInput, Button, Text } from 'react-native';
+import { useSdkSetup } from 'react-native-cloud-ca';
+import ListApiScene from './Scene/ListApiScene';
 
 export default function App() {
-  // const [lastResult, setResult] = React.useState<any>();
-  const [sdkSetupResult, sdkSetupError, onSdkSetup] = useSdkSetup();
-  // const [authenClientResult, authenClientError, onAuthenticateClient] =
-  //   useAuthenticateClient();
-  // const [authenUserResult, authenUserError, onAuthenticateClient] =
-  //   useAuthenticateUser();
+  const [baseUrl, setBaseUrl] = React.useState<string>(
+    'https://remotesigning.viettel.vn'
+  );
+  const [setupSdkResponse, , onSetupSDK] = useSdkSetup();
 
-  React.useEffect(() => {
-    // onSdkSetup({ baseUrl: 'https://remotesigning.viettel.vn' });
-    // onAuthenticateClient({
-    //   clientId: 'samples_test_client',
-    //   clientSecret: '205640fd6ea8c7d80bb91c630b52d286d21ee511',
-    //   grantType: 'client_credentials',
-    // });
-    // onAuthenticateClient({ userId: 'duynq7_viettel7' });
-  }, []);
+  const onSetUrl = () => {
+    onSetupSDK({ baseUrl });
+  };
 
   return (
     <View style={styles.container}>
-      {/* <Text>Result: {JSON.stringify(authenUserResult) || authenUserError}</Text> */}
+      {setupSdkResponse === null ? (
+        <>
+          <View>
+            <Text style={styles.label}>Base URL</Text>
+            <TextInput
+              onChangeText={setBaseUrl}
+              value={baseUrl}
+              style={styles.textInputContainer}
+            />
+          </View>
+          <Button title="Set URL" onPress={onSetUrl} />
+        </>
+      ) : (
+        <ListApiScene />
+      )}
     </View>
   );
 }
@@ -35,12 +38,18 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  label: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: 'black',
+  },
+  textInputContainer: {
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 10,
   },
 });

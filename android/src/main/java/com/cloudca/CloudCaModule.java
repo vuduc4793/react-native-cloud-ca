@@ -74,7 +74,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   public void sdkSetup(String baseURL, Promise promise) {
     try {
       SDKSetup.initialize((Application) reactContext.getApplicationContext(), baseURL);
-      promise.resolve("SDK setup done");
+      promise.resolve(SUCCEEDED);
     } catch(Exception e) {
       promise.reject(EVENT_ERROR, "SDK setup error");
     }
@@ -354,8 +354,8 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.13 Generate QR Code
   @ReactMethod
-  public void generateQRCode(String clientId, String userId, QRFormat format, String size, Promise promise) {
-    GenerateQRCodeAPIRequest qrCodeAPIRequest = new GenerateQRCodeAPIRequest(clientId, userId, format, size);
+  public void generateQRCode(String clientId, String userId, String format, String size, Promise promise) {
+    GenerateQRCodeAPIRequest qrCodeAPIRequest = new GenerateQRCodeAPIRequest(clientId, userId, QRFormat.get(format), size);
     GoSignSDK.get().generateQRCode(qrCodeAPIRequest, new ServiceApiListener<GenerateQRCodeAPIResponse>() {
       @Override
       public void onSuccess(GenerateQRCodeAPIResponse data) {
