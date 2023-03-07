@@ -111,13 +111,15 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
           result.putString("auth_type", data.getAuthType());
           // get token info
           AuthClientResponse tokenInfo = data.getTokenInfo();
-          WritableMap tokenInfoMap = Arguments.createMap();
-          tokenInfoMap.putString("access_token", tokenInfo.getAccessToken());
-          tokenInfoMap.putString("refresh_token", tokenInfo.getRefreshToken());
-          tokenInfoMap.putString("token_type", tokenInfo.getTokenType());
-          tokenInfoMap.putString("expires_in", tokenInfo.getExpiresIn());
-          // push token info to result
-          result.putMap("token_info", tokenInfoMap);
+          if (tokenInfo != null) {
+            WritableMap tokenInfoMap = Arguments.createMap();
+            tokenInfoMap.putString("access_token", tokenInfo.getAccessToken());
+            tokenInfoMap.putString("refresh_token", tokenInfo.getRefreshToken());
+            tokenInfoMap.putString("token_type", tokenInfo.getTokenType());
+            tokenInfoMap.putString("expires_in", tokenInfo.getExpiresIn());
+            // push token info to result
+            result.putMap("token_info", tokenInfoMap);
+          }
           promise.resolve(result);
         }
         @Override
@@ -191,14 +193,15 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         result.putString("auth_type", data.getAuthType());
         // get token info
         AuthClientResponse tokenInfo = data.getTokenInfo();
-        WritableMap tokenInfoMap = Arguments.createMap();
-        tokenInfoMap.putString("access_token", tokenInfo.getAccessToken());
-        tokenInfoMap.putString("refresh_token", tokenInfo.getRefreshToken());
-        tokenInfoMap.putString("token_type", tokenInfo.getTokenType());
-        tokenInfoMap.putString("expires_in", tokenInfo.getExpiresIn());
-        // push token info to result
-        result.putMap("token_info", tokenInfoMap);
-
+        if (tokenInfo != null) {
+          WritableMap tokenInfoMap = Arguments.createMap();
+          tokenInfoMap.putString("access_token", tokenInfo.getAccessToken());
+          tokenInfoMap.putString("refresh_token", tokenInfo.getRefreshToken());
+          tokenInfoMap.putString("token_type", tokenInfo.getTokenType());
+          tokenInfoMap.putString("expires_in", tokenInfo.getExpiresIn());
+          // push token info to result
+          result.putMap("token_info", tokenInfoMap);
+        }
         promise.resolve(result);
       }
       @Override
