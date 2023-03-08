@@ -12,28 +12,33 @@ type DeleteDeviceForPushNotificationFunc = (
 
 type DeleteDeviceForPushNotificationReturn = [
   BaseResponse | null,
-  string | null,
-  DeleteDeviceForPushNotificationFunc
+  CustomError | null,
+  DeleteDeviceForPushNotificationFunc,
+  boolean
 ];
 
 const useDeleteDeviceForPushNotification =
   (): DeleteDeviceForPushNotificationReturn => {
     const [result, setResult] = useState<BaseResponse | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<CustomError | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const deleteDeviceForPushNotificationFunc = useCallback(
       async (params: DeleteDeviceForPushNotificationParams) => {
         try {
+          setIsLoading(true);
           const response = await deleteDeviceForPushNotification(params);
           setResult(response);
         } catch (e) {
-          setError((e as CustomError)?.message);
+          setError(e as CustomError);
+        } finally {
+          setIsLoading(false);
         }
       },
       []
     );
 
-    return [result, error, deleteDeviceForPushNotificationFunc];
+    return [result, error, deleteDeviceForPushNotificationFunc, isLoading];
   };
 
 export default useDeleteDeviceForPushNotification;

@@ -10,27 +10,32 @@ type RegisterDeviceFunc = (params: RegisterDeviceParams) => void;
 
 type RegisterDeviceReturn = [
   RegisterDeviceResponse | null,
-  string | null,
-  RegisterDeviceFunc
+  CustomError | null,
+  RegisterDeviceFunc,
+  boolean
 ];
 
 const useRegisterDevice = (): RegisterDeviceReturn => {
   const [result, setResult] = useState<RegisterDeviceResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<CustomError | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const registerDeviceFunc = useCallback(
     async (params: RegisterDeviceParams) => {
       try {
+        setIsLoading(true);
         const response = await registerDevice(params);
         setResult(response);
       } catch (e) {
-        setError((e as CustomError)?.message);
+        setError(e as CustomError);
+      } finally {
+        setIsLoading(false);
       }
     },
     []
   );
 
-  return [result, error, registerDeviceFunc];
+  return [result, error, registerDeviceFunc, isLoading];
 };
 
 export default useRegisterDevice;

@@ -10,12 +10,9 @@
 #import <GoSignSDK/GoSignSDK-Swift.h>
 @interface RCT_EXTERN_MODULE(CloudCa, NSObject)
 
-RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
-
-RCT_EXTERN_METHOD(sdkSetup:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(sdkSetup:(NSString)baseUrl
+                  withResolver:(RCTPromiseResolveBlock)resolve
+                  withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.1 AuthenticateClient
 RCT_EXTERN_METHOD(authenticateClient:(NSString)clientId
                   withClientSecret: (NSString)clientSecret
@@ -51,7 +48,7 @@ RCT_EXTERN_METHOD(deleteDevice:(NSString)deviceId
 RCT_EXTERN_METHOD(getPendingAuthorisationRequest: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.9 Authorise a Pending Request
-RCT_EXTERN_METHOD(authoriseaPendingRequest:(RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(authorisationPendingRequest:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.10 Cancel a Pending Authorisation Request
 RCT_EXTERN_METHOD(cancelPendingRequest: (RCTPromiseResolveBlock)resolve

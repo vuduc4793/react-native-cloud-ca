@@ -11,27 +11,32 @@ type CancelPendingRequestFunc = (params?: CancelPendingRequestParams) => void;
 
 type CancelPendingRequestReturn = [
   BaseResponse | null,
-  string | null,
-  CancelPendingRequestFunc
+  CustomError | null,
+  CancelPendingRequestFunc,
+  boolean
 ];
 
 const useCancelPendingRequest = (): CancelPendingRequestReturn => {
   const [result, setResult] = useState<BaseResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<CustomError | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const cancelPendingRequestFunc = useCallback(
     async (params?: CancelPendingRequestParams) => {
       try {
+        setIsLoading(true);
         const response = await cancelPendingRequest(params);
         setResult(response);
       } catch (e) {
-        setError((e as CustomError)?.message);
+        setError(e as CustomError);
+      } finally {
+        setIsLoading(false);
       }
     },
     []
   );
 
-  return [result, error, cancelPendingRequestFunc];
+  return [result, error, cancelPendingRequestFunc, isLoading];
 };
 
 export default useCancelPendingRequest;

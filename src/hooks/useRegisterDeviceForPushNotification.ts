@@ -12,28 +12,33 @@ type RegisterDeviceForPushNotificationFunc = (
 
 type RegisterDeviceForPushNotificationReturn = [
   BaseResponse | null,
-  string | null,
-  RegisterDeviceForPushNotificationFunc
+  CustomError | null,
+  RegisterDeviceForPushNotificationFunc,
+  boolean
 ];
 
 const useRegisterDeviceForPushNotification =
   (): RegisterDeviceForPushNotificationReturn => {
     const [result, setResult] = useState<BaseResponse | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<CustomError | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const registerDeviceForPushNotificationFunc = useCallback(
       async (params: RegisterDeviceForPushNotificationParams) => {
         try {
+          setIsLoading(true);
           const response = await registerDeviceForPushNotification(params);
           setResult(response);
         } catch (e) {
-          setError((e as CustomError)?.message);
+          setError(e as CustomError);
+        } finally {
+          setIsLoading(false);
         }
       },
       []
     );
 
-    return [result, error, registerDeviceForPushNotificationFunc];
+    return [result, error, registerDeviceForPushNotificationFunc, isLoading];
   };
 
 export default useRegisterDeviceForPushNotification;

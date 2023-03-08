@@ -11,27 +11,32 @@ type GetUserProfileFunc = (params?: GetUserProfileParams) => void;
 
 type GetUserProfileReturn = [
   GetUserProfileResponse | null,
-  string | null,
-  GetUserProfileFunc
+  CustomError | null,
+  GetUserProfileFunc,
+  boolean
 ];
 
 const useGetUserProfile = (): GetUserProfileReturn => {
   const [result, setResult] = useState<GetUserProfileResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<CustomError | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getUserProfileFunc = useCallback(
     async (params?: GetUserProfileParams) => {
       try {
+        setIsLoading(true);
         const response = await getUserProfile(params);
         setResult(response);
       } catch (e) {
-        setError((e as CustomError)?.message);
+        setError(e as CustomError);
+      } finally {
+        setIsLoading(false);
       }
     },
     []
   );
 
-  return [result, error, getUserProfileFunc];
+  return [result, error, getUserProfileFunc, isLoading];
 };
 
 export default useGetUserProfile;

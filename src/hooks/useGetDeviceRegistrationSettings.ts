@@ -12,29 +12,34 @@ type GetDeviceRegistrationSettingsFunc = (
 
 type GetDeviceRegistrationSettingsReturn = [
   GetDeviceRegistrationSettingsResponse | null,
-  string | null,
-  GetDeviceRegistrationSettingsFunc
+  CustomError | null,
+  GetDeviceRegistrationSettingsFunc,
+  boolean
 ];
 
 const useGetDeviceRegistrationSettings =
   (): GetDeviceRegistrationSettingsReturn => {
     const [result, setResult] =
       useState<GetDeviceRegistrationSettingsResponse | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<CustomError | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const getDeviceRegistrationSettingsFunc = useCallback(
       async (params?: GetDeviceRegistrationSettingsParams) => {
         try {
+          setIsLoading(true);
           const response = await getDeviceRegistrationSettings(params);
           setResult(response);
         } catch (e) {
-          setError((e as CustomError)?.message);
+          setError(e as CustomError);
+        } finally {
+          setIsLoading(false);
         }
       },
       []
     );
 
-    return [result, error, getDeviceRegistrationSettingsFunc];
+    return [result, error, getDeviceRegistrationSettingsFunc, isLoading];
   };
 
 export default useGetDeviceRegistrationSettings;

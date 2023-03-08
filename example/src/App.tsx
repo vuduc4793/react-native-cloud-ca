@@ -1,6 +1,13 @@
 import * as React from 'react';
 
-import { StyleSheet, View, TextInput, Button, Text } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Text,
+  SafeAreaView,
+} from 'react-native';
 import { useSdkSetup } from 'react-native-cloud-ca';
 import ListApiScene from './Scene/ListApiScene';
 
@@ -15,7 +22,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {setupSdkResponse === null ? (
         <>
           <View>
@@ -31,7 +38,7 @@ export default function App() {
       ) : (
         <ListApiScene />
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -41,6 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 10,
     paddingVertical: 20,
+    backgroundColor: 'white',
   },
   label: {
     fontWeight: 'bold',

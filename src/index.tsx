@@ -79,7 +79,10 @@ export function verifyOTP(params: VerifyOTPParams): Promise<VerifyOTPResponse> {
 export function renewAccessToken(
   params: RenewAccessTokenParams
 ): Promise<RenewAccessTokenResponse> {
-  const { clientId, clientSecret } = params;
+  const { clientId, clientSecret, refresh_token } = params;
+  if (Platform.OS === 'ios') {
+    return CloudCa.renewAccessToken(refresh_token);
+  }
   return CloudCa.renewAccessToken(clientId, clientSecret);
 }
 
@@ -152,6 +155,9 @@ export function generateQRCode(
   params: GenerateQRCodeParams
 ): Promise<GenerateQRCodeResponse> {
   const { clientId, format, size, userId } = params;
+  if (Platform.OS === 'ios') {
+    return CloudCa.generateQRCode(clientId, userId);
+  }
   return CloudCa.generateQRCode(clientId, userId, format, size);
 }
 

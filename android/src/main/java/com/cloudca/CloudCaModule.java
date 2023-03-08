@@ -42,6 +42,7 @@ import com.viettel.sdk.gosignsdk.utils.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,14 +67,11 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void multiply(double a, double b, Promise promise) {
-    promise.resolve(a * b);
-  }
-
-  @ReactMethod
   public void sdkSetup(String baseURL, Promise promise) {
     try {
       SDKSetup.initialize((Application) reactContext.getApplicationContext(), baseURL);
+      WritableMap result = Arguments.createMap();
+      result.putString("result", SUCCEEDED);
       promise.resolve(SUCCEEDED);
     } catch(Exception e) {
       promise.reject(EVENT_ERROR, "SDK setup error");
@@ -96,7 +94,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
          @Override
          public void onFail(ResponseError error) {
            CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-           promise.reject(EVENT_ERROR, e);
+           promise.reject(e.getErrorCode(), e.getErrorMessage());
          }
        });
   }
@@ -125,7 +123,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(EVENT_ERROR, e.getError());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
         }
       });
   }
@@ -157,7 +155,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -179,7 +177,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(EVENT_ERROR, e.getError());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
         }
       });
   }
@@ -207,7 +205,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -237,7 +235,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(EVENT_ERROR, e.getError());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
         }
       });
   }
@@ -248,12 +246,14 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       new ServiceApiListenerEmpty() {
         @Override
         public void onSuccess() {
-          promise.resolve(SUCCEEDED);
+          WritableMap result = Arguments.createMap();
+          result.putString("result", SUCCEEDED);
+          promise.resolve(result);
         }
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(EVENT_ERROR, e.getError());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
         }
       });
   }
@@ -273,7 +273,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -283,12 +283,14 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     GoSignSDK.get().authorisationPendingRequest(new ServiceApiListenerEmpty() {
       @Override
       public void onSuccess() {
-        promise.resolve(SUCCEEDED);
+        WritableMap result = Arguments.createMap();
+        result.putString("result", SUCCEEDED);
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -298,12 +300,14 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     GoSignSDK.get().cancelPendingRequest(new ServiceApiListenerEmpty() {
       @Override
       public void onSuccess() {
-        promise.resolve(SUCCEEDED);
+        WritableMap result = Arguments.createMap();
+        result.putString("result", SUCCEEDED);
+        promise.resolve(result);
       }
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -325,7 +329,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -348,7 +352,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -368,7 +372,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(EVENT_ERROR, e.getError());
+        promise.reject(e.getErrorCode(), e.getErrorMessage());
       }
     });
   }
@@ -389,7 +393,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(EVENT_ERROR, e.getError());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
         }
       });
   }
@@ -400,12 +404,14 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       new ServiceApiListenerEmpty() {
         @Override
         public void onSuccess() {
-          promise.resolve(SUCCEEDED);
+          WritableMap result = Arguments.createMap();
+          result.putString("result", SUCCEEDED);
+          promise.resolve(result);
         }
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(EVENT_ERROR, e.getError());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
         }
       });
   }
@@ -416,12 +422,14 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       new ServiceApiListenerEmpty() {
         @Override
         public void onSuccess() {
-          promise.resolve(SUCCEEDED);
+          WritableMap result = Arguments.createMap();
+          result.putString("result", SUCCEEDED);
+          promise.resolve(result);
         }
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(EVENT_ERROR, e.getError());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
         }
       });
   }

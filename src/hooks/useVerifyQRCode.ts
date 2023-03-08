@@ -10,24 +10,29 @@ type VerifyQRCodeFunc = (params: VerifyQRCodeParams) => void;
 
 type VerifyQRCodeReturn = [
   VerifyQRCodeResponse | null,
-  string | null,
-  VerifyQRCodeFunc
+  CustomError | null,
+  VerifyQRCodeFunc,
+  boolean
 ];
 
 const useVerifyQRCode = (): VerifyQRCodeReturn => {
   const [result, setResult] = useState<VerifyQRCodeResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<CustomError | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const verifyQRCodeFunc = useCallback(async (params: VerifyQRCodeParams) => {
     try {
+      setIsLoading(true);
       const response = await verifyQRCode(params);
       setResult(response);
     } catch (e) {
-      setError((e as CustomError)?.message);
+      setError(e as CustomError);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
-  return [result, error, verifyQRCodeFunc];
+  return [result, error, verifyQRCodeFunc, isLoading];
 };
 
 export default useVerifyQRCode;

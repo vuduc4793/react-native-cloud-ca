@@ -2,7 +2,7 @@ package com.cloudca;
 
 import com.viettel.sdk.gosignsdk.network.response.ErrorType;
 
-public class CustomException extends Exception {
+public class CustomException extends Throwable {
   private ErrorType errorCode;
   private String errorMessage;
 
@@ -11,8 +11,8 @@ public class CustomException extends Exception {
     this.errorMessage = errorMessage;
   }
 
-  public ErrorType getErrorCode() {
-    return errorCode;
+  public String getErrorCode() {
+    return String.format("%s", errorCode);
   }
 
   public String getErrorMessage() {

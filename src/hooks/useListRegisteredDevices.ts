@@ -10,29 +10,34 @@ type ListRegisteredDevicesFunc = (params: ListRegisteredDevicesParams) => void;
 
 type ListRegisteredDevicesReturn = [
   ListRegisteredDevicesResponse | null,
-  string | null,
-  ListRegisteredDevicesFunc
+  CustomError | null,
+  ListRegisteredDevicesFunc,
+  boolean
 ];
 
 const useListRegisteredDevices = (): ListRegisteredDevicesReturn => {
   const [result, setResult] = useState<ListRegisteredDevicesResponse | null>(
     null
   );
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<CustomError | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const listRegisteredDevicesFunc = useCallback(
     async (params: ListRegisteredDevicesParams) => {
       try {
+        setIsLoading(true);
         const response = await listRegisteredDevices(params);
         setResult(response);
       } catch (e) {
-        setError((e as CustomError)?.message);
+        setError(e as CustomError);
+      } finally {
+        setIsLoading(false);
       }
     },
     []
   );
 
-  return [result, error, listRegisteredDevicesFunc];
+  return [result, error, listRegisteredDevicesFunc, isLoading];
 };
 
 export default useListRegisteredDevices;

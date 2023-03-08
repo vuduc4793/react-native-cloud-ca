@@ -12,29 +12,34 @@ type GetPendingAuthorisationRequestFunc = (
 
 type GetPendingAuthorisationRequestReturn = [
   GetPendingAuthorisationRequestResponse | null,
-  string | null,
-  GetPendingAuthorisationRequestFunc
+  CustomError | null,
+  GetPendingAuthorisationRequestFunc,
+  boolean
 ];
 
 const useGetPendingAuthorisationRequest =
   (): GetPendingAuthorisationRequestReturn => {
     const [result, setResult] =
       useState<GetPendingAuthorisationRequestResponse | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<CustomError | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const getPendingAuthorisationRequestFunc = useCallback(
       async (params?: GetPendingAuthorisationRequestParams) => {
         try {
+          setIsLoading(true);
           const response = await getPendingAuthorisationRequest(params);
           setResult(response);
         } catch (e) {
-          setError((e as CustomError)?.message);
+          setError(e as CustomError);
+        } finally {
+          setIsLoading(false);
         }
       },
       []
     );
 
-    return [result, error, getPendingAuthorisationRequestFunc];
+    return [result, error, getPendingAuthorisationRequestFunc, isLoading];
   };
 
 export default useGetPendingAuthorisationRequest;

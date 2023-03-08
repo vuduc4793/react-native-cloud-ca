@@ -46,6 +46,7 @@ export interface VerifyOTPResponse extends TokenInfo {}
 export interface RenewAccessTokenParams {
   clientId: string;
   clientSecret: string;
+  refresh_token?: string;
 }
 
 export interface RenewAccessTokenResponse extends TokenInfo {}
@@ -154,7 +155,8 @@ export interface DeleteDeviceForPushNotificationParams {
 }
 
 export interface CustomError {
+  code?: string;
   message: string;
 }
 
-export type BaseResponse = string;
+export type BaseResponse = { result: string };

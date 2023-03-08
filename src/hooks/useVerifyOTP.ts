@@ -8,22 +8,31 @@ import type {
 
 type VerifyOTPFunc = (params: VerifyOTPParams) => void;
 
-type VerifyOTPReturn = [VerifyOTPResponse | null, string | null, VerifyOTPFunc];
+type VerifyOTPReturn = [
+  VerifyOTPResponse | null,
+  CustomError | null,
+  VerifyOTPFunc,
+  boolean
+];
 
 const useVerifyOTP = (): VerifyOTPReturn => {
   const [result, setResult] = useState<VerifyOTPResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<CustomError | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const verifyOTPFunc = useCallback(async (params: VerifyOTPParams) => {
     try {
+      setIsLoading(true);
       const response = await verifyOTP(params);
       setResult(response);
     } catch (e) {
-      setError((e as CustomError)?.message);
+      setError(e as CustomError);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
-  return [result, error, verifyOTPFunc];
+  return [result, error, verifyOTPFunc, isLoading];
 };
 
 export default useVerifyOTP;
