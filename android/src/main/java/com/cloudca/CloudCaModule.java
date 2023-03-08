@@ -1,8 +1,6 @@
 package com.cloudca;
 
 import android.app.Application;
-import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -11,7 +9,6 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
@@ -39,10 +36,6 @@ import com.viettel.sdk.gosignsdk.network.response.TokenInfo;
 import com.viettel.sdk.gosignsdk.network.response.UserProfileAPIResponse;
 import com.viettel.sdk.gosignsdk.utils.StringUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,10 +126,10 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     VerifyOTPAPIRequest request = new VerifyOTPAPIRequest();
     request.setUserID(userId);
     List<VerifyOTPAPIRequest.OTPInfo> otpInfo = new ArrayList<>();
-    if(StringUtils.valid("OTP_SMS")) {
+    if(StringUtils.valid(otpSms)) {
       otpInfo.add(new VerifyOTPAPIRequest.OTPInfo(otpSms, OTPType.SMS));
     }
-    if(StringUtils.valid("OTP_MAIL")) {
+    if(StringUtils.valid(otpMail)) {
       otpInfo.add(new VerifyOTPAPIRequest.OTPInfo(otpMail, OTPType.MAIL));
     }
     request.setOtpInfo(otpInfo);
@@ -220,8 +213,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
           returnArray = data.toArray(returnArray);
 
           WritableArray result = Arguments.createArray();
-          for(int i=0;i<returnArray.length;i++){
-            DeviceInfo deviceChildInfo = returnArray[i];
+          for(DeviceInfo deviceChildInfo : returnArray){
             WritableMap deviceChildInfoMap = Arguments.createMap();
             deviceChildInfoMap.putString("device_id", deviceChildInfo.getDeviceID());
             deviceChildInfoMap.putString("device_name", deviceChildInfo.getDeviceName());
