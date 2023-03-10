@@ -1,18 +1,18 @@
+import type { BaseResponse, CustomError, SetupSDKParams } from 'lib/typescript';
 import { useState, useCallback } from 'react';
 import { sdkSetup } from 'react-native-cloud-ca';
-import type { CustomError, SetupSDKParams } from 'src/types';
 
 type SdkSetupFunc = (params?: SetupSDKParams) => void;
 
 type SdkSetupReturn = [
-  string | null,
+  BaseResponse | null,
   CustomError | null,
   SdkSetupFunc,
   boolean
 ];
 
 const useSdkSetup = (): SdkSetupReturn => {
-  const [result, setResult] = useState<string | null>(null);
+  const [result, setResult] = useState<BaseResponse | null>(null);
   const [error, setError] = useState<CustomError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

@@ -4,7 +4,7 @@ import type {
   AuthenticateUserParams,
   AuthenticateUserResponse,
   CustomError,
-} from 'src/types';
+} from 'lib/typescript';
 
 type AuthenticateUserFunc = (params: AuthenticateUserParams) => void;
 

@@ -6,7 +6,7 @@
 	<dict>
 		<key>Frameworks/Alamofire.framework/Alamofire</key>
 		<data>
-		QatbPOIjX8/z0hur/jz/LkufEeQ=
+		BuheBM5aiWMobPv/xLiLmlQ4/sE=
 		</data>
 		<key>Frameworks/Alamofire.framework/Info.plist</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Frameworks/KeychainSwift.framework/KeychainSwift</key>
 		<data>
-		I5qjsJp2PgjGPBzCqMYBSMXvxoc=
+		6DtCym216QuMhspBFymEsbFCFaY=
 		</data>
 		<key>Frameworks/KeychainSwift.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Frameworks/Moya.framework/Moya</key>
 		<data>
-		CkX1Yex3uuyvupAlm4LpxigbqpM=
+		/n5+DtmugobJLBwTlUjZh3AMZs4=
 		</data>
 		<key>Frameworks/Moya.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -52,17 +52,13 @@
 		<data>
 		gfLArcb6VZ9NUYGxsK2WOTyIGhI=
 		</data>
-		<key>Modules/GoSignSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
-		<data>
-		XRboIKGEQIYsTfsHLVlw061WDlc=
-		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		smv+3WC5wPbccVsitHrFZfcMWkQ=
+		67j/tnagGpr5YoDfbfSJ9tfLiZ8=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		XmR+E26oANRX3Eu49HL1hZpQdB4=
+		9i4baVwW5LkcjTIsjOWXEodti2M=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -70,11 +66,11 @@
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		XmR+E26oANRX3Eu49HL1hZpQdB4=
+		9i4baVwW5LkcjTIsjOWXEodti2M=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		tk0u/ndnSjFU4UicQo28kD4x1Hw=
+		0B7yOyZPfsacXJ6chkqZEQct2U0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -87,7 +83,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6TQzZPTlj0DJKiC4rndwmMEvKrJ1k99E5O8B7nkNv+Q=
+			fKAhQlXjuCsCz4BpIE4cgj4aoR/Tui6dQlUX9v4GbII=
 			</data>
 		</dict>
 		<key>Frameworks/Alamofire.framework/Info.plist</key>
@@ -115,7 +111,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OnQteqW2+K3mpF6VJ6hSeP24zCFjTYFvM0Pfk8Zd0vk=
+			Itg/K0ZJ/11azdIIJJvI6QQfxTmq70qw7zP1KQEVhU8=
 			</data>
 		</dict>
 		<key>Frameworks/KeychainSwift.framework/_CodeSignature/CodeResources</key>
@@ -136,7 +132,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WPsiD8Tp/70AFy3ln+/7sU0gc4XNQ26wSE1C22n3L7E=
+			ZXWD54pRBitJv8A8+p7AUneo9jaSYJNjS3SmVN2DkXc=
 			</data>
 		</dict>
 		<key>Frameworks/Moya.framework/_CodeSignature/CodeResources</key>
@@ -160,25 +156,18 @@
 			cs6HiUbI++pJeIsxDXPizWZaq5O+L1Vu36xxQUHzvhE=
 			</data>
 		</dict>
-		<key>Modules/GoSignSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			H1/0gcXooCaxaJTo8agsP5XattBfBUdgXSvHCpms60U=
-			</data>
-		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YHyV2U5xv0zxWdnrVyhPChKeAmWv86OW2KSZxTyR/30=
+			CBHQkj/hCoI8jW4t7UA6x7VZT3TpFtMWGsRMrBQB+0s=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			r8dXeFRBJWTyAhlBtuRtZ58PhF7ITOnPfme8cIU4//Q=
+			/+IeXjJTGaql8HGEgaMW/MxEcSXyCXbVFBIf8SFNj2c=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -192,14 +181,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			r8dXeFRBJWTyAhlBtuRtZ58PhF7ITOnPfme8cIU4//Q=
+			/+IeXjJTGaql8HGEgaMW/MxEcSXyCXbVFBIf8SFNj2c=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			I7vcm1HOuG6Fbm0UNm0pCSGjh7nW5BPGdr/j61cfO7E=
+			MnRaimu71lkVXSzmdJHgHrDOuKvLTT1eLlhCFe/rM0Y=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

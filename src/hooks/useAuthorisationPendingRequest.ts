@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
-import { authorisationPendingRequest } from 'react-native-cloud-ca';
-import type {
+import {
+  authorisationPendingRequest,
   AuthorisationPendingRequestParams,
   BaseResponse,
   CustomError,
-} from 'src/types';
+} from 'react-native-cloud-ca';
 
 type AuthorisationPendingRequestFunc = (
   params?: AuthorisationPendingRequestParams

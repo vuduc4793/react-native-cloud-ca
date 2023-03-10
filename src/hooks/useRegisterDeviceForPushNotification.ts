@@ -4,7 +4,7 @@ import type {
   BaseResponse,
   CustomError,
   RegisterDeviceForPushNotificationParams,
-} from 'src/types';
+} from 'lib/typescript';
 
 type RegisterDeviceForPushNotificationFunc = (
   params: RegisterDeviceForPushNotificationParams

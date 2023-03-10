@@ -4,7 +4,7 @@ import type {
   CustomError,
   GetDeviceRegistrationSettingsParams,
   GetDeviceRegistrationSettingsResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type GetDeviceRegistrationSettingsFunc = (
   params?: GetDeviceRegistrationSettingsParams

@@ -1,6 +1,10 @@
 import { useState, useCallback } from 'react';
 import { deleteDevice } from 'react-native-cloud-ca';
-import type { BaseResponse, CustomError, DeleteDeviceParams } from 'src/types';
+import type {
+  BaseResponse,
+  CustomError,
+  DeleteDeviceParams,
+} from 'lib/typescript';
 
 type DeleteDeviceFunc = (params: DeleteDeviceParams) => void;
 

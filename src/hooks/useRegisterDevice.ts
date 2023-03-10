@@ -1,10 +1,12 @@
 import { useState, useCallback } from 'react';
-import { registerDevice } from 'react-native-cloud-ca';
-import type {
+import {
+  registerDevice,
   CustomError,
   RegisterDeviceParams,
   RegisterDeviceResponse,
-} from 'src/types';
+} from 'react-native-cloud-ca';
+// import type {
+// } from 'lib/typescript';
 
 type RegisterDeviceFunc = (params: RegisterDeviceParams) => void;
 

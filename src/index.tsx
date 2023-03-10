@@ -48,9 +48,17 @@ const CloudCa = NativeModules.CloudCa
       }
     );
 
-export function sdkSetup(params?: SetupSDKParams): Promise<string> {
+export function sdkSetup(params?: SetupSDKParams): Promise<BaseResponse> {
   const { baseUrl } = params ?? { baseUrl: '' };
-  return CloudCa.sdkSetup(baseUrl);
+  const urlValidated = validateUrl(baseUrl);
+  return CloudCa.sdkSetup(urlValidated);
+}
+
+function validateUrl(params: string) {
+  if (!params.startsWith('http://') && !params.startsWith('https://')) {
+    return 'https://' + params;
+  }
+  return params;
 }
 
 // 4.1 AuthenticateClient
@@ -79,19 +87,22 @@ export function verifyOTP(params: VerifyOTPParams): Promise<VerifyOTPResponse> {
 export function renewAccessToken(
   params: RenewAccessTokenParams
 ): Promise<RenewAccessTokenResponse> {
-  const { clientId, clientSecret, refresh_token } = params;
+  const { refresh_token } = params;
   if (Platform.OS === 'ios') {
     return CloudCa.renewAccessToken(refresh_token);
   }
-  return CloudCa.renewAccessToken(clientId, clientSecret);
+  return CloudCa.renewAccessToken();
 }
 
 // 4.5 DeviceRegistration
 export function registerDevice(
   params?: RegisterDeviceParams
 ): Promise<RegisterDeviceResponse> {
-  const {} = params ?? {};
-  return CloudCa.registerDevice();
+  const { biometricApiType } = params ?? {};
+  if (Platform.OS === 'ios') {
+    return CloudCa.registerDevice(true, 'Unlock to add device');
+  }
+  return CloudCa.registerDevice(biometricApiType);
 }
 
 // 4.6 List Registered Devices
@@ -122,15 +133,39 @@ export function getPendingAuthorisationRequest(
 export function authorisationPendingRequest(
   params?: AuthorisationPendingRequestParams
 ): Promise<BaseResponse> {
-  const {} = params ?? {};
-  return CloudCa.authorisationPendingRequest();
+  const {
+    biometricApiType,
+    authenWithBiometrics,
+    hashAlgorithm,
+    localizedReason,
+    request,
+    transactionID,
+  } = params ?? {};
+  if (Platform.OS === 'ios') {
+    return CloudCa.authorisationPendingRequest(
+      authenWithBiometrics,
+      localizedReason,
+      transactionID,
+      request,
+      hashAlgorithm
+    );
+  }
+  return CloudCa.authorisationPendingRequest(
+    biometricApiType,
+    transactionID,
+    request,
+    hashAlgorithm
+  );
 }
 
 // 4.10 Cancel a Pending Authorisation Request
 export function cancelPendingRequest(
-  params?: CancelPendingRequestParams
+  params: CancelPendingRequestParams
 ): Promise<BaseResponse> {
-  const {} = params ?? {};
+  const { hashAlgorithm, request, transactionID } = params ?? {};
+  if (Platform.OS === 'ios') {
+    return CloudCa.cancelPendingRequest(transactionID, request, hashAlgorithm);
+  }
   return CloudCa.cancelPendingRequest();
 }
 
@@ -158,7 +193,7 @@ export function generateQRCode(
   if (Platform.OS === 'ios') {
     return CloudCa.generateQRCode(clientId, userId);
   }
-  return CloudCa.generateQRCode(clientId, userId, format, size);
+  return CloudCa.generateQRCode(format, size);
 }
 
 // 4.14 Verify QR Code
@@ -166,6 +201,7 @@ export function verifyQRCode(
   params: VerifyQRCodeParams
 ): Promise<VerifyQRCodeResponse> {
   const { qrCode, userId } = params;
+  console.log('params', params);
   return CloudCa.verifyQRCode(userId, qrCode);
 }
 

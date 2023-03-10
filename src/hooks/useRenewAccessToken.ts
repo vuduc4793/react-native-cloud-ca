@@ -4,7 +4,7 @@ import type {
   CustomError,
   RenewAccessTokenParams,
   RenewAccessTokenResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type RenewAccessTokenFunc = (params: RenewAccessTokenParams) => void;
 

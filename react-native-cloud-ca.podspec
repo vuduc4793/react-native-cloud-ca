@@ -17,11 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-#  s.dependency "Alamofire", "~> 5.6.1"
- s.dependency "Moya", "~> 15.0.0"
- s.dependency "KeychainSwift", "~> 20.0"
    s.vendored_frameworks = ["ios/GoSignSDK.xcframework", "ios/Alamofire.xcframework", "ios/KeychainSwift.xcframework", "ios/Moya.xcframework"]
-# s.vendored_frameworks = "ios/GoSignSDK.xcframework"
   
   # Don't install the dependencies when we run `pod install` in the old architecture.
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then

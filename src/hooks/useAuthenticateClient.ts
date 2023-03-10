@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
-import { authenticateClient } from 'react-native-cloud-ca';
 import type {
-  CustomError,
   AuthenticateClientParams,
   AuthenticateClientResponse,
-} from 'src/types';
+  CustomError,
+} from 'lib/typescript';
+import { useState, useCallback } from 'react';
+import { authenticateClient } from 'react-native-cloud-ca';
 
 type AuthenticateClientFunc = (params: AuthenticateClientParams) => void;
 

@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
-// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name GoSignSDK
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name GoSignSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import Alamofire
 import Foundation
@@ -29,26 +29,117 @@ public struct ServerResponseError : Swift.Error, Swift.Codable {
 }
 public struct VerifyQRCodeAPIRequest : Swift.Encodable {
   public let userID: Swift.String, qrCode: Swift.String
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case userID
+    case qrCode
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public init(userID: Swift.String, qrCode: Swift.String)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct DeleteDeviceForNotificationAPIRequest : Swift.Codable {
   public let deviceToken: Swift.String
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case deviceToken
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public init(deviceToken: Swift.String)
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
+}
+public struct UserAuthenticateAPIRequest : Swift.Encodable {
+  public let userID: Swift.String
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case userID
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  public func encode(to encoder: Swift.Encoder) throws
 }
 public struct DeviceRegistrationSettings : Swift.Codable {
   public let deviceKeyType: Swift.String?
   public let deviceKeySize: Swift.Int?
   public let secureElementRequired: Swift.Bool?, biometricRequired: Swift.Bool?
   public let allowedDevices: Swift.String?, clockToleranceOnAuthCERT: Swift.String?
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case deviceKeyType
+    case deviceKeySize
+    case secureElementRequired
+    case biometricRequired
+    case allowedDevices
+    case clockToleranceOnAuthCERT
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 public struct DevicePushNotificationAPIRequest : Swift.Encodable {
   public let deviceToken: Swift.String
   public let osType: Swift.String
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case deviceToken
+    case osType
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public init(deviceToken: Swift.String)
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -57,6 +148,22 @@ public struct GenerateQRCodeAPIRequest : Swift.Encodable {
   public let userID: Swift.String
   public let format: GoSignSDK.QRFormat
   public let size: Swift.String
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case format, size
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public init(clientID: Swift.String, userID: Swift.String, format: GoSignSDK.QRFormat = .png, size: Swift.String = "256")
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -112,16 +219,19 @@ public enum KeyAlgorithm {
     get
   }
 }
+extension GoSignSDK.API {
+  public static var host: Swift.String
+}
 public enum API {
   public static func authenticateClient(_ request: GoSignSDK.ClientAuthenticateAPIReqest, completion: @escaping (Swift.Result<GoSignSDK.AuthenticateClientAPIResponse, Swift.Error>) -> Swift.Void)
   public static func authenticateUser(_ userID: Swift.String, completion: @escaping (Swift.Result<GoSignSDK.AuthenticateUserAPIResponse, Swift.Error>) -> Swift.Void)
   public static func verifyOTP(_ request: GoSignSDK.VerifyOTPAPIRequest, completion: @escaping (Swift.Result<GoSignSDK.TokenInfo, Swift.Error>) -> Swift.Void)
   public static func renewAccessToken(_ refreshToken: Swift.String? = nil, completion: @escaping (Swift.Result<GoSignSDK.TokenInfo, Swift.Error>) -> Swift.Void)
-  public static func registerDevice(_ completion: @escaping (Swift.Result<GoSignSDK.RegisterDeviceAPIResponse, Swift.Error>) -> Swift.Void)
+  public static func registerDevice(localizedReason: Swift.String = "Unlock to add device", completion: @escaping (Swift.Result<GoSignSDK.RegisterDeviceAPIResponse, Swift.Error>) -> Swift.Void)
   public static func listRegisteredDevices(_ userID: Swift.String? = nil, completion: @escaping (Swift.Result<[GoSignSDK.DeviceInfo], Swift.Error>) -> Swift.Void)
-  public static func deleteDevice(_ deviceID: Swift.String, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
+  public static func deleteDevice(_ deviceID: Swift.String? = nil, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
   public static func getPendingAuthorisationRequest(_ completion: @escaping (Swift.Result<GoSignSDK.PendingAuthorisationAPIResponse, Swift.Error>) -> Swift.Void)
-  public static func authoriseaPendingRequest(_ pendingAuthorisationAPIResponse: GoSignSDK.PendingAuthorisationAPIResponse, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
+  public static func authoriseaPendingRequest(localizedReason: Swift.String = "Unlock to add device", pendingAuthorisationAPIResponse: GoSignSDK.PendingAuthorisationAPIResponse, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
   public static func cancelPendingRequest(_ pendingAuthorisationAPIResponse: GoSignSDK.PendingAuthorisationAPIResponse, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
   public static func getUserProfile(_ completion: @escaping (Swift.Result<GoSignSDK.UserProfileAPIResponse, Swift.Error>) -> Swift.Void)
   public static func getDeviceRegistrationSettings(_ completion: @escaping (Swift.Result<GoSignSDK.DeviceRegistrationSettings, Swift.Error>) -> Swift.Void)
@@ -136,6 +246,8 @@ public struct AuthenticateClientAPIResponse : Swift.Decodable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct AuthenticateUserAPIResponse : Swift.Codable {
+  public let authType: Swift.String?
+  public let tokenInfo: GoSignSDK.TokenInfo?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
@@ -146,18 +258,53 @@ public struct TokenInfo : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct RegisterDeviceAPIResponse : Swift.Codable {
+  public let alias: Swift.String?, certificate: Swift.String?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 public struct VerifyOTPAPIRequest : Swift.Encodable {
   public let userID: Swift.String
   public let otpInfo: [GoSignSDK.OtpInfo]
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case userID
+    case otpInfo
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public init(userID: Swift.String? = nil, otpInfo: [GoSignSDK.OtpInfo])
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct OtpInfo : Swift.Encodable {
   public let otp: Swift.String
   public let otpType: GoSignSDK.OTPType
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case otp
+    case otpType
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public init(otp: Swift.String, otpType: GoSignSDK.OTPType)
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -173,16 +320,82 @@ public enum OTPType : Swift.String, Swift.Encodable {
 public struct UserProfileAPIResponse : Swift.Codable {
   public let userID: Swift.String?, userName: Swift.String?, appName: Swift.String?
   public let userEmail: Swift.String?, userMobile: Swift.String?
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case userID
+    case userName
+    case appName
+    case userEmail
+    case userMobile
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 public struct PendingAuthorisationAPIResponse : Swift.Codable {
   public let transactionID: Swift.String, request: Swift.String, hashAlgorithm: Swift.String
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case transactionID
+    case request
+    case hashAlgorithm
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  public init(transactionID: Swift.String, request: Swift.String, hashAlgorithm: Swift.String)
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
+public struct AuthoriseaPendingAPIRequest : Swift.Encodable {
+  public let request: Swift.String
+  public let hashAlgorithm: Swift.String
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case request
+    case hashAlgorithm
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  public func encode(to encoder: Swift.Encoder) throws
+}
 public struct ClientAuthenticateAPIReqest : Swift.Encodable {
   public init(clientId: Swift.String, clientSecret: Swift.String, grantType: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct DeviceRegistrationAPIRequest : Swift.Encodable {
+  public let csr: Swift.String?
+  public let device: GoSignSDK.DeviceInfo
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct DeviceInfo : Swift.Codable {
@@ -190,14 +403,69 @@ public struct DeviceInfo : Swift.Codable {
   public let deviceName: Swift.String
   public let secureElement: Swift.Bool
   public let biometric: Swift.Bool
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case deviceID
+    case deviceName
+    case secureElement
+    case biometric
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
+extension GoSignSDK.VerifyQRCodeAPIRequest.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.VerifyQRCodeAPIRequest.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.VerifyQRCodeAPIRequest.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.DeleteDeviceForNotificationAPIRequest.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.DeleteDeviceForNotificationAPIRequest.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.DeleteDeviceForNotificationAPIRequest.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.UserAuthenticateAPIRequest.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.UserAuthenticateAPIRequest.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.UserAuthenticateAPIRequest.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.DeviceRegistrationSettings.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.DeviceRegistrationSettings.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.DeviceRegistrationSettings.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.DevicePushNotificationAPIRequest.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.DevicePushNotificationAPIRequest.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.DevicePushNotificationAPIRequest.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.GenerateQRCodeAPIRequest.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.GenerateQRCodeAPIRequest.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.GenerateQRCodeAPIRequest.CodingKeys : Swift.RawRepresentable {}
 extension GoSignSDK.QRFormat : Swift.Equatable {}
 extension GoSignSDK.QRFormat : Swift.Hashable {}
 extension GoSignSDK.QRFormat : Swift.RawRepresentable {}
 extension GoSignSDK.KeyAlgorithm.Signature : Swift.Equatable {}
 extension GoSignSDK.KeyAlgorithm.Signature : Swift.Hashable {}
+extension GoSignSDK.VerifyOTPAPIRequest.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.VerifyOTPAPIRequest.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.VerifyOTPAPIRequest.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.OtpInfo.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.OtpInfo.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.OtpInfo.CodingKeys : Swift.RawRepresentable {}
 extension GoSignSDK.OTPType : Swift.Equatable {}
 extension GoSignSDK.OTPType : Swift.Hashable {}
 extension GoSignSDK.OTPType : Swift.RawRepresentable {}
+extension GoSignSDK.UserProfileAPIResponse.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.UserProfileAPIResponse.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.UserProfileAPIResponse.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.PendingAuthorisationAPIResponse.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.PendingAuthorisationAPIResponse.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.PendingAuthorisationAPIResponse.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.AuthoriseaPendingAPIRequest.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.AuthoriseaPendingAPIRequest.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.AuthoriseaPendingAPIRequest.CodingKeys : Swift.RawRepresentable {}
+extension GoSignSDK.DeviceInfo.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.DeviceInfo.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.DeviceInfo.CodingKeys : Swift.RawRepresentable {}

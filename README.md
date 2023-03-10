@@ -1,21 +1,24 @@
 # react-native-cloud-ca
 
-CloudCASDK
+Cloud CA SDK
 
 ## Installation
 
 ```sh
+yarn add react-native-cloud-ca
+or
 npm install react-native-cloud-ca
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'react-native-cloud-ca';
+import { useSdkSetup } from 'react-native-cloud-ca';
 
 // ...
-
-const result = await multiply(3, 7);
+const [setupSdkResponse, setupSdkError, onSetupSDK] = useSdkSetup();
+// ...
+onSetupSDK({baseUrl: "http://"});
 ```
 
 ## Contributing

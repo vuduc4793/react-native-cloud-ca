@@ -15,7 +15,7 @@ class CloudCa: NSObject {
     
     @objc(sdkSetup:withResolver:withRejecter:)
     func sdkSetup(baseUrl: String, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-//                API.host = ""
+        API.host = baseUrl
         resolve(baseUrl)
     }
     
@@ -28,14 +28,14 @@ class CloudCa: NSObject {
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["access_token": success.accessToken,
-                                           "refresh_token": "",
-                                           "token_type": "",
-                                           "expires_in": success.expiresIn]
+                                             "refresh_token": "",
+                                             "token_type": "",
+                                             "expires_in": success.expiresIn]
                 resolve(result)
             case .failure(let failure):
                 reject("API_01_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -44,20 +44,20 @@ class CloudCa: NSObject {
     @objc(authenticateUser:withResolver:withRejecter:)
     func authenticateUser(userId: String,resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
         API.authenticateUser(userId, completion: { response in
-                switch response {
-                case .success(let success):
-                    let tokenInfo: [String: Any] = ["access_token": "success.token_info.access_token",
-                                                    "refresh_token": "success.token_info.refresh_token",
-                                                    "token_type": "success.token_info.token_type",
-                                                    "expires_in": "success.token_info.expires_in"]
-                    let result: [String: Any] = ["auth_type": "success.auth_type",
-                                                 "token_info": tokenInfo]
-                    resolve(result)
-                case .failure(let failure):
-                    reject("API_02_Failed",failure.localizedDescription, failure.asAFError)
-                    break
-
-                }
+            switch response {
+            case .success(let success):
+                let tokenInfo: [String: Any] = ["access_token": success.tokenInfo?.accessToken ?? "",
+                                                "refresh_token": success.tokenInfo?.refreshToken ?? "",
+                                                "token_type": success.tokenInfo?.tokenType ?? "",
+                                                "expires_in": success.tokenInfo?.expiresIn ?? ""]
+                let result: [String: Any] = ["auth_type": success.authType ?? "",
+                                             "token_info": tokenInfo]
+                resolve(result)
+            case .failure(let failure):
+                reject("API_02_Failed",failure.localizedDescription, failure.asAFError)
+                break
+                
+            }
         })
     }
     
@@ -73,25 +73,25 @@ class CloudCa: NSObject {
         if !otpSms.isEmpty {
             otpInfos.append(OtpInfo(otp: otpSms, otpType: .sms))
         }
-
+        
         if !otpMail.isEmpty {
             otpInfos.append(OtpInfo(otp: otpMail, otpType: .mail))
         }
         
         let request = VerifyOTPAPIRequest(userID: userId, otpInfo: otpInfos)
         API.verifyOTP(request) { response in
-                    switch response {
-                    case .success(let success):
-                        let result: [String: Any] = ["access_token": success.accessToken ?? "",
-                                                     "refresh_token": success.refreshToken ?? "",
-                                                     "token_type": success.tokenType ?? "",
-                                                     "expires_in": success.expiresIn ?? 0]
-                        resolve(result)
-                    case .failure(let failure):
-                        reject("API_03_Failed",failure.localizedDescription, failure.asAFError)
-                        break
-
-                    }
+            switch response {
+            case .success(let success):
+                let result: [String: Any] = ["access_token": success.accessToken ?? "",
+                                             "refresh_token": success.refreshToken ?? "",
+                                             "token_type": success.tokenType ?? "",
+                                             "expires_in": success.expiresIn ?? 0]
+                resolve(result)
+            case .failure(let failure):
+                reject("API_03_Failed",failure.localizedDescription, failure.asAFError)
+                break
+                
+            }
         }
     }
     
@@ -111,28 +111,25 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_04_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
     
     /// 4.5 DeviceRegistration
-    @objc(registerDevice:withRejecter:)
-    func registerDevice(resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
-        API.registerDevice { response in
+    @objc(registerDevice:withLocalizedReason:withResolver:withRejecter:)
+    func registerDevice(authenWithBiometrics: Bool = true, localizedReason: String = "Unlock to add device", resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
+        API.registerDevice(localizedReason: localizedReason) { response in
             switch response {
             case .success(let success):
-                let tokenInfo: [String: Any] = ["access_token": "success.token_info.access_token",
-                                                "refresh_token": "success.token_info.refresh_token",
-                                                "token_type": "success.token_info.token_type",
-                                                "expires_in": "success.token_info.expires_in"]
-                let result: [String: Any] = ["auth_type": "success.auth_type",
-                                             "token_info": tokenInfo]
+                let result: [String: Any] = ["alias": success.alias ?? "",
+                                             "certificate": success.certificate ?? ""]
+                
                 resolve(result)
             case .failure(let failure):
                 reject("API_05_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -158,7 +155,7 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_06_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -175,7 +172,7 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_07_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -194,45 +191,53 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_08_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
     
     /// 4.9 Authorise a Pending Request
-    
-    
-    @objc(authorisationPendingRequest:withRejecter:)
-    func authorisationPendingRequest(resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-        resolve(["result": self.EVENT_ERROR])
-//        let request: PendingAuthorisationAPIResponse = .init()
-//                API.authoriseaPendingRequest(request) { response in
-//                    switch response {
-//                    case .success(_):
-//                        resolve(["result": self.EVENT_SUCCEEDED])
-//                    case .failure(let failure):
-//                        reject("API_09_Failed",failure.localizedDescription, failure.asAFError)
-//                        break
-//
-//                    }
-//                }
+    @objc(authorisationPendingRequest:withLocalizedReason:withTransactionID:withRequest:withHashAlgorithm:withResolver:withRejecter:)
+    func authorisationPendingRequest(authenWithBiometrics: Bool,
+                                     localizedReason: String = "Unlock to add device",
+                                     transactionID: String,
+                                     request: String,
+                                     hashAlgorithm: String,
+                                     resolve: @escaping RCTPromiseResolveBlock,
+                                     reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let requestParams: PendingAuthorisationAPIResponse = .init(transactionID: transactionID,
+                                                                   request: request,
+                                                                   hashAlgorithm: hashAlgorithm)
+        API.authoriseaPendingRequest(localizedReason: localizedReason, pendingAuthorisationAPIResponse: requestParams) { response in
+            switch response {
+            case .success(_):
+                resolve(["result": self.EVENT_SUCCEEDED])
+            case .failure(let failure):
+                reject("API_09_Failed",failure.localizedDescription, failure.asAFError)
+                break
+                
+            }
+        }
     }
     
     /// 4.10 Cancel a Pending Authorisation Request
-    @objc(cancelPendingRequest:withRejecter:)
-    func cancelPendingRequest(resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-        resolve(["result": self.EVENT_ERROR])
-//                let request = PendingAuthorisationAPIResponse(from: "" as! Decoder)
-//                API.cancelPendingRequest(request) { response in
-//                    switch response {
-//                    case .success(_):
-//                        resolve(["result": self.EVENT_SUCCEEDED])
-//                    case .failure(let failure):
-//                        reject("API_10_Failed",failure.localizedDescription, failure.asAFError)
-//                        break
-//
-//                    }
-//                }
+    @objc(cancelPendingRequest:withRequest:withHashAlgorithm:withResolver:withRejecter:)
+    func cancelPendingRequest( transactionID: String,
+                               request: String,
+                               hashAlgorithm: String,
+                               resolve: @escaping RCTPromiseResolveBlock,
+                               reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let request = PendingAuthorisationAPIResponse(transactionID: transactionID, request: request, hashAlgorithm: hashAlgorithm)
+        API.cancelPendingRequest(request) { response in
+            switch response {
+            case .success(_):
+                resolve(["result": self.EVENT_SUCCEEDED])
+            case .failure(let failure):
+                reject("API_10_Failed",failure.localizedDescription, failure.asAFError)
+                break
+                
+            }
+        }
     }
     
     /// 4.11 Users Profile
@@ -250,7 +255,7 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_11_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -271,7 +276,7 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_12_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -293,7 +298,6 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_13_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
             }
         }
     }
@@ -315,7 +319,7 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_14_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -333,7 +337,7 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_15_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }
@@ -351,7 +355,7 @@ class CloudCa: NSObject {
             case .failure(let failure):
                 reject("API_16_Failed",failure.localizedDescription, failure.asAFError)
                 break
-
+                
             }
         }
     }

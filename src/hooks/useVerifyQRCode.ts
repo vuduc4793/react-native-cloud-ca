@@ -4,7 +4,7 @@ import type {
   CustomError,
   VerifyQRCodeParams,
   VerifyQRCodeResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type VerifyQRCodeFunc = (params: VerifyQRCodeParams) => void;
 

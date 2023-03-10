@@ -30,7 +30,6 @@ import {
   verifyOTP,
   verifyQRCode,
 } from 'react-native-cloud-ca';
-// import { CustomError, QRFormat } from 'src/types';
 
 import { API_LIST } from './constants';
 
@@ -89,10 +88,7 @@ const ListApiScene = () => {
           });
         break;
       case 4:
-        renewAccessToken({
-          clientId: CLIENT_ID,
-          clientSecret: CLIENT_SECRET,
-        })
+        renewAccessToken({ refresh_token: undefined })
           .then((response) => {
             setResult(JSON.stringify(response));
           })
@@ -101,7 +97,11 @@ const ListApiScene = () => {
           });
         break;
       case 5:
-        registerDevice()
+        registerDevice({
+          biometricApiType: 'AUTO',
+          authenWithBiometrics: true,
+          localizedReason: 'Unlock to add device',
+        })
           .then((response) => {
             setResult(JSON.stringify(response));
           })
@@ -135,7 +135,14 @@ const ListApiScene = () => {
           });
         break;
       case 9:
-        authorisationPendingRequest()
+        authorisationPendingRequest({
+          biometricApiType: 'AUTO',
+          authenWithBiometrics: true,
+          localizedReason: 'Unlock to add device',
+          hashAlgorithm: '',
+          request: '',
+          transactionID: '',
+        })
           .then((response) => {
             setResult(JSON.stringify(response));
           })
@@ -144,7 +151,11 @@ const ListApiScene = () => {
           });
         break;
       case 10:
-        cancelPendingRequest()
+        cancelPendingRequest({
+          hashAlgorithm: '',
+          request: '',
+          transactionID: '',
+        })
           .then((response) => {
             setResult(JSON.stringify(response));
           })

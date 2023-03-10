@@ -34,7 +34,9 @@ RCT_EXTERN_METHOD(renewAccessToken:(NSString)refreshToken
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.5 DeviceRegistration
-RCT_EXTERN_METHOD(registerDevice:(RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(registerDevice:(BOOL)authenWithBiometrics
+                  withLocalizedReason: (NSString)localizedReason
+                  withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.6 List Registered Devices
 RCT_EXTERN_METHOD(listRegisteredDevices:(NSString)userId
@@ -48,10 +50,18 @@ RCT_EXTERN_METHOD(deleteDevice:(NSString)deviceId
 RCT_EXTERN_METHOD(getPendingAuthorisationRequest: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.9 Authorise a Pending Request
-RCT_EXTERN_METHOD(authorisationPendingRequest:(RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(authorisationPendingRequest: (BOOL)authenWithBiometrics
+                  withLocalizedReason: (NSString)localizedReason
+                  withTransactionID: (NSString)transactionID
+                  withRequest: (NSString)request
+                  withHashAlgorithm: (NSString)hashAlgorithm
+                  withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.10 Cancel a Pending Authorisation Request
-RCT_EXTERN_METHOD(cancelPendingRequest: (RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(cancelPendingRequest: (NSString)transactionID
+                  withRequest: (NSString)request
+                  withHashAlgorithm: (NSString)hashAlgorithm
+                  withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.11 Users Profile
 RCT_EXTERN_METHOD(getUserProfile: (RCTPromiseResolveBlock)resolve

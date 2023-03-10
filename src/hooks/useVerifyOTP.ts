@@ -4,7 +4,7 @@ import type {
   CustomError,
   VerifyOTPParams,
   VerifyOTPResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type VerifyOTPFunc = (params: VerifyOTPParams) => void;
 

@@ -4,7 +4,7 @@ import type {
   BaseResponse,
   CustomError,
   DeleteDeviceForPushNotificationParams,
-} from 'src/types';
+} from 'lib/typescript';
 
 type DeleteDeviceForPushNotificationFunc = (
   params: DeleteDeviceForPushNotificationParams

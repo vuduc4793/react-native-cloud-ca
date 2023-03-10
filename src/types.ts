@@ -44,17 +44,34 @@ export interface VerifyOTPResponse extends TokenInfo {}
 
 // 4.4 Renew Access Token
 export interface RenewAccessTokenParams {
-  clientId: string;
-  clientSecret: string;
+  /**
+   * only for iOs
+   */
   refresh_token?: string;
 }
 
 export interface RenewAccessTokenResponse extends TokenInfo {}
 
 // 4.5 DeviceRegistration
-export interface RegisterDeviceParams {}
+export interface RegisterDeviceParams {
+  /**
+   * only for Android OS
+   */
+  biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
+  /**
+   * only for iOs
+   */
+  authenWithBiometrics?: boolean;
+  /**
+   * only for iOs
+   */
+  localizedReason: string;
+}
 
-export interface RegisterDeviceResponse extends AuthenticateUserResponse {}
+export interface RegisterDeviceResponse {
+  alias: string;
+  certificate: string;
+}
 
 // 4.6 List Registered Devices
 export interface ListRegisteredDevicesParams {
@@ -85,10 +102,39 @@ export interface GetPendingAuthorisationRequestResponse {
 }
 
 // 4.9 Authorise a Pending Request
-export interface AuthorisationPendingRequestParams {}
+export interface AuthorisationPendingRequestParams {
+  /**
+   * only for Android OS
+   */
+  biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
+  /**
+   * only for iOs
+   */
+  authenWithBiometrics?: boolean;
+  /**
+   * only for iOs
+   */
+  localizedReason: string;
+  transactionID: string;
+  request: string;
+  hashAlgorithm: string;
+}
 
 // 4.10 Cancel a Pending Authorisation Request
-export interface CancelPendingRequestParams {}
+export interface CancelPendingRequestParams {
+  /**
+   * only for iOs
+   */
+  transactionID: string;
+  /**
+   * only for iOs
+   */
+  request: string;
+  /**
+   * only for iOs
+   */
+  hashAlgorithm: string;
+}
 
 // 4.11 Users Profile
 export interface GetUserProfileParams {}
@@ -124,9 +170,21 @@ export enum QRFormat {
 }
 
 export interface GenerateQRCodeParams {
+  /**
+   * only for iOs
+   */
   clientId: string;
+  /**
+   * only for iOs
+   */
   userId: string;
+  /**
+   * only for Android OS
+   */
   format: QRFormat;
+  /**
+   * only for Android OS
+   */
   size: string;
 }
 

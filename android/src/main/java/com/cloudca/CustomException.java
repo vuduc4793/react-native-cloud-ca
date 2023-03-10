@@ -1,6 +1,7 @@
 package com.cloudca;
 
-import com.viettel.sdk.gosignsdk.network.response.ErrorType;
+
+import com.viettel.sdk.gosignsdk.utils.ErrorType;
 
 public class CustomException extends Throwable {
   private ErrorType errorCode;

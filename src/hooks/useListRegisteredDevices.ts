@@ -4,7 +4,7 @@ import type {
   CustomError,
   ListRegisteredDevicesParams,
   ListRegisteredDevicesResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type ListRegisteredDevicesFunc = (params: ListRegisteredDevicesParams) => void;
 

@@ -3,6 +3,7 @@ package com.cloudca;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -18,6 +19,7 @@ import com.viettel.sdk.gosignsdk.helpers.OTPType;
 import com.viettel.sdk.gosignsdk.helpers.QRFormat;
 import com.viettel.sdk.gosignsdk.helpers.SDKSetup;
 import com.viettel.sdk.gosignsdk.listener.ServiceApiListener;
+import com.viettel.sdk.gosignsdk.listener.ServiceLoadingApiListener;
 import com.viettel.sdk.gosignsdk.listener.ServiceApiListenerEmpty;
 import com.viettel.sdk.gosignsdk.network.request.ClientAuthenticateAPIRequest;
 import com.viettel.sdk.gosignsdk.network.request.DeleteDeviceForNotificationAPIRequest;
@@ -27,6 +29,7 @@ import com.viettel.sdk.gosignsdk.network.request.VerifyOTPAPIRequest;
 import com.viettel.sdk.gosignsdk.network.request.VerifyQRCodeAPIRequest;
 import com.viettel.sdk.gosignsdk.network.response.AuthClientResponse;
 import com.viettel.sdk.gosignsdk.network.response.AuthUserResponse;
+import com.viettel.sdk.gosignsdk.network.response.CertificateResponse;
 import com.viettel.sdk.gosignsdk.network.response.DeviceInfo;
 import com.viettel.sdk.gosignsdk.network.response.DeviceRegistrationSettings;
 import com.viettel.sdk.gosignsdk.network.response.GenerateQRCodeAPIResponse;
@@ -34,6 +37,7 @@ import com.viettel.sdk.gosignsdk.network.response.PendingAuthorisationAPIRespons
 import com.viettel.sdk.gosignsdk.network.response.ResponseError;
 import com.viettel.sdk.gosignsdk.network.response.TokenInfo;
 import com.viettel.sdk.gosignsdk.network.response.UserProfileAPIResponse;
+import com.viettel.sdk.gosignsdk.utils.BiometricApiType;
 import com.viettel.sdk.gosignsdk.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -65,7 +69,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       SDKSetup.initialize((Application) reactContext.getApplicationContext(), baseURL);
       WritableMap result = Arguments.createMap();
       result.putString("result", SUCCEEDED);
-      promise.resolve(SUCCEEDED);
+      promise.resolve(result);
     } catch(Exception e) {
       promise.reject(EVENT_ERROR, "SDK setup error");
     }
@@ -154,8 +158,8 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.4 Renew Access Token
   @ReactMethod
-  public void renewAccessToken(String clientId, String clientSecret, Promise promise) {
-    GoSignSDK.get().renewAccessToken(clientId, clientSecret,
+  public void renewAccessToken(Promise promise) {
+    GoSignSDK.get().renewAccessToken(
       new ServiceApiListener<TokenInfo>() {
         @Override
         public void onSuccess(TokenInfo data) {
@@ -176,31 +180,44 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.5 DeviceRegistration
   @ReactMethod
-  public void registerDevice(Promise promise) {
-    GoSignSDK.get().registerDevice(new ServiceApiListener<AuthUserResponse>() {
-      @Override
-      public void onSuccess(AuthUserResponse data) {
-        WritableMap result = Arguments.createMap();
-        result.putString("auth_type", data.getAuthType());
-        // get token info
-        AuthClientResponse tokenInfo = data.getTokenInfo();
-        if (tokenInfo != null) {
-          WritableMap tokenInfoMap = Arguments.createMap();
-          tokenInfoMap.putString("access_token", tokenInfo.getAccessToken());
-          tokenInfoMap.putString("refresh_token", tokenInfo.getRefreshToken());
-          tokenInfoMap.putString("token_type", tokenInfo.getTokenType());
-          tokenInfoMap.putString("expires_in", tokenInfo.getExpiresIn());
-          // push token info to result
-          result.putMap("token_info", tokenInfoMap);
-        }
-        promise.resolve(result);
+  public void registerDevice(String biometricApiType, Promise promise) {
+    try {
+      FragmentActivity activity = (FragmentActivity) getCurrentActivity();
+      if (activity == null) {
+        promise.reject("Activity_Error", "No current activity");
+        return;
       }
-      @Override
-      public void onFail(ResponseError error) {
-        CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
-      }
-    });
+      BiometricApiType biometricType = BiometricApiType.valueOf(biometricApiType);
+      ServiceLoadingApiListener<CertificateResponse> listener =
+        new ServiceLoadingApiListener<CertificateResponse>() {
+          @Override
+          public void showLoading() {
+          }
+          @Override
+          public void onSuccess(CertificateResponse data) {
+            WritableMap result = Arguments.createMap();
+            result.putString("alias", data.getAlias());
+            result.putString("certificate", data.getCertificate());
+            promise.resolve(result);
+          }
+          @Override
+          public void hideLoading() {
+          }
+          @Override
+          public void onFail(ResponseError error) {
+            CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
+            promise.reject(e.getErrorCode(), e.getErrorMessage());
+          }
+        };
+
+      GoSignSDK.get().registerDevice(
+        activity,
+        biometricType,
+        listener
+      );
+    } catch (Exception e) {
+      promise.reject(e.getLocalizedMessage(),e.getMessage());
+    }
   }
   // 4.6 List Registered Devices
   @ReactMethod
@@ -271,20 +288,57 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.9 Authorise a Pending Request
   @ReactMethod
-  public void authorisationPendingRequest(Promise promise) {
-    GoSignSDK.get().authorisationPendingRequest(new ServiceApiListenerEmpty() {
-      @Override
-      public void onSuccess() {
-        WritableMap result = Arguments.createMap();
-        result.putString("result", SUCCEEDED);
-        promise.resolve(result);
-      }
-      @Override
-      public void onFail(ResponseError error) {
-        CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
-      }
-    });
+  public void authorisationPendingRequest(String biometricApiType, String transactionID, String request, String hashAlgorithm, Promise promise) {
+    FragmentActivity activity = (FragmentActivity) reactContext.getCurrentActivity();
+    if (activity == null) {
+      promise.reject("Activity_Error", "No current activity");
+      return;
+    }
+
+    BiometricApiType biometricType = BiometricApiType.valueOf(biometricApiType);
+    PendingAuthorisationAPIResponse pendingAuthorisationAPIResponse = new PendingAuthorisationAPIResponse();
+
+    if(StringUtils.valid(transactionID)) {
+      pendingAuthorisationAPIResponse.setTransactionID(transactionID);
+    }
+    if(StringUtils.valid(request)) {
+      pendingAuthorisationAPIResponse.setRequest(request);
+    }
+    if(StringUtils.valid(hashAlgorithm)) {
+      pendingAuthorisationAPIResponse.setHashAlgorithm(hashAlgorithm);
+    }
+
+    ServiceLoadingApiListener listener =
+      new ServiceLoadingApiListener() {
+        @Override
+        public void showLoading() {
+
+        }
+
+        @Override
+        public void onSuccess(Object o) {
+          WritableMap result = Arguments.createMap();
+          result.putString("result", SUCCEEDED);
+          promise.resolve(result);
+        }
+
+        @Override
+        public void hideLoading() {
+
+        }
+
+        @Override
+        public void onFail(ResponseError error) {
+          CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
+        }
+      };
+
+    GoSignSDK.get().authorisationPendingRequest(
+      activity,
+      biometricType,
+      pendingAuthorisationAPIResponse,
+      listener);
   }
   // 4.10 Cancel a Pending Authorisation Request
   @ReactMethod
@@ -350,8 +404,8 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.13 Generate QR Code
   @ReactMethod
-  public void generateQRCode(String clientId, String userId, String format, String size, Promise promise) {
-    GenerateQRCodeAPIRequest qrCodeAPIRequest = new GenerateQRCodeAPIRequest(clientId, userId, QRFormat.get(format), size);
+  public void generateQRCode(String format, String size, Promise promise) {
+    GenerateQRCodeAPIRequest qrCodeAPIRequest = new GenerateQRCodeAPIRequest(QRFormat.get(format), size);
     GoSignSDK.get().generateQRCode(qrCodeAPIRequest, new ServiceApiListener<GenerateQRCodeAPIResponse>() {
       @Override
       public void onSuccess(GenerateQRCodeAPIResponse data) {
@@ -371,7 +425,17 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.14 Verify QR Code
   @ReactMethod
   public void verifyQRCode(String userId, String qrCode, Promise promise) {
-    GoSignSDK.get().verifyQRCode(new VerifyQRCodeAPIRequest(userId, qrCode),
+    VerifyQRCodeAPIRequest verifyQRCodeAPIRequest = new VerifyQRCodeAPIRequest();
+
+    if(StringUtils.valid(qrCode)) {
+      verifyQRCodeAPIRequest.setQrCode(qrCode);
+    }
+
+    if(StringUtils.valid(userId)) {
+    verifyQRCodeAPIRequest.setUserID(userId);
+    }
+
+    GoSignSDK.get().verifyQRCode(verifyQRCodeAPIRequest,
       new ServiceApiListener<TokenInfo>() {
         @Override
         public void onSuccess(TokenInfo data) {

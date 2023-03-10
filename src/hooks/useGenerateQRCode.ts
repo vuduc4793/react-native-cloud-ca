@@ -5,7 +5,7 @@ import type {
   CustomError,
   GenerateQRCodeParams,
   GenerateQRCodeResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type GenerateQRCodeFunc = (params: GenerateQRCodeParams) => void;
 

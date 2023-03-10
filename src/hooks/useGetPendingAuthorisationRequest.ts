@@ -4,7 +4,7 @@ import type {
   CustomError,
   GetPendingAuthorisationRequestParams,
   GetPendingAuthorisationRequestResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type GetPendingAuthorisationRequestFunc = (
   params?: GetPendingAuthorisationRequestParams

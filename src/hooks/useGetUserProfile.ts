@@ -5,7 +5,7 @@ import type {
   CustomError,
   GetUserProfileParams,
   GetUserProfileResponse,
-} from 'src/types';
+} from 'lib/typescript';
 
 type GetUserProfileFunc = (params?: GetUserProfileParams) => void;
 

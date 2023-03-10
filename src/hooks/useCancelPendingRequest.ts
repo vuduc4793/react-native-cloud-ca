@@ -1,13 +1,12 @@
 import { useState, useCallback } from 'react';
-import { cancelPendingRequest } from 'react-native-cloud-ca';
-
-import type {
+import {
+  cancelPendingRequest,
   BaseResponse,
   CancelPendingRequestParams,
   CustomError,
-} from 'src/types';
+} from 'react-native-cloud-ca';
 
-type CancelPendingRequestFunc = (params?: CancelPendingRequestParams) => void;
+type CancelPendingRequestFunc = (params: CancelPendingRequestParams) => void;
 
 type CancelPendingRequestReturn = [
   BaseResponse | null,
@@ -22,10 +21,15 @@ const useCancelPendingRequest = (): CancelPendingRequestReturn => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const cancelPendingRequestFunc = useCallback(
-    async (params?: CancelPendingRequestParams) => {
+    async (params: CancelPendingRequestParams) => {
+      const { transactionID, request, hashAlgorithm } = params;
       try {
         setIsLoading(true);
-        const response = await cancelPendingRequest(params);
+        const response = await cancelPendingRequest({
+          transactionID,
+          request,
+          hashAlgorithm,
+        });
         setResult(response);
       } catch (e) {
         setError(e as CustomError);
