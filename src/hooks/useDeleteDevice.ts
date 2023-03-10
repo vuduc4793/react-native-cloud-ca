@@ -4,7 +4,7 @@ import type {
   BaseResponse,
   CustomError,
   DeleteDeviceParams,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type DeleteDeviceFunc = (params: DeleteDeviceParams) => void;
 

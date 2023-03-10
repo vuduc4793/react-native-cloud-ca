@@ -4,7 +4,7 @@ import type {
   CustomError,
   VerifyOTPParams,
   VerifyOTPResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type VerifyOTPFunc = (params: VerifyOTPParams) => void;
 

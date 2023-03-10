@@ -4,7 +4,7 @@ import type {
   AuthenticateUserParams,
   AuthenticateUserResponse,
   CustomError,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type AuthenticateUserFunc = (params: AuthenticateUserParams) => void;
 

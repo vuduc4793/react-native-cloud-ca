@@ -4,7 +4,7 @@ import type {
   CustomError,
   GetPendingAuthorisationRequestParams,
   GetPendingAuthorisationRequestResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type GetPendingAuthorisationRequestFunc = (
   params?: GetPendingAuthorisationRequestParams

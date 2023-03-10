@@ -5,7 +5,7 @@ import type {
   CustomError,
   GetUserProfileParams,
   GetUserProfileResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type GetUserProfileFunc = (params?: GetUserProfileParams) => void;
 

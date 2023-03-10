@@ -4,7 +4,7 @@ import type {
   CustomError,
   VerifyQRCodeParams,
   VerifyQRCodeResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type VerifyQRCodeFunc = (params: VerifyQRCodeParams) => void;
 

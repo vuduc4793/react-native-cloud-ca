@@ -4,7 +4,7 @@ import type {
   BaseResponse,
   CustomError,
   DeleteDeviceForPushNotificationParams,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type DeleteDeviceForPushNotificationFunc = (
   params: DeleteDeviceForPushNotificationParams

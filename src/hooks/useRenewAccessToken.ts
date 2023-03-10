@@ -4,7 +4,7 @@ import type {
   CustomError,
   RenewAccessTokenParams,
   RenewAccessTokenResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type RenewAccessTokenFunc = (params: RenewAccessTokenParams) => void;
 

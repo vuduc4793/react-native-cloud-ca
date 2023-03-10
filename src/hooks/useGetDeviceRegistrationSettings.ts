@@ -4,7 +4,7 @@ import type {
   CustomError,
   GetDeviceRegistrationSettingsParams,
   GetDeviceRegistrationSettingsResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type GetDeviceRegistrationSettingsFunc = (
   params?: GetDeviceRegistrationSettingsParams

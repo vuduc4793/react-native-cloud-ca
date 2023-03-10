@@ -4,7 +4,7 @@ import type {
   CustomError,
   ListRegisteredDevicesParams,
   ListRegisteredDevicesResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type ListRegisteredDevicesFunc = (params: ListRegisteredDevicesParams) => void;
 

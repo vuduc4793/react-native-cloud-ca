@@ -5,7 +5,7 @@ import type {
   CustomError,
   GenerateQRCodeParams,
   GenerateQRCodeResponse,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 
 type GenerateQRCodeFunc = (params: GenerateQRCodeParams) => void;
 

@@ -1,4 +1,8 @@
-import type { BaseResponse, CustomError, SetupSDKParams } from 'lib/typescript';
+import type {
+  BaseResponse,
+  CustomError,
+  SetupSDKParams,
+} from 'react-native-cloud-ca';
 import { useState, useCallback } from 'react';
 import { sdkSetup } from 'react-native-cloud-ca';
 

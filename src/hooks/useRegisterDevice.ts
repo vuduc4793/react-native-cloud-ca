@@ -6,7 +6,7 @@ import {
   RegisterDeviceResponse,
 } from 'react-native-cloud-ca';
 // import type {
-// } from 'lib/typescript';
+// } from 'react-native-cloud-ca';
 
 type RegisterDeviceFunc = (params: RegisterDeviceParams) => void;
 

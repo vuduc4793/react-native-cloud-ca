@@ -2,7 +2,7 @@ import type {
   AuthenticateClientParams,
   AuthenticateClientResponse,
   CustomError,
-} from 'lib/typescript';
+} from 'react-native-cloud-ca';
 import { useState, useCallback } from 'react';
 import { authenticateClient } from 'react-native-cloud-ca';
 
