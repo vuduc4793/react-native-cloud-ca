@@ -98,9 +98,9 @@ export function renewAccessToken(
 export function registerDevice(
   params?: RegisterDeviceParams
 ): Promise<RegisterDeviceResponse> {
-  const { biometricApiType } = params ?? {};
+  const { biometricApiType, localizedReason } = params ?? {};
   if (Platform.OS === 'ios') {
-    return CloudCa.registerDevice(true, 'Unlock to add device');
+    return CloudCa.registerDevice(localizedReason);
   }
   return CloudCa.registerDevice(biometricApiType);
 }
@@ -135,7 +135,6 @@ export function authorisationPendingRequest(
 ): Promise<BaseResponse> {
   const {
     biometricApiType,
-    authenWithBiometrics,
     hashAlgorithm,
     localizedReason,
     request,
@@ -143,7 +142,6 @@ export function authorisationPendingRequest(
   } = params ?? {};
   if (Platform.OS === 'ios') {
     return CloudCa.authorisationPendingRequest(
-      authenWithBiometrics,
       localizedReason,
       transactionID,
       request,

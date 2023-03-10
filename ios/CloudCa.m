@@ -34,8 +34,7 @@ RCT_EXTERN_METHOD(renewAccessToken:(NSString)refreshToken
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.5 DeviceRegistration
-RCT_EXTERN_METHOD(registerDevice:(BOOL)authenWithBiometrics
-                  withLocalizedReason: (NSString)localizedReason
+RCT_EXTERN_METHOD(registerDevice: (NSString)localizedReason
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.6 List Registered Devices
@@ -50,8 +49,7 @@ RCT_EXTERN_METHOD(deleteDevice:(NSString)deviceId
 RCT_EXTERN_METHOD(getPendingAuthorisationRequest: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.9 Authorise a Pending Request
-RCT_EXTERN_METHOD(authorisationPendingRequest: (BOOL)authenWithBiometrics
-                  withLocalizedReason: (NSString)localizedReason
+RCT_EXTERN_METHOD(authorisationPendingRequest: (NSString)localizedReason
                   withTransactionID: (NSString)transactionID
                   withRequest: (NSString)request
                   withHashAlgorithm: (NSString)hashAlgorithm

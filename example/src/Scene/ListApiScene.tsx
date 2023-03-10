@@ -99,7 +99,6 @@ const ListApiScene = () => {
       case 5:
         registerDevice({
           biometricApiType: 'AUTO',
-          authenWithBiometrics: true,
           localizedReason: 'Unlock to add device',
         })
           .then((response) => {
@@ -137,7 +136,6 @@ const ListApiScene = () => {
       case 9:
         authorisationPendingRequest({
           biometricApiType: 'AUTO',
-          authenWithBiometrics: true,
           localizedReason: 'Unlock to add device',
           hashAlgorithm: '',
           request: '',

@@ -61,10 +61,6 @@ export interface RegisterDeviceParams {
   /**
    * only for iOs
    */
-  authenWithBiometrics?: boolean;
-  /**
-   * only for iOs
-   */
   localizedReason: string;
 }
 
@@ -107,10 +103,6 @@ export interface AuthorisationPendingRequestParams {
    * only for Android OS
    */
   biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
-  /**
-   * only for iOs
-   */
-  authenWithBiometrics?: boolean;
   /**
    * only for iOs
    */

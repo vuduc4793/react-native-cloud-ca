@@ -117,8 +117,8 @@ class CloudCa: NSObject {
     }
     
     /// 4.5 DeviceRegistration
-    @objc(registerDevice:withLocalizedReason:withResolver:withRejecter:)
-    func registerDevice(authenWithBiometrics: Bool = true, localizedReason: String = "Unlock to add device", resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
+    @objc(registerDevice:withResolver:withRejecter:)
+    func registerDevice(localizedReason: String = "Unlock to add device", resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
         API.registerDevice(localizedReason: localizedReason) { response in
             switch response {
             case .success(let success):
@@ -197,9 +197,8 @@ class CloudCa: NSObject {
     }
     
     /// 4.9 Authorise a Pending Request
-    @objc(authorisationPendingRequest:withLocalizedReason:withTransactionID:withRequest:withHashAlgorithm:withResolver:withRejecter:)
-    func authorisationPendingRequest(authenWithBiometrics: Bool,
-                                     localizedReason: String = "Unlock to add device",
+    @objc(authorisationPendingRequest:withTransactionID:withRequest:withHashAlgorithm:withResolver:withRejecter:)
+    func authorisationPendingRequest(localizedReason: String = "Unlock to add device",
                                      transactionID: String,
                                      request: String,
                                      hashAlgorithm: String,
