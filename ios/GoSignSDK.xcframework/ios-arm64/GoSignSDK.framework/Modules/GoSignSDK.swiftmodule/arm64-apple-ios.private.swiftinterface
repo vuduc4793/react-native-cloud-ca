@@ -19,6 +19,29 @@ extension Swift.Result where Success == () {
   }
 }
 public struct ServerResponseError : Swift.Error, Swift.Codable {
+  public let error: Swift.String?
+  public let errorDescription: Swift.String?
+  public let code: Swift.String?
+  public let codeDesc: Swift.String?
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case error
+    case errorDescription
+    case code
+    case codeDesc
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
@@ -425,6 +448,14 @@ public struct DeviceInfo : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
+extension Foundation.UserDefaults {
+  public var deviceID: Swift.String {
+    get
+  }
+}
+extension GoSignSDK.ServerResponseError.CodingKeys : Swift.Equatable {}
+extension GoSignSDK.ServerResponseError.CodingKeys : Swift.Hashable {}
+extension GoSignSDK.ServerResponseError.CodingKeys : Swift.RawRepresentable {}
 extension GoSignSDK.VerifyQRCodeAPIRequest.CodingKeys : Swift.Equatable {}
 extension GoSignSDK.VerifyQRCodeAPIRequest.CodingKeys : Swift.Hashable {}
 extension GoSignSDK.VerifyQRCodeAPIRequest.CodingKeys : Swift.RawRepresentable {}

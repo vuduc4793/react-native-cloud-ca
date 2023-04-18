@@ -145,7 +145,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         result.putString("access_token", data.getAccessToken());
         result.putString("refresh_token", data.getRefreshToken());
         result.putString("token_type", data.getTokenType());
-        result.putDouble("expires_in", data.getExpiresIn());
+        result.putString("expires_in", data.getExpiresIn());
 
         promise.resolve(result);
       }
@@ -167,7 +167,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
           result.putString("access_token", data.getAccessToken());
           result.putString("refresh_token", data.getRefreshToken());
           result.putString("token_type", data.getTokenType());
-          result.putDouble("expires_in", data.getExpiresIn());
+          result.putString("expires_in", data.getExpiresIn());
 
           promise.resolve(result);
         }
@@ -443,7 +443,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
           result.putString("access_token", data.getAccessToken());
           result.putString("refresh_token", data.getRefreshToken());
           result.putString("token_type", data.getTokenType());
-          result.putDouble("expires_in", data.getExpiresIn());
+          result.putString("expires_in", data.getExpiresIn());
           promise.resolve(result);
         }
         @Override
