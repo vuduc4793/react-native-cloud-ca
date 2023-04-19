@@ -157,10 +157,7 @@ export function cancelPendingRequest(
   params: CancelPendingRequestParams
 ): Promise<BaseResponse> {
   const { hashAlgorithm, request, transactionID } = params ?? {};
-  if (Platform.OS === 'ios') {
-    return CloudCa.cancelPendingRequest(transactionID, request, hashAlgorithm);
-  }
-  return CloudCa.cancelPendingRequest();
+  return CloudCa.cancelPendingRequest(transactionID, request, hashAlgorithm);
 }
 
 // 4.11 Users Profile

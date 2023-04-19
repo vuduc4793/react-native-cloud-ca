@@ -111,17 +111,8 @@ export interface AuthorisationPendingRequestParams {
 
 // 4.10 Cancel a Pending Authorisation Request
 export interface CancelPendingRequestParams {
-  /**
-   * only for iOs
-   */
   transactionID: string;
-  /**
-   * only for iOs
-   */
   request: string;
-  /**
-   * only for iOs
-   */
   hashAlgorithm: string;
 }
 

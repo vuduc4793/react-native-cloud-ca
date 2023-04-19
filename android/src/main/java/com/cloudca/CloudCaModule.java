@@ -340,8 +340,20 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.10 Cancel a Pending Authorisation Request
   @ReactMethod
-  public void cancelPendingRequest(Promise promise) {
-    GoSignSDK.get().cancelPendingRequest(new ServiceApiListenerEmpty() {
+  public void cancelPendingRequest(String transactionID, String request, String hashAlgorithm, Promise promise) {
+    PendingAuthorisationAPIResponse pendingAuthorisationAPIResponse = new PendingAuthorisationAPIResponse();
+
+    if(StringUtils.valid(transactionID)) {
+      pendingAuthorisationAPIResponse.setTransactionID(transactionID);
+    }
+    if(StringUtils.valid(request)) {
+      pendingAuthorisationAPIResponse.setRequest(request);
+    }
+    if(StringUtils.valid(hashAlgorithm)) {
+      pendingAuthorisationAPIResponse.setHashAlgorithm(hashAlgorithm);
+    }
+
+    GoSignSDK.get().cancelPendingRequest(pendingAuthorisationAPIResponse, new ServiceApiListenerEmpty() {
       @Override
       public void onSuccess() {
         WritableMap result = Arguments.createMap();
