@@ -35,7 +35,6 @@ export interface AuthenticateUserResponse {
 
 // 4.3 Verify OTP
 export interface VerifyOTPParams {
-  userId: string;
   otpSms: string;
   otpMail: string;
 }
@@ -70,9 +69,7 @@ export interface RegisterDeviceResponse {
 }
 
 // 4.6 List Registered Devices
-export interface ListRegisteredDevicesParams {
-  userId: string;
-}
+export interface ListRegisteredDevicesParams {}
 
 export interface DeviceInfo {
   device_id: string;
@@ -167,10 +164,6 @@ export interface GenerateQRCodeParams {
    */
   clientId: string;
   /**
-   * only for iOs
-   */
-  userId: string;
-  /**
    * only for Android OS
    */
   format: QRFormat;
@@ -188,7 +181,6 @@ export interface GenerateQRCodeResponse {
 
 // 4.14 Verify QR Code
 export interface VerifyQRCodeParams {
-  userId: string;
   qrCode: string;
 }
 

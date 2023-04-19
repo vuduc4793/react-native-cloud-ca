@@ -2,11 +2,10 @@ import { useState, useCallback } from 'react';
 import { listRegisteredDevices } from 'react-native-cloud-ca';
 import type {
   CustomError,
-  ListRegisteredDevicesParams,
   ListRegisteredDevicesResponse,
 } from 'react-native-cloud-ca';
 
-type ListRegisteredDevicesFunc = (params: ListRegisteredDevicesParams) => void;
+type ListRegisteredDevicesFunc = () => void;
 
 type ListRegisteredDevicesReturn = [
   ListRegisteredDevicesResponse | null,
@@ -22,20 +21,17 @@ const useListRegisteredDevices = (): ListRegisteredDevicesReturn => {
   const [error, setError] = useState<CustomError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const listRegisteredDevicesFunc = useCallback(
-    async (params: ListRegisteredDevicesParams) => {
-      try {
-        setIsLoading(true);
-        const response = await listRegisteredDevices(params);
-        setResult(response);
-      } catch (e) {
-        setError(e as CustomError);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    []
-  );
+  const listRegisteredDevicesFunc = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await listRegisteredDevices();
+      setResult(response);
+    } catch (e) {
+      setError(e as CustomError);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   return [result, error, listRegisteredDevicesFunc, isLoading];
 };

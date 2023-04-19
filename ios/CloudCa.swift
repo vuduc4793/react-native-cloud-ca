@@ -62,9 +62,8 @@ class CloudCa: NSObject {
     }
     
     /// 4.3 Verify OTP
-    @objc(verifyOTP:withOtpSms:withOtpMail:withResolver:withRejecter:)
-    func verifyOTP(userId: String,
-                   otpSms: String,
+    @objc(verifyOTP:withOtpMail:withResolver:withRejecter:)
+    func verifyOTP(otpSms: String,
                    otpMail: String,
                    resolve: @escaping RCTPromiseResolveBlock,
                    reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -78,7 +77,7 @@ class CloudCa: NSObject {
             otpInfos.append(OtpInfo(otp: otpMail, otpType: .mail))
         }
         
-        let request = VerifyOTPAPIRequest(userID: userId, otpInfo: otpInfos)
+        let request = VerifyOTPAPIRequest(otpInfo: otpInfos)
         API.verifyOTP(request) { response in
             switch response {
             case .success(let success):
@@ -135,11 +134,12 @@ class CloudCa: NSObject {
     }
     
     /// 4.6 List Registered Devices
-    @objc(listRegisteredDevices:withResolver:withRejecter:)
-    func listRegisteredDevices(userId: String,
+    @objc(listRegisteredDevices:withRejecter:)
+    func listRegisteredDevices(
                                resolve: @escaping RCTPromiseResolveBlock,
                                reject: @escaping RCTPromiseRejectBlock) -> Void {
-        API.listRegisteredDevices(userId) { response in
+                                   
+        API.listRegisteredDevices { response in
             switch response {
             case .success(let success):
                 var listDevices: [[String: Any]] = []
@@ -281,12 +281,11 @@ class CloudCa: NSObject {
     }
     
     /// 4.13 Generate QR Code
-    @objc(generateQRCode:withUserId:withResolver:withRejecter:)
+    @objc(generateQRCode:withResolver:withRejecter:)
     func generateQRCode(clientId: String,
-                        userId: String,
                         resolve: @escaping RCTPromiseResolveBlock,
                         reject: @escaping RCTPromiseRejectBlock) -> Void {
-        let request: GenerateQRCodeAPIRequest = .init(clientID: clientId, userID: userId)
+        let request: GenerateQRCodeAPIRequest = .init(clientID: clientId)
         API.generateQRCode(request) { response in
             switch response {
             case .success(let success):
@@ -302,11 +301,11 @@ class CloudCa: NSObject {
     }
     
     /// 4.14 Verify QR Code
-    @objc(verifyQRCode:withQrCode:withResolver:withRejecter:)
-    func verifyQRCode(userId: String, qrCode: String,
+    @objc(verifyQRCode:withResolver:withRejecter:)
+    func verifyQRCode(qrCode: String,
                       resolve: @escaping RCTPromiseResolveBlock,
                       reject: @escaping RCTPromiseRejectBlock) -> Void {
-        let request: VerifyQRCodeAPIRequest = .init(userID: userId, qrCode: qrCode)
+        let request: VerifyQRCodeAPIRequest = .init(qrCode: qrCode)
         API.verifyQRCode(request) { response in
             switch response {
             case .success(let success):

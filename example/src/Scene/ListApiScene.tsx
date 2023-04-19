@@ -33,10 +33,10 @@ import {
 
 import { API_LIST } from './constants';
 
-const CLIENT_ID = '';
-const CLIENT_SECRET = '';
-const GRANT_TYPE = '';
-const USER_ID = '';
+const CLIENT_ID = 'samples_test_client';
+const CLIENT_SECRET = '205640fd6ea8c7d80bb91c630b52d286d21ee511';
+const GRANT_TYPE = 'client_credentials';
+const USER_ID = 'duynq7_viettel7';
 
 const ListApiScene = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -76,7 +76,6 @@ const ListApiScene = () => {
         break;
       case 3:
         verifyOTP({
-          userId: USER_ID,
           otpMail: '',
           otpSms: '',
         })
@@ -109,9 +108,7 @@ const ListApiScene = () => {
           });
         break;
       case 6:
-        listRegisteredDevicesFnc({
-          userId: USER_ID,
-        });
+        listRegisteredDevicesFnc();
         break;
       case 7:
         deleteDevice({
@@ -181,7 +178,6 @@ const ListApiScene = () => {
         break;
       case 13:
         generateQRCode({
-          userId: USER_ID,
           clientId: CLIENT_ID,
           format: QRFormat.PNG,
           size: '256',
@@ -197,7 +193,6 @@ const ListApiScene = () => {
       case 14:
         verifyQRCode({
           qrCode: qrCode,
-          userId: USER_ID,
         })
           .then((response) => {
             setResult(JSON.stringify(response));
@@ -238,9 +233,7 @@ const ListApiScene = () => {
           title="Delete"
           onPress={() => {
             deleteDevicesFnc({ deviceId: item?.device_id });
-            listRegisteredDevicesFnc({
-              userId: USER_ID,
-            });
+            listRegisteredDevicesFnc();
           }}
         />
       </View>

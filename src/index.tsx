@@ -17,7 +17,6 @@ import type {
   GetPendingAuthorisationRequestResponse,
   GetUserProfileParams,
   GetUserProfileResponse,
-  ListRegisteredDevicesParams,
   ListRegisteredDevicesResponse,
   RegisterDeviceForPushNotificationParams,
   RegisterDeviceParams,
@@ -79,8 +78,8 @@ export function authenticateUser(
 
 // 4.3 Verify OTP
 export function verifyOTP(params: VerifyOTPParams): Promise<VerifyOTPResponse> {
-  const { otpMail, otpSms, userId } = params;
-  return CloudCa.verifyOTP(userId, otpSms, otpMail);
+  const { otpMail, otpSms } = params;
+  return CloudCa.verifyOTP(otpSms, otpMail);
 }
 
 // 4.4 Renew Access Token
@@ -106,11 +105,8 @@ export function registerDevice(
 }
 
 // 4.6 List Registered Devices
-export function listRegisteredDevices(
-  params: ListRegisteredDevicesParams
-): Promise<ListRegisteredDevicesResponse> {
-  const { userId } = params;
-  return CloudCa.listRegisteredDevices(userId);
+export function listRegisteredDevices(): Promise<ListRegisteredDevicesResponse> {
+  return CloudCa.listRegisteredDevices();
 }
 
 // 4.7 Delete Device
@@ -187,9 +183,9 @@ export function getDeviceRegistrationSettings(
 export function generateQRCode(
   params: GenerateQRCodeParams
 ): Promise<GenerateQRCodeResponse> {
-  const { clientId, format, size, userId } = params;
+  const { clientId, format, size } = params;
   if (Platform.OS === 'ios') {
-    return CloudCa.generateQRCode(clientId, userId);
+    return CloudCa.generateQRCode(clientId);
   }
   return CloudCa.generateQRCode(format, size);
 }
@@ -198,9 +194,9 @@ export function generateQRCode(
 export function verifyQRCode(
   params: VerifyQRCodeParams
 ): Promise<VerifyQRCodeResponse> {
-  const { qrCode, userId } = params;
+  const { qrCode } = params;
   console.log('params', params);
-  return CloudCa.verifyQRCode(userId, qrCode);
+  return CloudCa.verifyQRCode(qrCode);
 }
 
 // 4.15 Register Device for Push Notification

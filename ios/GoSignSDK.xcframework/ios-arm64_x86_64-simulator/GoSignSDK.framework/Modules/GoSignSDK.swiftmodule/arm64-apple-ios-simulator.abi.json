@@ -1463,9 +1463,18 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               },
               {
                 "kind": "TypeNominal",
@@ -1475,8 +1484,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:9GoSignSDK22VerifyQRCodeAPIRequestV6userID6qrCodeACSS_SStcfc",
-            "mangledName": "$s9GoSignSDK22VerifyQRCodeAPIRequestV6userID6qrCodeACSS_SStcfc",
+            "usr": "s:9GoSignSDK22VerifyQRCodeAPIRequestV6userID6qrCodeACSSSg_SStcfc",
+            "mangledName": "$s9GoSignSDK22VerifyQRCodeAPIRequestV6userID6qrCodeACSSSg_SStcfc",
             "moduleName": "GoSignSDK",
             "declAttributes": [
               "AccessControl"
@@ -4634,9 +4643,18 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               },
               {
                 "kind": "TypeNominal",
@@ -4654,8 +4672,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:9GoSignSDK24GenerateQRCodeAPIRequestV8clientID04userH06format4sizeACSS_SSAA8QRFormatOSStcfc",
-            "mangledName": "$s9GoSignSDK24GenerateQRCodeAPIRequestV8clientID04userH06format4sizeACSS_SSAA8QRFormatOSStcfc",
+            "usr": "s:9GoSignSDK24GenerateQRCodeAPIRequestV8clientID04userH06format4sizeACSS_SSSgAA8QRFormatOSStcfc",
+            "mangledName": "$s9GoSignSDK24GenerateQRCodeAPIRequestV8clientID04userH06format4sizeACSS_SSSgAA8QRFormatOSStcfc",
             "moduleName": "GoSignSDK",
             "declAttributes": [
               "AccessControl"
@@ -13816,21 +13834,21 @@
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 460,
+      "offset": 467,
       "length": 5,
       "value": "\"256\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 805,
+      "offset": 844,
       "length": 9,
       "value": "\"qr_code\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 805,
+      "offset": 844,
       "length": 9,
       "value": "\"qr_code\""
     },

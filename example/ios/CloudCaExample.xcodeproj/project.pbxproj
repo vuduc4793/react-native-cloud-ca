@@ -487,7 +487,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 654W89VXAM;
+				DEVELOPMENT_TEAM = DX476LUU93;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				INFOPLIST_FILE = CloudCaExample/Info.plist;
@@ -501,7 +501,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jp.onestudy.testing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cloudcarnexample;
 				PRODUCT_NAME = CloudCaExample;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -517,7 +517,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 654W89VXAM;
+				DEVELOPMENT_TEAM = DX476LUU93;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				INFOPLIST_FILE = CloudCaExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -530,7 +530,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jp.onestudy.testing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cloudcarnexample;
 				PRODUCT_NAME = CloudCaExample;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

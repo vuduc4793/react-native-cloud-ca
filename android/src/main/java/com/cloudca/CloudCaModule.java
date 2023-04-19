@@ -126,9 +126,8 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.3 Verify OTP
   @ReactMethod
-  public void verifyOTP(String userId, String otpSms, String otpMail, Promise promise) {
+  public void verifyOTP(String otpSms, String otpMail, Promise promise) {
     VerifyOTPAPIRequest request = new VerifyOTPAPIRequest();
-    request.setUserID(userId);
     List<VerifyOTPAPIRequest.OTPInfo> otpInfo = new ArrayList<>();
     if(StringUtils.valid(otpSms)) {
       otpInfo.add(new VerifyOTPAPIRequest.OTPInfo(otpSms, OTPType.SMS));
@@ -221,9 +220,8 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.6 List Registered Devices
   @ReactMethod
-  public void listRegisteredDevices(String userId, Promise promise) {
-    GoSignSDK.get().listRegisteredDevices(userId,
-      new ServiceApiListener<List<DeviceInfo>>() {
+  public void listRegisteredDevices(Promise promise) {
+    GoSignSDK.get().listRegisteredDevices(new ServiceApiListener<List<DeviceInfo>>() {
         @Override
         public void onSuccess(List<DeviceInfo> data) {
           DeviceInfo[] returnArray = new DeviceInfo[data.size()];
@@ -424,15 +422,11 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.14 Verify QR Code
   @ReactMethod
-  public void verifyQRCode(String userId, String qrCode, Promise promise) {
+  public void verifyQRCode(String qrCode, Promise promise) {
     VerifyQRCodeAPIRequest verifyQRCodeAPIRequest = new VerifyQRCodeAPIRequest();
 
     if(StringUtils.valid(qrCode)) {
       verifyQRCodeAPIRequest.setQrCode(qrCode);
-    }
-
-    if(StringUtils.valid(userId)) {
-    verifyQRCodeAPIRequest.setUserID(userId);
     }
 
     GoSignSDK.get().verifyQRCode(verifyQRCodeAPIRequest,

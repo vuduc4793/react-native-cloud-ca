@@ -69,7 +69,7 @@ public struct VerifyQRCodeAPIRequest : Swift.Encodable {
       get
     }
   }
-  public init(userID: Swift.String, qrCode: Swift.String)
+  public init(userID: Swift.String? = nil, qrCode: Swift.String)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct DeleteDeviceForNotificationAPIRequest : Swift.Codable {
@@ -187,7 +187,7 @@ public struct GenerateQRCodeAPIRequest : Swift.Encodable {
       get
     }
   }
-  public init(clientID: Swift.String, userID: Swift.String, format: GoSignSDK.QRFormat = .png, size: Swift.String = "256")
+  public init(clientID: Swift.String, userID: Swift.String? = nil, format: GoSignSDK.QRFormat = .png, size: Swift.String = "256")
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct GenerateQRCodeAPIResponse : Swift.Codable {

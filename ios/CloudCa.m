@@ -24,8 +24,7 @@ RCT_EXTERN_METHOD(authenticateUser:(NSString)userId
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.3 Verify OTP
-RCT_EXTERN_METHOD(verifyOTP:(NSString)userId
-                  withOtpSms: (NSString)otpSms
+RCT_EXTERN_METHOD(verifyOTP: (NSString)otpSms
                   withOtpMail: (NSString)otpMail
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
@@ -38,9 +37,8 @@ RCT_EXTERN_METHOD(registerDevice: (NSString)localizedReason
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.6 List Registered Devices
-RCT_EXTERN_METHOD(listRegisteredDevices:(NSString)userId
-                  withResolver: (RCTPromiseResolveBlock)resolve
-                  withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(listRegisteredDevices: (RCTPromiseResolveBlock)resolve
+                  withRejecter: (RCTPromiseRejectBlock)reject)
 /// 4.7 Delete Device
 RCT_EXTERN_METHOD(deleteDevice:(NSString)deviceId
                   withResolver: (RCTPromiseResolveBlock)resolve
@@ -68,15 +66,13 @@ RCT_EXTERN_METHOD(getUserProfile: (RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(getDeviceRegistrationSettings: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
 /// 4.13 Generate QR Code
-RCT_EXTERN_METHOD(generateQRCode:(NSString)clientId
-                  withUserId: (NSString)userId
+RCT_EXTERN_METHOD(generateQRCode: (NSString)clientId
                   withResolver: (RCTPromiseResolveBlock)resolve
-                  withRejecter:(RCTPromiseRejectBlock)reject)
+                  withRejecter: (RCTPromiseRejectBlock)reject)
 /// 4.14 Verify QR Code
-RCT_EXTERN_METHOD(verifyQRCode:(NSString)userId
-                  withQrCode: (NSString)qrCode
+RCT_EXTERN_METHOD(verifyQRCode: (NSString)qrCode
                   withResolver: (RCTPromiseResolveBlock)resolve
-                  withRejecter:(RCTPromiseRejectBlock)reject)
+                  withRejecter: (RCTPromiseRejectBlock)reject)
 /// 4.15 Register Device for Push Notification
 RCT_EXTERN_METHOD(registerDeviceForPushNotification:(NSString)deviceToken
                   withResolver: (RCTPromiseResolveBlock)resolve
