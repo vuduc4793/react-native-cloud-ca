@@ -165,7 +165,10 @@ class CloudCa: NSObject {
     func deleteDevice(deviceId: String,
                       resolve: @escaping RCTPromiseResolveBlock,
                       reject: @escaping RCTPromiseRejectBlock) -> Void {
-        API.deleteDevice(deviceId) { response in
+        
+        let id = deviceId.isEmpty ? nil : deviceId
+        
+        API.deleteDevice(id) { response in
             switch response {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
