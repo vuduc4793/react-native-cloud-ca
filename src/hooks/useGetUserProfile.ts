@@ -21,20 +21,17 @@ const useGetUserProfile = (): GetUserProfileReturn => {
   const [error, setError] = useState<CustomError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const getUserProfileFunc = useCallback(
-    async (params?: GetUserProfileParams) => {
-      try {
-        setIsLoading(true);
-        const response = await getUserProfile(params);
-        setResult(response);
-      } catch (e) {
-        setError(e as CustomError);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    []
-  );
+  const getUserProfileFunc = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await getUserProfile();
+      setResult(response);
+    } catch (e) {
+      setError(e as CustomError);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   return [result, error, getUserProfileFunc, isLoading];
 };

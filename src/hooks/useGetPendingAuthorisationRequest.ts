@@ -24,20 +24,17 @@ const useGetPendingAuthorisationRequest =
     const [error, setError] = useState<CustomError | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const getPendingAuthorisationRequestFunc = useCallback(
-      async (params?: GetPendingAuthorisationRequestParams) => {
-        try {
-          setIsLoading(true);
-          const response = await getPendingAuthorisationRequest(params);
-          setResult(response);
-        } catch (e) {
-          setError(e as CustomError);
-        } finally {
-          setIsLoading(false);
-        }
-      },
-      []
-    );
+    const getPendingAuthorisationRequestFunc = useCallback(async () => {
+      try {
+        setIsLoading(true);
+        const response = await getPendingAuthorisationRequest();
+        setResult(response);
+      } catch (e) {
+        setError(e as CustomError);
+      } finally {
+        setIsLoading(false);
+      }
+    }, []);
 
     return [result, error, getPendingAuthorisationRequestFunc, isLoading];
   };

@@ -11,11 +11,8 @@ import type {
   DeleteDeviceParams,
   GenerateQRCodeParams,
   GenerateQRCodeResponse,
-  GetDeviceRegistrationSettingsParams,
   GetDeviceRegistrationSettingsResponse,
-  GetPendingAuthorisationRequestParams,
   GetPendingAuthorisationRequestResponse,
-  GetUserProfileParams,
   GetUserProfileResponse,
   ListRegisteredDevicesResponse,
   RegisterDeviceForPushNotificationParams,
@@ -118,10 +115,7 @@ export function deleteDevice(
 }
 
 // 4.8 Get Pending Authorisation Request
-export function getPendingAuthorisationRequest(
-  params?: GetPendingAuthorisationRequestParams
-): Promise<GetPendingAuthorisationRequestResponse> {
-  const {} = params ?? {};
+export function getPendingAuthorisationRequest(): Promise<GetPendingAuthorisationRequestResponse> {
   return CloudCa.getPendingAuthorisationRequest();
 }
 
@@ -161,18 +155,12 @@ export function cancelPendingRequest(
 }
 
 // 4.11 Users Profile
-export function getUserProfile(
-  params?: GetUserProfileParams
-): Promise<GetUserProfileResponse> {
-  const {} = params ?? {};
+export function getUserProfile(): Promise<GetUserProfileResponse> {
   return CloudCa.getUserProfile();
 }
 
 // 4.12 Get Device Registration Settings
-export function getDeviceRegistrationSettings(
-  params?: GetDeviceRegistrationSettingsParams
-): Promise<GetDeviceRegistrationSettingsResponse> {
-  const {} = params ?? {};
+export function getDeviceRegistrationSettings(): Promise<GetDeviceRegistrationSettingsResponse> {
   return CloudCa.getDeviceRegistrationSettings();
 }
 

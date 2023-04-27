@@ -24,20 +24,17 @@ const useGetDeviceRegistrationSettings =
     const [error, setError] = useState<CustomError | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const getDeviceRegistrationSettingsFunc = useCallback(
-      async (params?: GetDeviceRegistrationSettingsParams) => {
-        try {
-          setIsLoading(true);
-          const response = await getDeviceRegistrationSettings(params);
-          setResult(response);
-        } catch (e) {
-          setError(e as CustomError);
-        } finally {
-          setIsLoading(false);
-        }
-      },
-      []
-    );
+    const getDeviceRegistrationSettingsFunc = useCallback(async () => {
+      try {
+        setIsLoading(true);
+        const response = await getDeviceRegistrationSettings();
+        setResult(response);
+      } catch (e) {
+        setError(e as CustomError);
+      } finally {
+        setIsLoading(false);
+      }
+    }, []);
 
     return [result, error, getDeviceRegistrationSettingsFunc, isLoading];
   };
