@@ -1,43 +1,23 @@
 import * as React from 'react';
 
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  Button,
-  Text,
-  SafeAreaView,
-} from 'react-native';
-import { useSdkSetup } from 'react-native-cloud-ca';
-import ListApiScene from './Scene/ListApiScene';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { DeviceRegistrationView } from 'react-native-cloud-ca';
+
+const CLIENT_ID = 'samples_test_client';
+const CLIENT_SECRET = '205640fd6ea8c7d80bb91c630b52d286d21ee511';
+const GRANT_TYPE = 'client_credentials';
+const USER_ID = 'MST_0123456787-932';
 
 export default function App() {
-  const [baseUrl, setBaseUrl] = React.useState<string>(
-    'https://remotesigning.viettel.vn'
-  );
-  const [setupSdkResponse, , onSetupSDK] = useSdkSetup();
-
-  const onSetUrl = () => {
-    onSetupSDK({ baseUrl });
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      {setupSdkResponse === null ? (
-        <>
-          <View>
-            <Text style={styles.label}>Base URL</Text>
-            <TextInput
-              onChangeText={setBaseUrl}
-              value={baseUrl}
-              style={styles.textInputContainer}
-            />
-          </View>
-          <Button title="Set URL" onPress={onSetUrl} />
-        </>
-      ) : (
-        <ListApiScene />
-      )}
+      <DeviceRegistrationView
+        buttonLabel="Đăng ký"
+        clientId={CLIENT_ID}
+        clientSecret={CLIENT_SECRET}
+        grantType={GRANT_TYPE}
+        userId={USER_ID}
+      />
     </SafeAreaView>
   );
 }
