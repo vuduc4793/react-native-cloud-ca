@@ -1,7 +1,6 @@
 import React from 'react';
-import { Modal, View, Text, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, Image } from 'react-native';
 import type { DialogueConfirmProps } from './types';
-import { Image } from 'react-native';
 import styles from './styles';
 
 const DialogueConfirm = (props: DialogueConfirmProps) => {
@@ -14,8 +13,19 @@ const DialogueConfirm = (props: DialogueConfirmProps) => {
     closeLabel,
     closeOnPress,
     closeDisable,
+    modalType,
     ...rest
   } = props;
+
+  const icons = {
+    ERROR: require('../../asset/icon/IC_ERROR.png'),
+    WARNING: require('../../asset/icon/IC_WARNING.png'),
+    SUCCESS: require('../../asset/icon/IC_SUCCESS.png'),
+  };
+
+  const renderIcon = () => (
+    <Image style={styles.iconStyle} source={icons[modalType || 'SUCCESS']} />
+  );
 
   return (
     <Modal animationType="fade" visible={true} transparent={true} {...rest}>
@@ -28,6 +38,7 @@ const DialogueConfirm = (props: DialogueConfirmProps) => {
               resizeMode="stretch"
             />
           </TouchableOpacity>
+          {!!modalType?.length && renderIcon()}
           <Text style={styles.titleStyle}>{title || 'Thông báo'}</Text>
           {children}
           <View style={styles.buttonWarp}>

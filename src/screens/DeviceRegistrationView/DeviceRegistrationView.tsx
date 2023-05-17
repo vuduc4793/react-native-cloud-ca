@@ -10,7 +10,6 @@ import {
   DialogueConfirm,
   authenticateClient,
   authenticateUser,
-  sdkSetup,
   verifyOTP,
 } from 'react-native-cloud-ca';
 import styles from './styles';
@@ -31,6 +30,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   const [isShowError, setIsShowError] = useState<boolean>(false);
   const [isShowSuccess, setIsShowSuccess] = useState<boolean>(false);
   const [isShowOtp, setIsShowOtp] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorResponse, setErrorResponse] = useState<string>('');
   const [successResponse, setSuccessResponse] = useState<string>('');
   const [otpSms, setOtpSms] = useState<string>('');
@@ -50,11 +50,8 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   };
 
   const onRegister = async () => {
+    setIsLoading(true);
     try {
-      const settingSDK = await sdkSetup({
-        baseUrl: 'https://remotesigning.viettel.vn',
-      });
-      console.log(settingSDK);
       const authenticateClientResult = await authenticateClient({
         clientId: clientId,
         clientSecret: clientSecret,
@@ -66,11 +63,13 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       });
       await getOtp();
       handleShowRequestRegister(false);
+      setIsLoading(false);
     } catch (error) {
       console.log('error', error);
       setErrorResponse((error as CustomError)?.message);
       handleShowRequestRegister(false);
       setIsShowError(true);
+      setIsLoading(false);
     }
   };
 
@@ -140,6 +139,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         closeLabel="Bỏ qua"
         confirmOnPress={onRegister}
         confirmLabel="Tiếp tục"
+        confirmDisable={isLoading}
         visible={isShowRequestRegister}
       >
         <Text style={styles.contentStyle}>
