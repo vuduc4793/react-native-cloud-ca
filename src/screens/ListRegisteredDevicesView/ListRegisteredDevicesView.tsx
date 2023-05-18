@@ -13,7 +13,7 @@ import type { ListRegisteredDevicesViewProps } from './types';
 import { DeviceItem } from './components';
 
 const ListRegisteredDevicesView = (props: ListRegisteredDevicesViewProps) => {
-  const { headerProps } = props;
+  const { headerProps, goBack } = props;
   const [listDevices, setListDevices] = useState<Array<DeviceInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(() => {
@@ -43,7 +43,7 @@ const ListRegisteredDevicesView = (props: ListRegisteredDevicesViewProps) => {
   const rootViewContainer = () => {
     return (
       <View style={styles.container}>
-        <Header {...headerProps} goBack={() => console.log('asd')} />
+        <Header {...headerProps} goBack={goBack} />
         <Text style={styles.numberOfDevices}>
           Thiết bị đã đăng ký ({listDevices?.length})
         </Text>
