@@ -1,16 +1,19 @@
-import type {
-  AuthorisationPendingRequestParams,
-  CancelPendingRequestParams,
-} from 'react-native-cloud-ca';
 import type { HeaderProps } from '../../components/Header/types';
 import type { GestureResponderEvent } from 'react-native';
 
 export interface GetPendingAuthorisationRequestViewProps {
   headerProps?: HeaderProps;
   goBack: (event: GestureResponderEvent) => void;
-  authorisationPendingInfo: AuthorisationPendingInfo;
+  authorisationPendingOptions: AuthorisationPendingOptions;
 }
 
-export interface AuthorisationPendingInfo
-  extends AuthorisationPendingRequestParams,
-    CancelPendingRequestParams {}
+export interface AuthorisationPendingOptions {
+  /**
+   * only for Android OS
+   */
+  biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
+  /**
+   * only for iOs
+   */
+  localizedReason: string;
+}

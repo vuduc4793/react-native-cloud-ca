@@ -28,7 +28,7 @@ import { Link, NativeRouter, Route, Routes } from 'react-router-native';
 const GetPendingAuthorisationRequestView = (
   props: GetPendingAuthorisationRequestViewProps
 ) => {
-  const { headerProps, authorisationPendingInfo, goBack } = props;
+  const { headerProps, authorisationPendingOptions, goBack } = props;
 
   const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
   const { themeColor } = cloudCAProviderContext;
@@ -91,11 +91,11 @@ const GetPendingAuthorisationRequestView = (
     setIsLoading(true);
     try {
       const params: AuthorisationPendingRequestParams = {
-        biometricApiType: authorisationPendingInfo?.biometricApiType,
-        hashAlgorithm: authorisationPendingInfo?.hashAlgorithm,
-        localizedReason: authorisationPendingInfo?.localizedReason,
-        request: authorisationPendingInfo?.request,
-        transactionID: authorisationPendingInfo?.transactionID,
+        biometricApiType: authorisationPendingOptions?.biometricApiType,
+        hashAlgorithm: pendingAuthoriastion?.hash_algorithm!,
+        localizedReason: authorisationPendingOptions?.localizedReason,
+        request: pendingAuthoriastion?.request!,
+        transactionID: pendingAuthoriastion?.transaction_id!,
       };
       await authorisationPendingRequest(params);
       setIsLoading(false);
@@ -111,9 +111,9 @@ const GetPendingAuthorisationRequestView = (
     setIsLoading(true);
     try {
       const params: CancelPendingRequestParams = {
-        hashAlgorithm: authorisationPendingInfo?.hashAlgorithm,
-        request: authorisationPendingInfo?.request,
-        transactionID: authorisationPendingInfo?.transactionID,
+        hashAlgorithm: pendingAuthoriastion?.hash_algorithm!,
+        request: pendingAuthoriastion?.request!,
+        transactionID: pendingAuthoriastion?.transaction_id!,
       };
       await cancelPendingRequest(params);
       setIsLoading(false);

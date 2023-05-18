@@ -38,7 +38,11 @@ const GetDeviceRegistrationSettingsView = (
   }, []);
   return (
     <View style={styles.container}>
-      <Header {...headerProps} label="Thông tin tài khoản" goBack={goBack} />
+      <Header
+        {...headerProps}
+        label="Thông tin cấu hình cài đặt"
+        goBack={goBack}
+      />
       <View style={styles.contentContainer}>
         <InfoField
           title="Kiểu mã hoá"
