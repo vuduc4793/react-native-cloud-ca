@@ -162,7 +162,6 @@
     "buffer": "^6.0.3",
     "react-native-xml2js": "^1.0.3",
     "react-router-native": "^6.11.1",
-    "text-encoding": "^0.7.0",
-    "xml-js": "^1.6.11"
+    "text-encoding": "^0.7.0"
   }
 }
