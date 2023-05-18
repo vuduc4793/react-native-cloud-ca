@@ -308,6 +308,66 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 + (NSString * _Nonnull)refreshToken SWIFT_WARN_UNUSED_RESULT;
 @end
 
+@class ClientAuthenticateAPIRequest;
+@class AuthenticateClientAPIResponse;
+@class NSError;
+@class AuthenticateUserAPIResponse;
+@class VerifyOTPAPIRequest;
+@class TokenInfo;
+@class RegisterDeviceAPIResponse;
+@class DeviceInfo;
+@class PendingAuthorisationAPIResponse;
+@class UserProfileAPIResponse;
+@class DeviceRegistrationSettings;
+@class GenerateQRCodeAPIRequest;
+@class GenerateQRCodeAPIResponse;
+@class VerifyQRCodeAPIRequest;
+@class DevicePushNotificationAPIRequest;
+@class DeleteDeviceForNotificationAPIRequest;
+
+@interface API (SWIFT_EXTENSION(GoSignSDK))
++ (void)authenticateClient:(ClientAuthenticateAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(AuthenticateClientAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)authenticateUser:(NSString * _Nonnull)userID completion:(void (^ _Nonnull)(AuthenticateUserAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)verifyOTP:(VerifyOTPAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(TokenInfo * _Nullable, NSError * _Nullable))completion;
++ (void)renewAccessToken:(void (^ _Nonnull)(TokenInfo * _Nullable, NSError * _Nullable))completion;
++ (void)registerDeviceWithLocalizedReason:(NSString * _Nonnull)localizedReason completion:(void (^ _Nonnull)(RegisterDeviceAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)listRegisteredDevices:(void (^ _Nonnull)(NSArray<DeviceInfo *> * _Nullable, NSError * _Nullable))completion;
++ (void)deleteDevice:(NSString * _Nullable)deviceID completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)getPendingAuthorisationRequest:(void (^ _Nonnull)(PendingAuthorisationAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)authoriseaPendingRequestWithLocalizedReason:(NSString * _Nonnull)localizedReason pendingAuthorisationAPIResponse:(PendingAuthorisationAPIResponse * _Nonnull)pendingAuthorisationAPIResponse completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)cancelPendingRequest:(PendingAuthorisationAPIResponse * _Nonnull)pendingAuthorisationAPIResponse completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)getUserProfile:(void (^ _Nonnull)(UserProfileAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)getDeviceRegistrationSettings:(void (^ _Nonnull)(DeviceRegistrationSettings * _Nullable, NSError * _Nullable))completion;
++ (void)generateQRCode:(GenerateQRCodeAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(GenerateQRCodeAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)verifyQRCode:(VerifyQRCodeAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(TokenInfo * _Nullable, NSError * _Nullable))completion;
++ (void)registerDeviceForPushNotification:(DevicePushNotificationAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)deleteDeviceForPushNotification:(DeleteDeviceForNotificationAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK29AuthenticateClientAPIResponse")
+@interface AuthenticateClientAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull accessToken;
+@property (nonatomic, readonly) double expiresIn;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK27AuthenticateUserAPIResponse")
+@interface AuthenticateUserAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable authType;
+@property (nonatomic, readonly, strong) TokenInfo * _Nullable tokenInfo;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK27AuthoriseaPendingAPIRequest")
+@interface AuthoriseaPendingAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable request;
+@property (nonatomic, copy) NSString * _Nullable hashAlgorithm;
+- (nonnull instancetype)initWithRequest:(NSString * _Nullable)request hashAlgorithm:(NSString * _Nullable)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS("_TtC9GoSignSDK25CertificateSigningRequest")
 @interface CertificateSigningRequest : NSObject
@@ -318,6 +378,112 @@ SWIFT_CLASS("_TtC9GoSignSDK25CertificateSigningRequest")
 SWIFT_CLASS("_TtC9GoSignSDK28ClientAuthenticateAPIRequest")
 @interface ClientAuthenticateAPIRequest : NSObject
 - (nonnull instancetype)initWithClientId:(NSString * _Nonnull)clientId clientSecret:(NSString * _Nonnull)clientSecret grantType:(NSString * _Nonnull)grantType OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK7CloudCA")
+@interface CloudCA : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK37DeleteDeviceForNotificationAPIRequest")
+@interface DeleteDeviceForNotificationAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull deviceToken;
+- (nonnull instancetype)initWithDeviceToken:(NSString * _Nonnull)deviceToken OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK6Device")
+@interface Device : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL hasSecureEnclave;)
++ (BOOL)hasSecureEnclave SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isSimulator;)
++ (BOOL)isSimulator SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL hasBiometrics;)
++ (BOOL)hasBiometrics SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK10DeviceInfo")
+@interface DeviceInfo : NSObject
+@property (nonatomic, copy) NSString * _Nonnull deviceID;
+@property (nonatomic, copy) NSString * _Nonnull deviceName;
+@property (nonatomic) BOOL secureElement;
+@property (nonatomic) BOOL biometric;
+- (nonnull instancetype)initWithDeviceID:(NSString * _Nonnull)deviceID deviceName:(NSString * _Nonnull)deviceName secureElement:(BOOL)secureElement biometric:(BOOL)biometric OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK32DevicePushNotificationAPIRequest")
+@interface DevicePushNotificationAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull deviceToken;
+@property (nonatomic, copy) NSString * _Nonnull osType;
+- (nonnull instancetype)initWithDeviceToken:(NSString * _Nonnull)deviceToken OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK28DeviceRegistrationAPIRequest")
+@interface DeviceRegistrationAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable csr;
+@property (nonatomic, strong) DeviceInfo * _Nullable device;
+- (nonnull instancetype)initWithCsr:(NSString * _Nullable)csr device:(DeviceInfo * _Nullable)device OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK26DeviceRegistrationSettings")
+@interface DeviceRegistrationSettings : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable deviceKeyType;
+@property (nonatomic, readonly) NSInteger deviceKeySize;
+@property (nonatomic, readonly) BOOL secureElementRequired;
+@property (nonatomic, readonly) BOOL biometricRequired;
+@property (nonatomic, readonly, copy) NSString * _Nullable allowedDevices;
+@property (nonatomic, readonly, copy) NSString * _Nullable clockToleranceOnAuthCERT;
+@end
+
+enum QRFormat : NSInteger;
+
+SWIFT_CLASS("_TtC9GoSignSDK24GenerateQRCodeAPIRequest")
+@interface GenerateQRCodeAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull clientID;
+@property (nonatomic, copy) NSString * _Nonnull userID;
+@property (nonatomic) enum QRFormat format;
+@property (nonatomic, copy) NSString * _Nonnull size;
+- (nonnull instancetype)initWithClientID:(NSString * _Nonnull)clientID userID:(NSString * _Nullable)userID format:(enum QRFormat)format size:(NSString * _Nonnull)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK25GenerateQRCodeAPIResponse")
+@interface GenerateQRCodeAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable size;
+@property (nonatomic, readonly, copy) NSString * _Nullable qrCode;
+@property (nonatomic, readonly) enum QRFormat format;
+@end
+
+typedef SWIFT_ENUM(NSInteger, OTPType, open) {
+  OTPTypeSms = 0,
+  OTPTypeMail = 1,
+};
+
+
+SWIFT_CLASS("_TtC9GoSignSDK7OtpInfo")
+@interface OtpInfo : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull otp;
+@property (nonatomic, readonly) enum OTPType otpType;
+- (nonnull instancetype)initWithOtp:(NSString * _Nonnull)otp otpType:(enum OTPType)otpType OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -334,6 +500,15 @@ SWIFT_CLASS("_TtC9GoSignSDK31PendingAuthorisationAPIResponse")
 @end
 
 
+typedef SWIFT_ENUM(NSInteger, QRFormat, open) {
+  QRFormatPng = 0,
+  QRFormatJpg = 1,
+  QRFormatBmp = 2,
+  QRFormatJpeg = 3,
+  QRFormatWbmp = 4,
+  QRFormatGif = 5,
+};
+
 
 SWIFT_CLASS("_TtC9GoSignSDK25RegisterDeviceAPIResponse")
 @interface RegisterDeviceAPIResponse : NSObject
@@ -342,9 +517,69 @@ SWIFT_CLASS("_TtC9GoSignSDK25RegisterDeviceAPIResponse")
 @end
 
 
+SWIFT_CLASS("_TtC9GoSignSDK19ServerResponseError")
+@interface ServerResponseError : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable error;
+@property (nonatomic, readonly, copy) NSString * _Nullable errorDescription;
+@property (nonatomic, readonly, copy) NSString * _Nullable code;
+@property (nonatomic, readonly, copy) NSString * _Nullable codeDesc;
+- (nonnull instancetype)initWithError:(NSString * _Nullable)error errorDescription:(NSString * _Nullable)errorDescription code:(NSString * _Nullable)code codeDesc:(NSString * _Nullable)codeDesc OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK9TokenInfo")
+@interface TokenInfo : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable accessToken;
+@property (nonatomic, readonly, copy) NSString * _Nullable refreshToken;
+@property (nonatomic, readonly, copy) NSString * _Nullable tokenType;
+@property (nonatomic, readonly) NSInteger expiresIn;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK26UserAuthenticateAPIRequest")
+@interface UserAuthenticateAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable userID;
+- (nonnull instancetype)initWithUserID:(NSString * _Nullable)userID OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 @interface NSUserDefaults (SWIFT_EXTENSION(GoSignSDK))
 @property (nonatomic, readonly, copy) NSString * _Nonnull deviceID;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK22UserProfileAPIResponse")
+@interface UserProfileAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable userID;
+@property (nonatomic, readonly, copy) NSString * _Nullable userName;
+@property (nonatomic, readonly, copy) NSString * _Nullable appName;
+@property (nonatomic, readonly, copy) NSString * _Nullable userEmail;
+@property (nonatomic, readonly, copy) NSString * _Nullable userMobile;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK19VerifyOTPAPIRequest")
+@interface VerifyOTPAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull userID;
+@property (nonatomic, copy) NSArray<OtpInfo *> * _Nonnull otpInfo;
+- (nonnull instancetype)initWithUserID:(NSString * _Nullable)userID otpInfo:(NSArray<OtpInfo *> * _Nonnull)otpInfo OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK22VerifyQRCodeAPIRequest")
+@interface VerifyQRCodeAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable userID;
+@property (nonatomic, copy) NSString * _Nullable qrCode;
+- (nonnull instancetype)initWithUserID:(NSString * _Nullable)userID qrCode:(NSString * _Nullable)qrCode OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 #endif
@@ -665,6 +900,66 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 + (NSString * _Nonnull)refreshToken SWIFT_WARN_UNUSED_RESULT;
 @end
 
+@class ClientAuthenticateAPIRequest;
+@class AuthenticateClientAPIResponse;
+@class NSError;
+@class AuthenticateUserAPIResponse;
+@class VerifyOTPAPIRequest;
+@class TokenInfo;
+@class RegisterDeviceAPIResponse;
+@class DeviceInfo;
+@class PendingAuthorisationAPIResponse;
+@class UserProfileAPIResponse;
+@class DeviceRegistrationSettings;
+@class GenerateQRCodeAPIRequest;
+@class GenerateQRCodeAPIResponse;
+@class VerifyQRCodeAPIRequest;
+@class DevicePushNotificationAPIRequest;
+@class DeleteDeviceForNotificationAPIRequest;
+
+@interface API (SWIFT_EXTENSION(GoSignSDK))
++ (void)authenticateClient:(ClientAuthenticateAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(AuthenticateClientAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)authenticateUser:(NSString * _Nonnull)userID completion:(void (^ _Nonnull)(AuthenticateUserAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)verifyOTP:(VerifyOTPAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(TokenInfo * _Nullable, NSError * _Nullable))completion;
++ (void)renewAccessToken:(void (^ _Nonnull)(TokenInfo * _Nullable, NSError * _Nullable))completion;
++ (void)registerDeviceWithLocalizedReason:(NSString * _Nonnull)localizedReason completion:(void (^ _Nonnull)(RegisterDeviceAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)listRegisteredDevices:(void (^ _Nonnull)(NSArray<DeviceInfo *> * _Nullable, NSError * _Nullable))completion;
++ (void)deleteDevice:(NSString * _Nullable)deviceID completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)getPendingAuthorisationRequest:(void (^ _Nonnull)(PendingAuthorisationAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)authoriseaPendingRequestWithLocalizedReason:(NSString * _Nonnull)localizedReason pendingAuthorisationAPIResponse:(PendingAuthorisationAPIResponse * _Nonnull)pendingAuthorisationAPIResponse completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)cancelPendingRequest:(PendingAuthorisationAPIResponse * _Nonnull)pendingAuthorisationAPIResponse completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)getUserProfile:(void (^ _Nonnull)(UserProfileAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)getDeviceRegistrationSettings:(void (^ _Nonnull)(DeviceRegistrationSettings * _Nullable, NSError * _Nullable))completion;
++ (void)generateQRCode:(GenerateQRCodeAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(GenerateQRCodeAPIResponse * _Nullable, NSError * _Nullable))completion;
++ (void)verifyQRCode:(VerifyQRCodeAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(TokenInfo * _Nullable, NSError * _Nullable))completion;
++ (void)registerDeviceForPushNotification:(DevicePushNotificationAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
++ (void)deleteDeviceForPushNotification:(DeleteDeviceForNotificationAPIRequest * _Nonnull)request completion:(void (^ _Nonnull)(NSError * _Nullable))completion;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK29AuthenticateClientAPIResponse")
+@interface AuthenticateClientAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull accessToken;
+@property (nonatomic, readonly) double expiresIn;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK27AuthenticateUserAPIResponse")
+@interface AuthenticateUserAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable authType;
+@property (nonatomic, readonly, strong) TokenInfo * _Nullable tokenInfo;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK27AuthoriseaPendingAPIRequest")
+@interface AuthoriseaPendingAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable request;
+@property (nonatomic, copy) NSString * _Nullable hashAlgorithm;
+- (nonnull instancetype)initWithRequest:(NSString * _Nullable)request hashAlgorithm:(NSString * _Nullable)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS("_TtC9GoSignSDK25CertificateSigningRequest")
 @interface CertificateSigningRequest : NSObject
@@ -675,6 +970,112 @@ SWIFT_CLASS("_TtC9GoSignSDK25CertificateSigningRequest")
 SWIFT_CLASS("_TtC9GoSignSDK28ClientAuthenticateAPIRequest")
 @interface ClientAuthenticateAPIRequest : NSObject
 - (nonnull instancetype)initWithClientId:(NSString * _Nonnull)clientId clientSecret:(NSString * _Nonnull)clientSecret grantType:(NSString * _Nonnull)grantType OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK7CloudCA")
+@interface CloudCA : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK37DeleteDeviceForNotificationAPIRequest")
+@interface DeleteDeviceForNotificationAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull deviceToken;
+- (nonnull instancetype)initWithDeviceToken:(NSString * _Nonnull)deviceToken OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK6Device")
+@interface Device : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL hasSecureEnclave;)
++ (BOOL)hasSecureEnclave SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isSimulator;)
++ (BOOL)isSimulator SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL hasBiometrics;)
++ (BOOL)hasBiometrics SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK10DeviceInfo")
+@interface DeviceInfo : NSObject
+@property (nonatomic, copy) NSString * _Nonnull deviceID;
+@property (nonatomic, copy) NSString * _Nonnull deviceName;
+@property (nonatomic) BOOL secureElement;
+@property (nonatomic) BOOL biometric;
+- (nonnull instancetype)initWithDeviceID:(NSString * _Nonnull)deviceID deviceName:(NSString * _Nonnull)deviceName secureElement:(BOOL)secureElement biometric:(BOOL)biometric OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK32DevicePushNotificationAPIRequest")
+@interface DevicePushNotificationAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull deviceToken;
+@property (nonatomic, copy) NSString * _Nonnull osType;
+- (nonnull instancetype)initWithDeviceToken:(NSString * _Nonnull)deviceToken OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK28DeviceRegistrationAPIRequest")
+@interface DeviceRegistrationAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable csr;
+@property (nonatomic, strong) DeviceInfo * _Nullable device;
+- (nonnull instancetype)initWithCsr:(NSString * _Nullable)csr device:(DeviceInfo * _Nullable)device OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK26DeviceRegistrationSettings")
+@interface DeviceRegistrationSettings : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable deviceKeyType;
+@property (nonatomic, readonly) NSInteger deviceKeySize;
+@property (nonatomic, readonly) BOOL secureElementRequired;
+@property (nonatomic, readonly) BOOL biometricRequired;
+@property (nonatomic, readonly, copy) NSString * _Nullable allowedDevices;
+@property (nonatomic, readonly, copy) NSString * _Nullable clockToleranceOnAuthCERT;
+@end
+
+enum QRFormat : NSInteger;
+
+SWIFT_CLASS("_TtC9GoSignSDK24GenerateQRCodeAPIRequest")
+@interface GenerateQRCodeAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull clientID;
+@property (nonatomic, copy) NSString * _Nonnull userID;
+@property (nonatomic) enum QRFormat format;
+@property (nonatomic, copy) NSString * _Nonnull size;
+- (nonnull instancetype)initWithClientID:(NSString * _Nonnull)clientID userID:(NSString * _Nullable)userID format:(enum QRFormat)format size:(NSString * _Nonnull)size OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK25GenerateQRCodeAPIResponse")
+@interface GenerateQRCodeAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable size;
+@property (nonatomic, readonly, copy) NSString * _Nullable qrCode;
+@property (nonatomic, readonly) enum QRFormat format;
+@end
+
+typedef SWIFT_ENUM(NSInteger, OTPType, open) {
+  OTPTypeSms = 0,
+  OTPTypeMail = 1,
+};
+
+
+SWIFT_CLASS("_TtC9GoSignSDK7OtpInfo")
+@interface OtpInfo : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull otp;
+@property (nonatomic, readonly) enum OTPType otpType;
+- (nonnull instancetype)initWithOtp:(NSString * _Nonnull)otp otpType:(enum OTPType)otpType OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -691,6 +1092,15 @@ SWIFT_CLASS("_TtC9GoSignSDK31PendingAuthorisationAPIResponse")
 @end
 
 
+typedef SWIFT_ENUM(NSInteger, QRFormat, open) {
+  QRFormatPng = 0,
+  QRFormatJpg = 1,
+  QRFormatBmp = 2,
+  QRFormatJpeg = 3,
+  QRFormatWbmp = 4,
+  QRFormatGif = 5,
+};
+
 
 SWIFT_CLASS("_TtC9GoSignSDK25RegisterDeviceAPIResponse")
 @interface RegisterDeviceAPIResponse : NSObject
@@ -699,9 +1109,69 @@ SWIFT_CLASS("_TtC9GoSignSDK25RegisterDeviceAPIResponse")
 @end
 
 
+SWIFT_CLASS("_TtC9GoSignSDK19ServerResponseError")
+@interface ServerResponseError : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable error;
+@property (nonatomic, readonly, copy) NSString * _Nullable errorDescription;
+@property (nonatomic, readonly, copy) NSString * _Nullable code;
+@property (nonatomic, readonly, copy) NSString * _Nullable codeDesc;
+- (nonnull instancetype)initWithError:(NSString * _Nullable)error errorDescription:(NSString * _Nullable)errorDescription code:(NSString * _Nullable)code codeDesc:(NSString * _Nullable)codeDesc OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK9TokenInfo")
+@interface TokenInfo : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable accessToken;
+@property (nonatomic, readonly, copy) NSString * _Nullable refreshToken;
+@property (nonatomic, readonly, copy) NSString * _Nullable tokenType;
+@property (nonatomic, readonly) NSInteger expiresIn;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK26UserAuthenticateAPIRequest")
+@interface UserAuthenticateAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable userID;
+- (nonnull instancetype)initWithUserID:(NSString * _Nullable)userID OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 @interface NSUserDefaults (SWIFT_EXTENSION(GoSignSDK))
 @property (nonatomic, readonly, copy) NSString * _Nonnull deviceID;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK22UserProfileAPIResponse")
+@interface UserProfileAPIResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable userID;
+@property (nonatomic, readonly, copy) NSString * _Nullable userName;
+@property (nonatomic, readonly, copy) NSString * _Nullable appName;
+@property (nonatomic, readonly, copy) NSString * _Nullable userEmail;
+@property (nonatomic, readonly, copy) NSString * _Nullable userMobile;
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK19VerifyOTPAPIRequest")
+@interface VerifyOTPAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nonnull userID;
+@property (nonatomic, copy) NSArray<OtpInfo *> * _Nonnull otpInfo;
+- (nonnull instancetype)initWithUserID:(NSString * _Nullable)userID otpInfo:(NSArray<OtpInfo *> * _Nonnull)otpInfo OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK22VerifyQRCodeAPIRequest")
+@interface VerifyQRCodeAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable userID;
+@property (nonatomic, copy) NSString * _Nullable qrCode;
+- (nonnull instancetype)initWithUserID:(NSString * _Nullable)userID qrCode:(NSString * _Nullable)qrCode OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 #endif
