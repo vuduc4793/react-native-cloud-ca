@@ -193,3 +193,37 @@ export interface CustomError {
 }
 
 export type BaseResponse = { result: string };
+
+// decode base64 from 4.8 response
+
+export interface AuthorisationDataTypes {
+  AuthorisationData?: {
+    OriginatorID: string;
+    UserID: string;
+    CertificateID: string;
+    TransactionID: string;
+    Salt: string;
+    MetaData: {
+      DeviceID: string;
+    };
+    NumSignatures: string;
+    Documents: {
+      Document: Array<DocumentTypes>;
+    };
+    ValidityPeriod: {
+      ValidFrom: string;
+      ValidTo: string;
+    };
+    Signature: {
+      DigestMethod: string;
+    };
+  };
+}
+
+export interface DocumentTypes {
+  $: {
+    id: string;
+  };
+  Name: string;
+  DigestValue: string;
+}

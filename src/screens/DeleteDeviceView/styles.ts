@@ -23,8 +23,4 @@ export default StyleSheet.create({
     paddingBottom: 8,
     color: '#121517',
   },
-  resendText: {
-    color: '#EE0033',
-    fontWeight: '600',
-  },
 });

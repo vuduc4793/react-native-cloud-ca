@@ -5,6 +5,7 @@ import type {
 } from './types';
 import { TouchableOpacity, Text, TextInput, View } from 'react-native';
 import {
+  CloudCAProviderContext,
   CustomError,
   Dialogue,
   DialogueConfirm,
@@ -25,6 +26,8 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
     ...rest
   } = props;
 
+  const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
+  const { themeColor } = cloudCAProviderContext;
   const [isShowRequestRegister, setIsShowRequestRegister] =
     useState<boolean>(false);
   const [isShowError, setIsShowError] = useState<boolean>(false);
@@ -168,7 +171,9 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
             selectionColor={'#121517'}
           />
           <TouchableOpacity disabled={otpTimeLeft !== 0} onPress={getOtp}>
-            <Text style={styles.resendText}>Gửi lại ({otpTimeLeft}s)</Text>
+            <Text style={[styles.resendText, { color: themeColor }]}>
+              Gửi lại ({otpTimeLeft}s)
+            </Text>
           </TouchableOpacity>
         </View>
       </DialogueConfirm>

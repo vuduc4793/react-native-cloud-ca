@@ -51,7 +51,6 @@ export default StyleSheet.create({
   },
   confirmButton: {
     marginTop: 24,
-    backgroundColor: '#EE0033',
     borderRadius: 4,
     paddingVertical: 10,
     flex: 1,
@@ -62,7 +61,6 @@ export default StyleSheet.create({
     marginTop: 24,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#EE0033',
     borderRadius: 4,
     paddingVertical: 10,
     flex: 1,
@@ -72,7 +70,6 @@ export default StyleSheet.create({
   },
   closeText: {
     fontSize: 14,
-    color: '#EE0033',
     textAlign: 'center',
   },
   confirmText: {

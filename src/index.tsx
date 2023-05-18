@@ -4,6 +4,7 @@ import type {
   AuthenticateClientResponse,
   AuthenticateUserParams,
   AuthenticateUserResponse,
+  AuthorisationDataTypes,
   AuthorisationPendingRequestParams,
   BaseResponse,
   CancelPendingRequestParams,
@@ -26,6 +27,10 @@ import type {
   VerifyQRCodeParams,
   VerifyQRCodeResponse,
 } from './types';
+
+import { Buffer } from 'buffer';
+import { TextDecoder } from 'text-encoding';
+import { parseString } from 'react-native-xml2js';
 
 const LINKING_ERROR =
   `The package 'react-native-cloud-ca' doesn't seem to be linked. Make sure: \n\n` +
@@ -200,6 +205,31 @@ export function deleteDeviceForPushNotification(
   return CloudCa.deleteDeviceForPushNotification(deviceToken);
 }
 
+// decode base64 from 4.8 response
+export function decodeRequestBase64(
+  encodedString: string
+): AuthorisationDataTypes {
+  const binaryString = Buffer.from(encodedString, 'base64').toString('binary');
+  const decoder = new TextDecoder('utf-8');
+  const decodedString = decoder.decode(
+    new Uint8Array(binaryString.length).map((_, i) =>
+      binaryString.charCodeAt(i)
+    )
+  );
+
+  let jsonData: AuthorisationDataTypes = {};
+  const options = { explicitArray: false };
+  parseString(
+    decodedString,
+    options,
+    function (_err: any, result: AuthorisationDataTypes) {
+      jsonData = result;
+    }
+  );
+
+  return jsonData;
+}
+
 export * from './hooks';
 
 export * from './types';
@@ -207,3 +237,5 @@ export * from './types';
 export * from './screens';
 
 export * from './components';
+
+export * from './context';

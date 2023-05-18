@@ -59,6 +59,7 @@
     "@types/jest": "^28.1.2",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
+    "@types/text-encoding": "^0.0.36",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",
@@ -158,6 +159,10 @@
     ]
   },
   "dependencies": {
-    "react-router-native": "^6.11.1"
+    "buffer": "^6.0.3",
+    "react-native-xml2js": "^1.0.3",
+    "react-router-native": "^6.11.1",
+    "text-encoding": "^0.7.0",
+    "xml-js": "^1.6.11"
   }
 }

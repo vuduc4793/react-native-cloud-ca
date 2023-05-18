@@ -1,11 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, SafeAreaView } from 'react-native';
-// import {
-//   DeleteDeviceView,
-//   DeviceRegistrationView,
-//   ListRegisteredDevicesView,
-// } from 'react-native-cloud-ca';
+import { CloudCAProvider } from 'react-native-cloud-ca';
 
 // const CLIENT_ID = 'samples_test_client';
 // const CLIENT_SECRET = '205640fd6ea8c7d80bb91c630b52d286d21ee511';
@@ -15,7 +11,13 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <DeviceRegistrationView
+      <CloudCAProvider
+        themeColor="green"
+        headerTheme={{
+          overlayColor: 'rgba(0, 128, 0,.9)',
+        }}
+      >
+        {/* <DeviceRegistrationView
         buttonLabel="Đăng ký"
         clientId={CLIENT_ID}
         clientSecret={CLIENT_SECRET}
@@ -23,7 +25,9 @@ export default function App() {
         userId={USER_ID}
       />
       <DeleteDeviceView buttonLabel="Huỷ đăng ký" deviceId="" /> */}
-      {/* <ListRegisteredDevicesView /> */}
+        {/* <ListRegisteredDevicesView /> */}
+        {/* <GetPendingAuthorisationRequestView /> */}
+      </CloudCAProvider>
     </SafeAreaView>
   );
 }

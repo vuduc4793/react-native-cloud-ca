@@ -2,11 +2,10 @@ import React from 'react';
 import { View, TouchableOpacity, Image, Text, StatusBar } from 'react-native';
 import styles from './styles';
 import type { HeaderProps } from './types';
+import { CloudCAProviderContext } from 'react-native-cloud-ca';
 
 const Header = (props: HeaderProps) => {
   const {
-    themeColor,
-    backgroundImage,
     label,
     leftIconImage,
     leftIconTouchable,
@@ -14,23 +13,36 @@ const Header = (props: HeaderProps) => {
     rightIconImage,
     rightIconTouchable,
   } = props;
+  const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
+  const { headerTheme } = cloudCAProviderContext;
+  const defaultColor = 'rgba(238, 0, 51, 0.9)';
   const rightImageStyleDefault = {
     ...styles.iconStyle,
     tintColor: 'transparent',
   };
   return (
     <View style={styles.headerContainer}>
-      <StatusBar backgroundColor={themeColor || 'rgba(238, 0, 51, 0.9)'} />
+      <StatusBar backgroundColor={headerTheme?.overlayColor || defaultColor} />
       <Image
-        {...backgroundImage}
-        style={[styles.headerBackgroundImage, backgroundImage?.style || {}]}
+        {...headerTheme?.backgroundImageProps}
+        style={[
+          styles.headerBackgroundImage,
+          headerTheme?.backgroundImageProps?.style || {},
+        ]}
         source={
-          backgroundImage?.source ||
+          headerTheme?.imageSource ||
           require('../../asset/image/BG_Viettel.jpeg')
         }
-        resizeMode={backgroundImage?.resizeMode || 'cover'}
+        resizeMode={headerTheme?.backgroundImageProps?.resizeMode || 'cover'}
       />
-      <View style={styles.overlay}>
+      <View
+        style={[
+          styles.overlay,
+          {
+            backgroundColor: headerTheme?.overlayColor || defaultColor,
+          },
+        ]}
+      >
         <View style={styles.headerButtonContainer}>
           <TouchableOpacity
             {...leftIconTouchable}

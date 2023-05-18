@@ -1,12 +1,14 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import styles from './styles';
+import { CloudCAProviderContext } from 'react-native-cloud-ca';
 
 const Loading = () => {
-  // const { width } = Dimensions.get('screen');
+  const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
+  const { themeColor } = cloudCAProviderContext;
   return (
     <View style={styles.container}>
-      <ActivityIndicator size={'large'} color="white" />
+      <ActivityIndicator size={'large'} color={themeColor || '#EE0033'} />
     </View>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, View, Text, TouchableOpacity, Image } from 'react-native';
 import type { DialogueConfirmProps } from './types';
 import styles from './styles';
+import { CloudCAProviderContext } from 'react-native-cloud-ca';
 
 const DialogueConfirm = (props: DialogueConfirmProps) => {
   const {
@@ -16,7 +17,8 @@ const DialogueConfirm = (props: DialogueConfirmProps) => {
     modalType,
     ...rest
   } = props;
-
+  const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
+  const { themeColor } = cloudCAProviderContext;
   const icons = {
     ERROR: require('../../asset/icon/IC_ERROR.png'),
     WARNING: require('../../asset/icon/IC_WARNING.png'),
@@ -31,7 +33,7 @@ const DialogueConfirm = (props: DialogueConfirmProps) => {
     <Modal animationType="fade" visible={true} transparent={true} {...rest}>
       <View style={styles.container}>
         <View style={styles.contentContainer}>
-          <TouchableOpacity style={styles.closeStyle} onPress={closeOnPress}>
+          <TouchableOpacity style={[styles.closeStyle]} onPress={closeOnPress}>
             <Image
               style={styles.closeImage}
               source={require('../../asset/icon/IC_CLOSE.png')}
@@ -43,17 +45,19 @@ const DialogueConfirm = (props: DialogueConfirmProps) => {
           {children}
           <View style={styles.buttonWarp}>
             <TouchableOpacity
-              style={styles.closeButton}
+              style={[styles.closeButton, { borderColor: themeColor }]}
               onPress={closeOnPress}
               disabled={closeDisable}
             >
-              <Text style={styles.closeText}>{closeLabel || 'Đóng'}</Text>
+              <Text style={[styles.closeText, { color: themeColor }]}>
+                {closeLabel || 'Đóng'}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={
                 confirmDisable
                   ? [styles.confirmButton, { backgroundColor: '#9099A0' }]
-                  : styles.confirmButton
+                  : [styles.confirmButton, { backgroundColor: themeColor }]
               }
               onPress={confirmOnPress}
               disabled={confirmDisable}

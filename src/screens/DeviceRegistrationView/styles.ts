@@ -24,7 +24,6 @@ export default StyleSheet.create({
     color: '#121517',
   },
   resendText: {
-    color: '#EE0033',
     fontWeight: '600',
   },
 });
