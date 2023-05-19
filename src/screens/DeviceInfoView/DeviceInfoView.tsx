@@ -38,7 +38,6 @@ const DeviceInfoView = () => {
       setIsLoading(false);
       setIsShowRequestDelete(false);
       setIsShowSuccess(true);
-      onGoBack();
     } catch (error) {
       setErrorResponse((error as CustomError)?.message);
       setIsLoading(false);
@@ -49,6 +48,7 @@ const DeviceInfoView = () => {
 
   const handleDone = () => {
     setIsShowSuccess(false);
+    onGoBack();
   };
 
   return (
