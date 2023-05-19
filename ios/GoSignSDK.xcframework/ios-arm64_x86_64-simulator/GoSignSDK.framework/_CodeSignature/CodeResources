@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/GoSignSDK-Swift.h</key>
 		<data>
-		aR57eCxE+3rWVXqGudXMKtXk6Sw=
+		yzBEek/QsiogXUJAv0cUf6civCs=
 		</data>
 		<key>Headers/GoSignSDK.h</key>
 		<data>
@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		jqjouPqxFkwH91O+1zJkczSYTkc=
+		ICLwjLGeSHD2vu9M0RlE3LOZys8=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		OJ4BUn+H+PwvUqCwF5P62GnB3ac=
+		h3BZIwWhnteSfRx3RGdxTjgcn1M=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -30,19 +30,19 @@
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		OJ4BUn+H+PwvUqCwF5P62GnB3ac=
+		h3BZIwWhnteSfRx3RGdxTjgcn1M=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		BKMMrkv9xouiZsBoHnAusDgz710=
+		SYOeMP9n8fg/KPmagXnNfyvjDho=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		jqjouPqxFkwH91O+1zJkczSYTkc=
+		ICLwjLGeSHD2vu9M0RlE3LOZys8=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		DYXthnsejToTIp47D5Sf1aX4734=
+		TNjCnym5FkhJCnZe77zo5GjYkrQ=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -50,11 +50,11 @@
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		DYXthnsejToTIp47D5Sf1aX4734=
+		TNjCnym5FkhJCnZe77zo5GjYkrQ=
 		</data>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		6G7R5ivlWcViYATIFgv490IXrZM=
+		iWAUrxO1hR/zGBcjtAuraohU99c=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -67,7 +67,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			44c/VL8mET1eO67C0wqqt8sFIk+VUaw3+KrNpLxTXOY=
+			czW+hp61VRTaQfbsR69FUQbqgeO7/1VJI9mzh3SOeHw=
 			</data>
 		</dict>
 		<key>Headers/GoSignSDK.h</key>
@@ -81,14 +81,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			R41fyRcZOIZ0Vl99nPDN7l01WWDtUwroRgpqX3aCEXA=
+			LOhBg2gJoC3RuRWWIUPT6o/P5ClXx8MGEW0obwHK4YI=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6FcvdvXrd/3dD7tD5tyG4IRZ8vvtXeetINqFFc9A5MY=
+			siW3s4CrJAV5X/LVOdGkWSCWo/avP5Oc/WTvCm//6D4=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -102,28 +102,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6FcvdvXrd/3dD7tD5tyG4IRZ8vvtXeetINqFFc9A5MY=
+			siW3s4CrJAV5X/LVOdGkWSCWo/avP5Oc/WTvCm//6D4=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3Bn6U33zhJLu1ohIIicDnciXRr25aruOTHAChgqDSDM=
+			Pjpas6VHE3fJjhrQrKxYbMvCiwdeQuT2tO4CJaJAlkw=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			R41fyRcZOIZ0Vl99nPDN7l01WWDtUwroRgpqX3aCEXA=
+			LOhBg2gJoC3RuRWWIUPT6o/P5ClXx8MGEW0obwHK4YI=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3yx5pv9YclJ2SmMr8+9XSL3uwEmrDzyPaoQ2u2mPZTs=
+			vLIlZWJyulIGM6aaVN4XDyW7r6bmHSenmeLtfxl9po0=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -137,14 +137,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3yx5pv9YclJ2SmMr8+9XSL3uwEmrDzyPaoQ2u2mPZTs=
+			vLIlZWJyulIGM6aaVN4XDyW7r6bmHSenmeLtfxl9po0=
 			</data>
 		</dict>
 		<key>Modules/GoSignSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0diG7WbBntDwkUubg7NZWrIqh5UAvPvYtA2bKL8RmX0=
+			XqiX0vr5N1MS11jSAeK9Rb+N0vJ6WbuX8RkxSA2eEXE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

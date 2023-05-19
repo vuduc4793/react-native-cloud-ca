@@ -242,7 +242,9 @@ const GetPendingAuthorisationRequestView = (
       <View style={styles.container}>
         <Header {...headerProps} label="Uỷ quyền xác thực" goBack={goBack} />
         <View style={styles.contentContainer}>
-          {pendingAuthoriastion ? renderRequestInfo() : renderEmptyRequest()}
+          {pendingAuthoriastion?.request?.length
+            ? renderRequestInfo()
+            : renderEmptyRequest()}
         </View>
         <Dialogue visible={isShowSuccess} onClose={handleDone}>
           <Text style={styles.contentStyle}>

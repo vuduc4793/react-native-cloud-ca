@@ -256,8 +256,10 @@ extension GoSignSDK.API {
   required public init(from decoder: any Swift.Decoder) throws
 }
 @objc public class PendingAuthorisationAPIResponse : ObjectiveC.NSObject, Swift.Codable {
-  @objc final public let transactionID: Swift.String, request: Swift.String, hashAlgorithm: Swift.String
-  @objc public init(transactionID: Swift.String, request: Swift.String, hashAlgorithm: Swift.String)
+  @objc public var transactionID: Swift.String
+  @objc public var request: Swift.String
+  @objc public var hashAlgorithm: Swift.String
+  @objc public init(transactionID: Swift.String? = nil, request: Swift.String? = nil, hashAlgorithm: Swift.String? = nil)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws

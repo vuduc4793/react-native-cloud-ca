@@ -204,9 +204,9 @@ class CloudCa: NSObject {
         CloudCA.getPendingAuthorisationRequest { response in
             switch response {
             case .success(let success):
-                let result: [String: Any] = ["transaction_id": success.transactionID,
-                                             "request": success.request,
-                                             "hash_algorithm": success.hashAlgorithm]
+                let result: [String: Any] = ["transaction_id": success.transactionID ?? "",
+                                             "request": success.request ?? "",
+                                             "hash_algorithm": success.hashAlgorithm ?? ""]
                 resolve(result)
             case .failure(let failure):
                 reject("API_08_Failed",failure.localizedDescription, failure.asAFError)

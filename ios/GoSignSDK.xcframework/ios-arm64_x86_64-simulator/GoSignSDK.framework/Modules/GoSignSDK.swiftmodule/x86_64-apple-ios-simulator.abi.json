@@ -9305,12 +9305,10 @@
             "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13transactionIDSSvp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "Final",
               "HasStorage",
               "AccessControl",
               "ObjC"
             ],
-            "isLet": true,
             "hasStorage": true,
             "accessors": [
               {
@@ -9331,10 +9329,54 @@
                 "moduleName": "GoSignSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final",
                   "ObjC"
                 ],
                 "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@GoSignSDK@objc(cs)PendingAuthorisationAPIResponse(im)setTransactionID:",
+                "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13transactionIDSSvs",
+                "moduleName": "GoSignSDK",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9GoSignSDK31PendingAuthorisationAPIResponseC13transactionIDSSvM",
+                "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13transactionIDSSvM",
+                "moduleName": "GoSignSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
               }
             ]
           },
@@ -9355,12 +9397,10 @@
             "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC7requestSSvp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "Final",
               "HasStorage",
               "AccessControl",
               "ObjC"
             ],
-            "isLet": true,
             "hasStorage": true,
             "accessors": [
               {
@@ -9381,10 +9421,54 @@
                 "moduleName": "GoSignSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final",
                   "ObjC"
                 ],
                 "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@GoSignSDK@objc(cs)PendingAuthorisationAPIResponse(im)setRequest:",
+                "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC7requestSSvs",
+                "moduleName": "GoSignSDK",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9GoSignSDK31PendingAuthorisationAPIResponseC7requestSSvM",
+                "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC7requestSSvM",
+                "moduleName": "GoSignSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
               }
             ]
           },
@@ -9405,12 +9489,10 @@
             "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13hashAlgorithmSSvp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "Final",
               "HasStorage",
               "AccessControl",
               "ObjC"
             ],
-            "isLet": true,
             "hasStorage": true,
             "accessors": [
               {
@@ -9431,10 +9513,54 @@
                 "moduleName": "GoSignSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final",
                   "ObjC"
                 ],
                 "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@GoSignSDK@objc(cs)PendingAuthorisationAPIResponse(im)setHashAlgorithm:",
+                "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13hashAlgorithmSSvs",
+                "moduleName": "GoSignSDK",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9GoSignSDK31PendingAuthorisationAPIResponseC13hashAlgorithmSSvM",
+                "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13hashAlgorithmSSvM",
+                "moduleName": "GoSignSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
               }
             ]
           },
@@ -9451,26 +9577,53 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               },
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               },
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
             "usr": "c:@M@GoSignSDK@objc(cs)PendingAuthorisationAPIResponse(im)initWithTransactionID:request:hashAlgorithm:",
-            "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13transactionID7request13hashAlgorithmACSS_S2Stcfc",
+            "mangledName": "$s9GoSignSDK31PendingAuthorisationAPIResponseC13transactionID7request13hashAlgorithmACSSSg_A2Gtcfc",
             "moduleName": "GoSignSDK",
             "objc_name": "initWithTransactionID:request:hashAlgorithm:",
             "declAttributes": [
@@ -13095,70 +13248,119 @@
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "IntegerLiteral",
-      "offset": 3191,
+      "offset": 2387,
+      "length": 3,
+      "value": "200"
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
+      "kind": "StringLiteral",
+      "offset": 2460,
+      "length": 11,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
+      "kind": "StringLiteral",
+      "offset": 2470,
+      "length": 22,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
+      "kind": "StringLiteral",
+      "offset": 2491,
+      "length": 7,
+      "value": "\"Empty\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
+      "kind": "StringLiteral",
+      "offset": 2506,
+      "length": 11,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
+      "kind": "StringLiteral",
+      "offset": 2516,
+      "length": 14,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
+      "kind": "StringLiteral",
+      "offset": 2529,
+      "length": 7,
+      "value": "\"Empty\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3418,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "IntegerLiteral",
-      "offset": 3226,
+      "offset": 3453,
       "length": 3,
       "value": "200"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "IntegerLiteral",
-      "offset": 3270,
+      "offset": 3497,
       "length": 3,
       "value": "401"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "StringLiteral",
-      "offset": 3404,
+      "offset": 3631,
       "length": 15,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "StringLiteral",
-      "offset": 3418,
+      "offset": 3645,
       "length": 37,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "StringLiteral",
-      "offset": 3454,
+      "offset": 3681,
       "length": 15,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "StringLiteral",
-      "offset": 3468,
+      "offset": 3695,
       "length": 23,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "StringLiteral",
-      "offset": 4312,
+      "offset": 4539,
       "length": 4,
       "value": "\"01\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "StringLiteral",
-      "offset": 4370,
+      "offset": 4597,
       "length": 9,
       "value": "\"Unknown\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Networking\/Router.swift",
       "kind": "StringLiteral",
-      "offset": 4821,
+      "offset": 5048,
       "length": 4,
       "value": "\"01\""
     },
@@ -14299,154 +14501,161 @@
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 6075,
+      "offset": 6174,
+      "length": 5,
+      "value": "\"200\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
+      "kind": "StringLiteral",
+      "offset": 6521,
       "length": 22,
       "value": "\"Unlock to add device\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 11642,
+      "offset": 12088,
       "length": 22,
       "value": "\"Unlock to add device\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 13749,
+      "offset": 14195,
       "length": 23,
       "value": "\"Unlock to auth device\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 22566,
+      "offset": 23012,
       "length": 4,
       "value": "\"01\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 22624,
+      "offset": 23070,
       "length": 9,
       "value": "\"Unknown\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23042,
+      "offset": 23488,
       "length": 14,
       "value": "\"access_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23082,
+      "offset": 23528,
       "length": 12,
       "value": "\"expires_in\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23042,
+      "offset": 23488,
       "length": 14,
       "value": "\"access_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23082,
+      "offset": 23528,
       "length": 12,
       "value": "\"expires_in\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23363,
+      "offset": 23809,
       "length": 11,
       "value": "\"auth_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23400,
+      "offset": 23846,
       "length": 12,
       "value": "\"token_info\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23363,
+      "offset": 23809,
       "length": 11,
       "value": "\"auth_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23400,
+      "offset": 23846,
       "length": 12,
       "value": "\"token_info\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "IntegerLiteral",
-      "offset": 23599,
+      "offset": 24045,
       "length": 3,
       "value": "120"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23676,
+      "offset": 24122,
       "length": 14,
       "value": "\"access_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23719,
+      "offset": 24165,
       "length": 15,
       "value": "\"refresh_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23760,
+      "offset": 24206,
       "length": 12,
       "value": "\"token_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23798,
+      "offset": 24244,
       "length": 12,
       "value": "\"expires_in\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23676,
+      "offset": 24122,
       "length": 14,
       "value": "\"access_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23719,
+      "offset": 24165,
       "length": 15,
       "value": "\"refresh_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23760,
+      "offset": 24206,
       "length": 12,
       "value": "\"token_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 23798,
+      "offset": 24244,
       "length": 12,
       "value": "\"expires_in\""
     },
@@ -14670,30 +14879,51 @@
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",
       "kind": "StringLiteral",
-      "offset": 345,
+      "offset": 397,
       "length": 16,
       "value": "\"transaction_id\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",
       "kind": "StringLiteral",
-      "offset": 412,
+      "offset": 464,
       "length": 16,
       "value": "\"hash_algorithm\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",
       "kind": "StringLiteral",
-      "offset": 345,
+      "offset": 397,
       "length": 16,
       "value": "\"transaction_id\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",
       "kind": "StringLiteral",
-      "offset": 412,
+      "offset": 464,
       "length": 16,
       "value": "\"hash_algorithm\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",
+      "kind": "StringLiteral",
+      "offset": 646,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",
+      "kind": "StringLiteral",
+      "offset": 683,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",
+      "kind": "StringLiteral",
+      "offset": 732,
+      "length": 2,
+      "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/PendingAuthorisationAPIResponse.swift",

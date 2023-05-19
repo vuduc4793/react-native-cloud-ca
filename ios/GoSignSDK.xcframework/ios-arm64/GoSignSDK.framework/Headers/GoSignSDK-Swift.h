@@ -491,10 +491,10 @@ SWIFT_CLASS("_TtC9GoSignSDK7OtpInfo")
 
 SWIFT_CLASS("_TtC9GoSignSDK31PendingAuthorisationAPIResponse")
 @interface PendingAuthorisationAPIResponse : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull transactionID;
-@property (nonatomic, readonly, copy) NSString * _Nonnull request;
-@property (nonatomic, readonly, copy) NSString * _Nonnull hashAlgorithm;
-- (nonnull instancetype)initWithTransactionID:(NSString * _Nonnull)transactionID request:(NSString * _Nonnull)request hashAlgorithm:(NSString * _Nonnull)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, copy) NSString * _Nonnull transactionID;
+@property (nonatomic, copy) NSString * _Nonnull request;
+@property (nonatomic, copy) NSString * _Nonnull hashAlgorithm;
+- (nonnull instancetype)initWithTransactionID:(NSString * _Nullable)transactionID request:(NSString * _Nullable)request hashAlgorithm:(NSString * _Nullable)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
