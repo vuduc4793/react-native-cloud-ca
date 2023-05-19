@@ -15,6 +15,7 @@ import type {
   GetDeviceRegistrationSettingsResponse,
   GetPendingAuthorisationRequestResponse,
   GetUserProfileResponse,
+  InitDataParams,
   ListRegisteredDevicesResponse,
   RegisterDeviceForPushNotificationParams,
   RegisterDeviceParams,
@@ -60,6 +61,10 @@ function validateUrl(params: string) {
     return 'https://' + params;
   }
   return params;
+}
+
+export function initData(params: InitDataParams): Promise<BaseResponse> {
+  return CloudCa.initData(params);
 }
 
 // 4.1 AuthenticateClient

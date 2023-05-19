@@ -15,3 +15,4 @@ export { default as useGenerateQRCode } from './useGenerateQRCode';
 export { default as useVerifyQRCode } from './useVerifyQRCode';
 export { default as useRegisterDeviceForPushNotification } from './useRegisterDeviceForPushNotification';
 export { default as useDeleteDeviceForPushNotification } from './useDeleteDeviceForPushNotification';
+export { default as useInitData } from './useInitData';

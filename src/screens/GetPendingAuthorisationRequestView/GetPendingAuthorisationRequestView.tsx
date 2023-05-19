@@ -55,9 +55,11 @@ const GetPendingAuthorisationRequestView = (
     try {
       const result = await getPendingAuthorisationRequest();
       setPendingAuthoriastion(result);
-      const authorRequest = await decodeRequestBase64(result?.request);
-      setRequestDecoded(authorRequest);
-      getTimeleft(authorRequest?.AuthorisationData?.ValidityPeriod?.ValidTo);
+      if (result?.request) {
+        const authorRequest = await decodeRequestBase64(result?.request);
+        setRequestDecoded(authorRequest);
+        getTimeleft(authorRequest?.AuthorisationData?.ValidityPeriod?.ValidTo);
+      }
       setIsLoading(false);
     } catch (error) {
       setIsShowError(true);

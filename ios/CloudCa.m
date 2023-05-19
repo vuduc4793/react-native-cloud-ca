@@ -13,16 +13,19 @@
 RCT_EXTERN_METHOD(sdkSetup:(NSString)baseUrl
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
-/// 4.1 AuthenticateClient
-RCT_EXTERN_METHOD(authenticateClient:(NSString)clientId
+/// 4.0 Init Data
+RCT_EXTERN_METHOD(initData:(NSString)clientId
                   withClientSecret: (NSString)clientSecret
                   withGrantType: (NSString)grantType
+                  withUserId: (NSString)userId
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
+/// 4.1 AuthenticateClient
+RCT_EXTERN_METHOD(authenticateClient: (RCTPromiseResolveBlock)resolve
+                  withRejecter: (RCTPromiseRejectBlock)reject)
 /// 4.2 AuthenticateUser
-RCT_EXTERN_METHOD(authenticateUser:(NSString)userId
-                  withResolver: (RCTPromiseResolveBlock)resolve
-                  withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(authenticateUser: (RCTPromiseResolveBlock)resolve
+                  withRejecter: (RCTPromiseRejectBlock)reject)
 /// 4.3 Verify OTP
 RCT_EXTERN_METHOD(verifyOTP: (NSString)otpSms
                   withOtpMail: (NSString)otpMail

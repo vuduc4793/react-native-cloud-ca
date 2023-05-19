@@ -14,17 +14,31 @@ class CloudCa: NSObject {
     let EVENT_ERROR: String = "Create Event Error"
     
     @objc(sdkSetup:withResolver:withRejecter:)
-    func sdkSetup(baseUrl: String, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
+    func sdkSetup(baseUrl: String,
+                  resolve: RCTPromiseResolveBlock,
+                  reject: RCTPromiseRejectBlock) -> Void {
         API.host = baseUrl
         resolve(baseUrl)
     }
     
-    /// 4.1 AuthenticateClient
-    @objc(authenticateClient:withClientSecret:withGrantType:withResolver:withRejecter:)
-    func authenticateClient(clientId: String, clientSecret: String, grantType: String, resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
+    @objc(initData:withClientSecret:withGrantType:withUserId:withResolver:withRejecter:)
+    func initData(clientId: String,
+                  clientSecret: String,
+                  grantType: String,
+                  userId: String,
+                  resolve: @escaping RCTPromiseResolveBlock,
+                  reject: @escaping RCTPromiseRejectBlock) -> Void {
+        CloudCA.initData(clientId: clientId, clientSecret: clientSecret, grantType: grantType, userId: userId)
+            resolve(["result": self.EVENT_SUCCEEDED])
         
-        let request = ClientAuthenticateAPIReqest(clientId: clientId, clientSecret: clientSecret, grantType: grantType)
-        CloudCa.authenticateClient(request) { response in
+    }
+    
+    /// 4.1 AuthenticateClient
+    @objc(authenticateClient:withRejecter:)
+    func authenticateClient(resolve: @escaping RCTPromiseResolveBlock,
+                            reject: @escaping RCTPromiseRejectBlock) -> Void {
+        
+        CloudCA.authenticateClient { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["access_token": success.accessToken,
@@ -41,9 +55,10 @@ class CloudCa: NSObject {
     }
     
     /// 4.2 AuthenticateUser
-    @objc(authenticateUser:withResolver:withRejecter:)
-    func authenticateUser(userId: String,resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
-        CloudCa.authenticateUser(userId, completion: { response in
+    @objc(authenticateUser:withRejecter:)
+    func authenticateUser(resolve: @escaping RCTPromiseResolveBlock,
+                          reject: @escaping RCTPromiseRejectBlock) -> Void {
+        CloudCA.authenticateUser { response in
             switch response {
             case .success(let success):
                 let tokenInfo: [String: Any] = ["access_token": success.tokenInfo?.accessToken ?? "",
@@ -58,7 +73,7 @@ class CloudCa: NSObject {
                 break
                 
             }
-        })
+        }
     }
     
     /// 4.3 Verify OTP
@@ -78,13 +93,13 @@ class CloudCa: NSObject {
         }
         
         let request = VerifyOTPAPIRequest(otpInfo: otpInfos)
-        CloudCa.verifyOTP(request) { response in
+        CloudCA.verifyOTP(request) { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["access_token": success.accessToken ?? "",
                                              "refresh_token": success.refreshToken ?? "",
                                              "token_type": success.tokenType ?? "",
-                                             "expires_in": success.expiresIn ?? 0]
+                                             "expires_in": success.expiresIn ]
                 resolve(result)
             case .failure(let failure):
                 reject("API_03_Failed",failure.localizedDescription, failure.asAFError)
@@ -99,13 +114,13 @@ class CloudCa: NSObject {
     func renewAccessToken(refreshToken: String?,
                           resolve: @escaping RCTPromiseResolveBlock,
                           reject: @escaping RCTPromiseRejectBlock) -> Void {
-        CloudCa.renewAccessToken(refreshToken) { response in
+        CloudCA.renewAccessToken(refreshToken) { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["access_token": success.accessToken ?? "",
                                              "refresh_token": success.refreshToken ?? "",
                                              "token_type": success.tokenType ?? "",
-                                             "expires_in": success.expiresIn ?? 0]
+                                             "expires_in": success.expiresIn ]
                 resolve(result)
             case .failure(let failure):
                 reject("API_04_Failed",failure.localizedDescription, failure.asAFError)
@@ -117,8 +132,10 @@ class CloudCa: NSObject {
     
     /// 4.5 DeviceRegistration
     @objc(registerDevice:withResolver:withRejecter:)
-    func registerDevice(localizedReason: String = "Unlock to add device", resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
-        CloudCa.registerDevice(localizedReason: localizedReason) { response in
+    func registerDevice(localizedReason: String = "Unlock to add device",
+                        resolve: @escaping RCTPromiseResolveBlock,
+                        reject: @escaping RCTPromiseRejectBlock) -> Void {
+        CloudCA.registerDevice(localizedReason: localizedReason) { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["alias": success.alias ?? "",
@@ -135,11 +152,10 @@ class CloudCa: NSObject {
     
     /// 4.6 List Registered Devices
     @objc(listRegisteredDevices:withRejecter:)
-    func listRegisteredDevices(
-                               resolve: @escaping RCTPromiseResolveBlock,
+    func listRegisteredDevices(resolve: @escaping RCTPromiseResolveBlock,
                                reject: @escaping RCTPromiseRejectBlock) -> Void {
                                    
-        CloudCa.listRegisteredDevices { response in
+        CloudCA.listRegisteredDevices { response in
             switch response {
             case .success(let success):
                 var listDevices: [[String: Any]] = []
@@ -147,7 +163,7 @@ class CloudCa: NSObject {
                     let device = ["device_id": element.deviceID,
                                   "device_name": element.deviceName,
                                   "secure_element": element.secureElement,
-                                  "biometric": element.biometric]
+                                  "biometric": element.biometric] as [String : Any]
                     listDevices.append(device)
                 }
                 
@@ -168,7 +184,7 @@ class CloudCa: NSObject {
         
         let id = deviceId.isEmpty ? nil : deviceId
         
-        CloudCa.deleteDevice(id) { response in
+        CloudCA.deleteDevice(id) { response in
             switch response {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
@@ -185,7 +201,7 @@ class CloudCa: NSObject {
     func getPendingAuthorisationRequest(resolve: @escaping RCTPromiseResolveBlock,
                                         reject:  @escaping RCTPromiseRejectBlock) -> Void {
         
-        CloudCa.getPendingAuthorisationRequest { response in
+        CloudCA.getPendingAuthorisationRequest { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["transaction_id": success.transactionID,
@@ -211,7 +227,7 @@ class CloudCa: NSObject {
         let requestParams: PendingAuthorisationAPIResponse = .init(transactionID: transactionID,
                                                                    request: request,
                                                                    hashAlgorithm: hashAlgorithm)
-        CloudCa.authoriseaPendingRequest(localizedReason: localizedReason, pendingAuthorisationAPIResponse: requestParams) { response in
+        CloudCA.authoriseaPendingRequest(localizedReason: localizedReason, pendingAuthorisationAPIResponse: requestParams) { response in
             switch response {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
@@ -231,7 +247,7 @@ class CloudCa: NSObject {
                                resolve: @escaping RCTPromiseResolveBlock,
                                reject: @escaping RCTPromiseRejectBlock) -> Void {
         let request = PendingAuthorisationAPIResponse(transactionID: transactionID, request: request, hashAlgorithm: hashAlgorithm)
-        CloudCa.cancelPendingRequest(request) { response in
+        CloudCA.cancelPendingRequest(request) { response in
             switch response {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
@@ -245,8 +261,9 @@ class CloudCa: NSObject {
     
     /// 4.11 Users Profile
     @objc(getUserProfile:withRejecter:)
-    func getUserProfile(resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
-        CloudCa.getUserProfile { response in
+    func getUserProfile(resolve: @escaping RCTPromiseResolveBlock,
+                        reject: @escaping RCTPromiseRejectBlock) -> Void {
+        CloudCA.getUserProfile { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["user_id": success.userID ?? "",
@@ -265,14 +282,15 @@ class CloudCa: NSObject {
     
     /// 4.12 Get Device Registration Settings
     @objc(getDeviceRegistrationSettings:withRejecter:)
-    func getDeviceRegistrationSettings(resolve: @escaping RCTPromiseResolveBlock,reject: @escaping RCTPromiseRejectBlock) -> Void {
-        CloudCa.getDeviceRegistrationSettings { response in
+    func getDeviceRegistrationSettings(resolve: @escaping RCTPromiseResolveBlock,
+                                       reject: @escaping RCTPromiseRejectBlock) -> Void {
+        CloudCA.getDeviceRegistrationSettings { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["device_key_type": success.deviceKeyType ?? "",
-                                             "device_key_size": success.deviceKeySize ?? "",
-                                             "secure_element_required": success.secureElementRequired ?? "",
-                                             "biometric_required": success.biometricRequired ?? "",
+                                             "device_key_size": success.deviceKeySize ,
+                                             "secure_element_required": success.secureElementRequired ,
+                                             "biometric_required": success.biometricRequired ,
                                              "allowed_devices": success.allowedDevices ?? "",
                                              "clock_tolerance_on_auth_cert": success.clockToleranceOnAuthCERT ?? ""]
                 resolve(result)
@@ -290,12 +308,12 @@ class CloudCa: NSObject {
                         resolve: @escaping RCTPromiseResolveBlock,
                         reject: @escaping RCTPromiseRejectBlock) -> Void {
         let request: GenerateQRCodeAPIRequest = .init(clientID: clientId)
-        CloudCa.generateQRCode(request) { response in
+        CloudCA.generateQRCode(request) { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["size": success.size ?? "",
                                              "qr_code": success.qrCode ?? "",
-                                             "format": success.format ?? ""]
+                                             "format": success.format ]
                 resolve(result)
             case .failure(let failure):
                 reject("API_13_Failed",failure.localizedDescription, failure.asAFError)
@@ -310,13 +328,13 @@ class CloudCa: NSObject {
                       resolve: @escaping RCTPromiseResolveBlock,
                       reject: @escaping RCTPromiseRejectBlock) -> Void {
         let request: VerifyQRCodeAPIRequest = .init(qrCode: qrCode)
-        CloudCa.verifyQRCode(request) { response in
+        CloudCA.verifyQRCode(request) { response in
             switch response {
             case .success(let success):
                 let result: [String: Any] = ["access_token": success.accessToken ?? "",
                                              "refresh_token": success.refreshToken ?? "",
                                              "token_type": success.tokenType ?? "",
-                                             "expires_in": success.expiresIn ?? 0]
+                                             "expires_in": success.expiresIn ]
                 resolve(result)
             case .failure(let failure):
                 reject("API_14_Failed",failure.localizedDescription, failure.asAFError)
@@ -332,7 +350,7 @@ class CloudCa: NSObject {
                                            resolve: @escaping RCTPromiseResolveBlock,
                                            reject: @escaping RCTPromiseRejectBlock) -> Void {
         let request: DevicePushNotificationAPIRequest = .init(deviceToken: deviceToken)
-        CloudCa.registerDeviceForPushNotification(request) { response in
+        CloudCA.registerDeviceForPushNotification(request) { response in
             switch response {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
@@ -350,7 +368,7 @@ class CloudCa: NSObject {
                                          resolve: @escaping RCTPromiseResolveBlock,
                                          reject: @escaping RCTPromiseRejectBlock) -> Void {
         let request: DeleteDeviceForNotificationAPIRequest = .init(deviceToken: deviceToken)
-        CloudCa.deleteDeviceForPushNotification(request) { response in
+        CloudCA.deleteDeviceForPushNotification(request) { response in
             switch response {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])

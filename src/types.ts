@@ -2,6 +2,13 @@ export interface SetupSDKParams {
   baseUrl: string;
 }
 
+export interface InitDataParams {
+  clientId: string;
+  clientSecret: string;
+  grantType: string;
+  userId: string;
+}
+
 // 4.1 AuthenticateClient
 export interface AuthenticateClientParams {
   clientId: string;

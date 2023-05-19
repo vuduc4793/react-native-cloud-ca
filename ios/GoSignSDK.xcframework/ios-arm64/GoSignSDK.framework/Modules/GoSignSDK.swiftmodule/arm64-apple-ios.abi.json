@@ -9710,13 +9710,19 @@
         "children": [
           {
             "kind": "Function",
-            "name": "initData",
-            "printedName": "initData(clientId:clientSecret:grantType:)",
+            "name": "setData",
+            "printedName": "setData(clientId:clientSecret:grantType:userId:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               },
               {
                 "kind": "TypeNominal",
@@ -9738,8 +9744,54 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:9GoSignSDK7CloudCAC8initData8clientId0H6Secret9grantTypeySS_S2StFZ",
-            "mangledName": "$s9GoSignSDK7CloudCAC8initData8clientId0H6Secret9grantTypeySS_S2StFZ",
+            "usr": "s:9GoSignSDK7CloudCAC7setData8clientId0H6Secret9grantType04userI0ySS_S3StFZ",
+            "mangledName": "$s9GoSignSDK7CloudCAC7setData8clientId0H6Secret9grantType04userI0ySS_S3StFZ",
+            "moduleName": "GoSignSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "initData",
+            "printedName": "initData(clientId:clientSecret:grantType:userId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9GoSignSDK7CloudCAC8initData8clientId0H6Secret9grantType04userI0ySS_S3StFZ",
+            "mangledName": "$s9GoSignSDK7CloudCAC8initData8clientId0H6Secret9grantType04userI0ySS_S3StFZ",
             "moduleName": "GoSignSDK",
             "static": true,
             "declAttributes": [
@@ -9751,18 +9803,12 @@
           {
             "kind": "Function",
             "name": "authenticateClient",
-            "printedName": "authenticateClient(_:completion:)",
+            "printedName": "authenticateClient(_:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "ClientAuthenticateAPIRequest",
-                "printedName": "GoSignSDK.ClientAuthenticateAPIRequest",
-                "usr": "c:@M@GoSignSDK@objc(cs)ClientAuthenticateAPIRequest"
               },
               {
                 "kind": "TypeFunc",
@@ -9798,8 +9844,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:9GoSignSDK7CloudCAC18authenticateClient_10completionyAA0G22AuthenticateAPIRequestC_ys6ResultOyAA0iG11APIResponseCs5Error_pGctFZ",
-            "mangledName": "$s9GoSignSDK7CloudCAC18authenticateClient_10completionyAA0G22AuthenticateAPIRequestC_ys6ResultOyAA0iG11APIResponseCs5Error_pGctFZ",
+            "usr": "s:9GoSignSDK7CloudCAC18authenticateClientyyys6ResultOyAA012AuthenticateG11APIResponseCs5Error_pGcFZ",
+            "mangledName": "$s9GoSignSDK7CloudCAC18authenticateClientyyys6ResultOyAA012AuthenticateG11APIResponseCs5Error_pGcFZ",
             "moduleName": "GoSignSDK",
             "static": true,
             "declAttributes": [
@@ -9812,18 +9858,12 @@
           {
             "kind": "Function",
             "name": "authenticateUser",
-            "printedName": "authenticateUser(_:completion:)",
+            "printedName": "authenticateUser(_:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Void",
                 "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
               },
               {
                 "kind": "TypeFunc",
@@ -9859,8 +9899,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:9GoSignSDK7CloudCAC16authenticateUser_10completionySS_ys6ResultOyAA012AuthenticateG11APIResponseCs5Error_pGctFZ",
-            "mangledName": "$s9GoSignSDK7CloudCAC16authenticateUser_10completionySS_ys6ResultOyAA012AuthenticateG11APIResponseCs5Error_pGctFZ",
+            "usr": "s:9GoSignSDK7CloudCAC16authenticateUseryyys6ResultOyAA012AuthenticateG11APIResponseCs5Error_pGcFZ",
+            "mangledName": "$s9GoSignSDK7CloudCAC16authenticateUseryyys6ResultOyAA012AuthenticateG11APIResponseCs5Error_pGcFZ",
             "moduleName": "GoSignSDK",
             "static": true,
             "declAttributes": [
@@ -14686,35 +14726,56 @@
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
       "kind": "StringLiteral",
-      "offset": 697,
+      "offset": 1184,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
       "kind": "StringLiteral",
-      "offset": 784,
+      "offset": 1255,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
       "kind": "StringLiteral",
-      "offset": 865,
+      "offset": 1324,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
       "kind": "StringLiteral",
-      "offset": 3396,
+      "offset": 1664,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
+      "kind": "StringLiteral",
+      "offset": 1751,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
+      "kind": "StringLiteral",
+      "offset": 1832,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
+      "kind": "StringLiteral",
+      "offset": 4339,
       "length": 22,
       "value": "\"Unlock to add device\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
       "kind": "StringLiteral",
-      "offset": 7141,
+      "offset": 8084,
       "length": 22,
       "value": "\"Unlock to add device\""
     },

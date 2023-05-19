@@ -36,10 +36,12 @@ const DeviceInfoView = () => {
     try {
       await deleteDevice({ deviceId: device_id as string });
       setIsLoading(false);
+      setIsShowRequestDelete(false);
       setIsShowSuccess(true);
     } catch (error) {
       setErrorResponse((error as CustomError)?.message);
       setIsLoading(false);
+      setIsShowRequestDelete(false);
       setIsShowError(true);
     }
   };

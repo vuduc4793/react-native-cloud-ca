@@ -264,9 +264,10 @@ extension GoSignSDK.API {
 }
 public let ANAUTHORIZED_CODE: Swift.String
 @objc @_inheritsConvenienceInitializers final public class CloudCA : ObjectiveC.NSObject {
-  public static func initData(clientId: Swift.String, clientSecret: Swift.String, grantType: Swift.String)
-  public static func authenticateClient(_ request: GoSignSDK.ClientAuthenticateAPIRequest, completion: @escaping (Swift.Result<GoSignSDK.AuthenticateClientAPIResponse, any Swift.Error>) -> Swift.Void)
-  public static func authenticateUser(_ userID: Swift.String, completion: @escaping (Swift.Result<GoSignSDK.AuthenticateUserAPIResponse, any Swift.Error>) -> Swift.Void)
+  public static func setData(clientId: Swift.String, clientSecret: Swift.String, grantType: Swift.String, userId: Swift.String)
+  public static func initData(clientId: Swift.String, clientSecret: Swift.String, grantType: Swift.String, userId: Swift.String)
+  public static func authenticateClient(_ completion: @escaping (Swift.Result<GoSignSDK.AuthenticateClientAPIResponse, any Swift.Error>) -> Swift.Void)
+  public static func authenticateUser(_ completion: @escaping (Swift.Result<GoSignSDK.AuthenticateUserAPIResponse, any Swift.Error>) -> Swift.Void)
   public static func verifyOTP(_ request: GoSignSDK.VerifyOTPAPIRequest, completion: @escaping (Swift.Result<GoSignSDK.TokenInfo, any Swift.Error>) -> Swift.Void)
   public static func renewAccessToken(_ refreshToken: Swift.String? = nil, completion: @escaping (Swift.Result<GoSignSDK.TokenInfo, any Swift.Error>) -> Swift.Void)
   public static func registerDevice(localizedReason: Swift.String = "Unlock to add device", completion: @escaping (Swift.Result<GoSignSDK.RegisterDeviceAPIResponse, any Swift.Error>) -> Swift.Void)
