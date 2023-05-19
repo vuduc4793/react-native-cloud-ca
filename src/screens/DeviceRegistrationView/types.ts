@@ -7,10 +7,6 @@ import type {
 
 export interface DeviceRegistrationProps extends TouchableOpacityProps {
   buttonLabel: string;
-  clientId: string;
-  clientSecret: string;
-  grantType: string;
-  userId: string;
   onDone?: (allResponse: DeviceRegistrationResponse) => void;
 }
 

@@ -1,8 +1,6 @@
 import { NativeModules, Platform } from 'react-native';
 import type {
-  AuthenticateClientParams,
   AuthenticateClientResponse,
-  AuthenticateUserParams,
   AuthenticateUserResponse,
   AuthorisationDataTypes,
   AuthorisationPendingRequestParams,
@@ -68,19 +66,13 @@ export function initData(params: InitDataParams): Promise<BaseResponse> {
 }
 
 // 4.1 AuthenticateClient
-export function authenticateClient(
-  params: AuthenticateClientParams
-): Promise<AuthenticateClientResponse> {
-  const { clientId, clientSecret, grantType } = params;
-  return CloudCa.authenticateClient(clientId, clientSecret, grantType);
+export function authenticateClient(): Promise<AuthenticateClientResponse> {
+  return CloudCa.authenticateClient();
 }
 
 // 4.2 AuthenticateUser
-export function authenticateUser(
-  params: AuthenticateUserParams
-): Promise<AuthenticateUserResponse> {
-  const { userId } = params;
-  return CloudCa.authenticateUser(userId);
+export function authenticateUser(): Promise<AuthenticateUserResponse> {
+  return CloudCa.authenticateUser();
 }
 
 // 4.3 Verify OTP

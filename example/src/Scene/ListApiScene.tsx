@@ -33,10 +33,7 @@ import {
 
 import { API_LIST } from './constants';
 
-const CLIENT_ID = 'samples_test_client';
-const CLIENT_SECRET = '205640fd6ea8c7d80bb91c630b52d286d21ee511';
-const GRANT_TYPE = 'client_credentials';
-const USER_ID = 'duynq7_viettel7';
+const CLIENT_ID = '';
 
 const ListApiScene = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -51,11 +48,7 @@ const ListApiScene = () => {
     setApiSelected(key);
     switch (key) {
       case 1:
-        authenticateClient({
-          clientId: CLIENT_ID,
-          clientSecret: CLIENT_SECRET,
-          grantType: GRANT_TYPE,
-        })
+        authenticateClient()
           .then((response) => {
             setResult(JSON.stringify(response));
           })
@@ -64,9 +57,7 @@ const ListApiScene = () => {
           });
         break;
       case 2:
-        authenticateUser({
-          userId: USER_ID,
-        })
+        authenticateUser()
           .then((response) => {
             setResult(JSON.stringify(response));
           })

@@ -1,12 +1,11 @@
 import type {
-  AuthenticateClientParams,
   AuthenticateClientResponse,
   CustomError,
 } from 'react-native-cloud-ca';
 import { useState, useCallback } from 'react';
 import { authenticateClient } from 'react-native-cloud-ca';
 
-type AuthenticateClientFunc = (params: AuthenticateClientParams) => void;
+type AuthenticateClientFunc = () => void;
 
 type AuthenticateClientReturn = [
   AuthenticateClientResponse | null,
@@ -20,20 +19,17 @@ const useAuthenticateClient = (): AuthenticateClientReturn => {
   const [error, setError] = useState<CustomError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const authenticateClientFunc = useCallback(
-    async (params: AuthenticateClientParams) => {
-      try {
-        setIsLoading(true);
-        const response = await authenticateClient(params);
-        setResult(response);
-      } catch (e) {
-        setError(e as CustomError);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    []
-  );
+  const authenticateClientFunc = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await authenticateClient();
+      setResult(response);
+    } catch (e) {
+      setError(e as CustomError);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   return [result, error, authenticateClientFunc, isLoading];
 };

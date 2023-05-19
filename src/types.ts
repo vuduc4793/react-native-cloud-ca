@@ -10,11 +10,7 @@ export interface InitDataParams {
 }
 
 // 4.1 AuthenticateClient
-export interface AuthenticateClientParams {
-  clientId: string;
-  clientSecret: string;
-  grantType: string;
-}
+export interface AuthenticateClientParams {}
 
 export interface AuthenticateClientResponse {
   access_token: string;
@@ -24,9 +20,7 @@ export interface AuthenticateClientResponse {
 }
 
 // 4.2 AuthenticateUser
-export interface AuthenticateUserParams {
-  userId: string;
-}
+export interface AuthenticateUserParams {}
 
 export interface TokenInfo {
   access_token: string;

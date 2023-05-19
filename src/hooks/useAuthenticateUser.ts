@@ -1,12 +1,11 @@
 import { useState, useCallback } from 'react';
 import { authenticateUser } from 'react-native-cloud-ca';
 import type {
-  AuthenticateUserParams,
   AuthenticateUserResponse,
   CustomError,
 } from 'react-native-cloud-ca';
 
-type AuthenticateUserFunc = (params: AuthenticateUserParams) => void;
+type AuthenticateUserFunc = () => void;
 
 type AuthenticateUserReturn = [
   AuthenticateUserResponse | null,
@@ -20,20 +19,17 @@ const useAuthenticateUser = (): AuthenticateUserReturn => {
   const [error, setError] = useState<CustomError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const authenticateUserFunc = useCallback(
-    async (params: AuthenticateUserParams) => {
-      try {
-        setIsLoading(true);
-        const response = await authenticateUser(params);
-        setResult(response);
-      } catch (e) {
-        setError(e as CustomError);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    []
-  );
+  const authenticateUserFunc = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await authenticateUser();
+      setResult(response);
+    } catch (e) {
+      setError(e as CustomError);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   return [result, error, authenticateUserFunc, isLoading];
 };

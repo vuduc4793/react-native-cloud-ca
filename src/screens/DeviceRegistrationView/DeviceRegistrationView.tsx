@@ -17,15 +17,7 @@ import {
 import styles from './styles';
 
 const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
-  const {
-    buttonLabel,
-    clientId,
-    clientSecret,
-    grantType,
-    userId,
-    onDone,
-    ...rest
-  } = props;
+  const { buttonLabel, onDone, ...rest } = props;
 
   const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
   const { themeColor } = cloudCAProviderContext;
@@ -56,11 +48,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   const onRegister = async () => {
     setIsLoading(true);
     try {
-      const authenticateClientResult = await authenticateClient({
-        clientId: clientId,
-        clientSecret: clientSecret,
-        grantType: grantType,
-      });
+      const authenticateClientResult = await authenticateClient();
       setAllResult({
         ...allResult,
         authenticateClientResponse: authenticateClientResult,
@@ -79,9 +67,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
 
   const getOtp = async () => {
     try {
-      const authenticateUserResult = await authenticateUser({
-        userId: userId,
-      });
+      const authenticateUserResult = await authenticateUser();
       if (authenticateUserResult?.auth_type === 'OTP') {
         setOtpTimeLeft(120);
         setIsShowOtp(true);
