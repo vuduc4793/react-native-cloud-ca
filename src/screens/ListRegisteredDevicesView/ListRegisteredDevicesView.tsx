@@ -8,7 +8,13 @@ import {
   Loading,
   listRegisteredDevices,
 } from 'react-native-cloud-ca';
-import { NativeRouter, Routes, Route, Link } from 'react-router-native';
+import {
+  NativeRouter,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from 'react-router-native';
 import type { ListRegisteredDevicesViewProps } from './types';
 import { DeviceItem } from './components';
 
@@ -16,6 +22,9 @@ const ListRegisteredDevicesView = (props: ListRegisteredDevicesViewProps) => {
   const { headerProps, goBack } = props;
   const [listDevices, setListDevices] = useState<Array<DeviceInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  let location = useLocation();
+
   useEffect(() => {
     (async () => {
       setIsLoading(true);
@@ -27,7 +36,7 @@ const ListRegisteredDevicesView = (props: ListRegisteredDevicesViewProps) => {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [location]);
 
   const renderItem = ({ item, index }: ListRenderItemInfo<DeviceInfo>) => {
     return (
