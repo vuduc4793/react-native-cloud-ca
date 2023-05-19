@@ -62,7 +62,19 @@ function validateUrl(params: string) {
 }
 
 export function initData(params: InitDataParams): Promise<BaseResponse> {
-  return CloudCa.initData(params);
+  const { clientId, clientSecret, grantType, userId, baseURL, biometricTitle } =
+    params;
+  if (Platform.OS === 'ios') {
+    return CloudCa.initData(clientId, clientSecret, grantType, userId);
+  }
+  return CloudCa.initData(
+    baseURL,
+    biometricTitle,
+    clientId,
+    clientSecret,
+    grantType,
+    userId
+  );
 }
 
 // 4.1 AuthenticateClient

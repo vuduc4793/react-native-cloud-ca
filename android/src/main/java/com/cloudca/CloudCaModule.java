@@ -14,14 +14,13 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
 
-import com.viettel.sdk.gosignsdk.helpers.GoSignSDK;
+import com.viettel.sdk.gosignsdk.helpers.CloudCA;
 import com.viettel.sdk.gosignsdk.helpers.OTPType;
 import com.viettel.sdk.gosignsdk.helpers.QRFormat;
 import com.viettel.sdk.gosignsdk.helpers.SDKSetup;
 import com.viettel.sdk.gosignsdk.listener.ServiceApiListener;
 import com.viettel.sdk.gosignsdk.listener.ServiceLoadingApiListener;
 import com.viettel.sdk.gosignsdk.listener.ServiceApiListenerEmpty;
-import com.viettel.sdk.gosignsdk.network.request.ClientAuthenticateAPIRequest;
 import com.viettel.sdk.gosignsdk.network.request.DeleteDeviceForNotificationAPIRequest;
 import com.viettel.sdk.gosignsdk.network.request.DevicePushNotificationAPIRequest;
 import com.viettel.sdk.gosignsdk.network.request.GenerateQRCodeAPIRequest;
@@ -74,10 +73,23 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       promise.reject(EVENT_ERROR, "SDK setup error");
     }
   }
+
+  @ReactMethod
+  public void initData(String baseURL, String biometricTitle, String clientId, String clientSecret, String grantType, String userId, Promise promise) {
+    try {
+      CloudCA.initialize(reactContext.getApplicationContext(), baseURL, biometricTitle, clientId, clientSecret, grantType, userId);
+      WritableMap result = Arguments.createMap();
+      result.putString("result", SUCCEEDED);
+      promise.resolve(result);
+    } catch(Exception e) {
+      promise.reject(EVENT_ERROR, "SDK setup error");
+    }
+  }
+
   // 4.1 AuthenticateClient
   @ReactMethod
-  public void authenticateClient(String clientId, String clientSecret, String grantType, Promise promise) {
-    GoSignSDK.get().authenticateClient(new ClientAuthenticateAPIRequest(clientId, clientSecret, grantType),
+  public void authenticateClient(Promise promise) {
+    CloudCA.get().authenticateClient(
        new ServiceApiListener<AuthClientResponse>() {
          @Override
          public void onSuccess(AuthClientResponse data) {
@@ -97,8 +109,8 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.2 AuthenticateUser
   @ReactMethod
-  public void authenticateUser(String userId, Promise promise) {
-    GoSignSDK.get().authenticateUser(userId,
+  public void authenticateUser(Promise promise) {
+    CloudCA.get().authenticateUser(
       new ServiceApiListener<AuthUserResponse>() {
         @Override
         public void onSuccess(AuthUserResponse data) {
@@ -137,7 +149,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     }
     request.setOtpInfo(otpInfo);
 
-    GoSignSDK.get().verifyOTP(request, new ServiceApiListener<TokenInfo>() {
+    CloudCA.get().verifyOTP(request, new ServiceApiListener<TokenInfo>() {
       @Override
       public void onSuccess(TokenInfo data) {
         WritableMap result = Arguments.createMap();
@@ -158,7 +170,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.4 Renew Access Token
   @ReactMethod
   public void renewAccessToken(Promise promise) {
-    GoSignSDK.get().renewAccessToken(
+    CloudCA.get().renewAccessToken(
       new ServiceApiListener<TokenInfo>() {
         @Override
         public void onSuccess(TokenInfo data) {
@@ -209,7 +221,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
           }
         };
 
-      GoSignSDK.get().registerDevice(
+      CloudCA.get().registerDevice(
         activity,
         biometricType,
         listener
@@ -221,7 +233,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.6 List Registered Devices
   @ReactMethod
   public void listRegisteredDevices(Promise promise) {
-    GoSignSDK.get().listRegisteredDevices(new ServiceApiListener<List<DeviceInfo>>() {
+    CloudCA.get().listRegisteredDevices(new ServiceApiListener<List<DeviceInfo>>() {
         @Override
         public void onSuccess(List<DeviceInfo> data) {
           DeviceInfo[] returnArray = new DeviceInfo[data.size()];
@@ -249,7 +261,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.7 Delete Device
   @ReactMethod
   public void deleteDevice(String deviceId, Promise promise) {
-    GoSignSDK.get().deleteDevice(deviceId,
+    CloudCA.get().deleteDevice(deviceId,
       new ServiceApiListenerEmpty() {
         @Override
         public void onSuccess() {
@@ -267,7 +279,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.8 Get Pending Authorisation Request
   @ReactMethod
   public void getPendingAuthorisationRequest(Promise promise) {
-    GoSignSDK.get().getPendingAuthorisationRequest(new ServiceApiListener<PendingAuthorisationAPIResponse>() {
+    CloudCA.get().getPendingAuthorisationRequest(new ServiceApiListener<PendingAuthorisationAPIResponse>() {
       @Override
       public void onSuccess(PendingAuthorisationAPIResponse data) {
         WritableMap result = Arguments.createMap();
@@ -332,7 +344,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         }
       };
 
-    GoSignSDK.get().authorisationPendingRequest(
+    CloudCA.get().authorisationPendingRequest(
       activity,
       biometricType,
       pendingAuthorisationAPIResponse,
@@ -353,7 +365,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       pendingAuthorisationAPIResponse.setHashAlgorithm(hashAlgorithm);
     }
 
-    GoSignSDK.get().cancelPendingRequest(pendingAuthorisationAPIResponse, new ServiceApiListenerEmpty() {
+    CloudCA.get().cancelPendingRequest(pendingAuthorisationAPIResponse, new ServiceApiListenerEmpty() {
       @Override
       public void onSuccess() {
         WritableMap result = Arguments.createMap();
@@ -370,7 +382,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.11 Users Profile
   @ReactMethod
   public void getUserProfile(Promise promise) {
-    GoSignSDK.get().getUserProfile(new ServiceApiListener<UserProfileAPIResponse>() {
+    CloudCA.get().getUserProfile(new ServiceApiListener<UserProfileAPIResponse>() {
       @Override
       public void onSuccess(UserProfileAPIResponse data) {
         WritableMap result = Arguments.createMap();
@@ -392,7 +404,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.12 Get Device Registration Settings
   @ReactMethod
   public void getDeviceRegistrationSettings(Promise promise) {
-    GoSignSDK.get().getDeviceRegistrationSettings(new ServiceApiListener<DeviceRegistrationSettings>() {
+    CloudCA.get().getDeviceRegistrationSettings(new ServiceApiListener<DeviceRegistrationSettings>() {
       @Override
       public void onSuccess(DeviceRegistrationSettings data) {
         WritableMap result = Arguments.createMap();
@@ -416,7 +428,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void generateQRCode(String format, String size, Promise promise) {
     GenerateQRCodeAPIRequest qrCodeAPIRequest = new GenerateQRCodeAPIRequest(QRFormat.get(format), size);
-    GoSignSDK.get().generateQRCode(qrCodeAPIRequest, new ServiceApiListener<GenerateQRCodeAPIResponse>() {
+    CloudCA.get().generateQRCode(qrCodeAPIRequest, new ServiceApiListener<GenerateQRCodeAPIResponse>() {
       @Override
       public void onSuccess(GenerateQRCodeAPIResponse data) {
         WritableMap result = Arguments.createMap();
@@ -441,7 +453,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       verifyQRCodeAPIRequest.setQrCode(qrCode);
     }
 
-    GoSignSDK.get().verifyQRCode(verifyQRCodeAPIRequest,
+    CloudCA.get().verifyQRCode(verifyQRCodeAPIRequest,
       new ServiceApiListener<TokenInfo>() {
         @Override
         public void onSuccess(TokenInfo data) {
@@ -462,7 +474,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.15 Register Device for Push Notification
   @ReactMethod
   public void registerDeviceForPushNotification(String deviceToken, Promise promise) {
-    GoSignSDK.get().registerDeviceForPushNotification(new DevicePushNotificationAPIRequest(deviceToken),
+    CloudCA.get().registerDeviceForPushNotification(new DevicePushNotificationAPIRequest(deviceToken),
       new ServiceApiListenerEmpty() {
         @Override
         public void onSuccess() {
@@ -480,7 +492,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   // 4.16 Delete Device for Push Notification
   @ReactMethod
   public void deleteDeviceForPushNotification(String deviceToken, Promise promise) {
-    GoSignSDK.get().deleteDeviceForPushNotification(new DeleteDeviceForNotificationAPIRequest(deviceToken),
+    CloudCA.get().deleteDeviceForPushNotification(new DeleteDeviceForNotificationAPIRequest(deviceToken),
       new ServiceApiListenerEmpty() {
         @Override
         public void onSuccess() {

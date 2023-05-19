@@ -3,6 +3,14 @@ export interface SetupSDKParams {
 }
 
 export interface InitDataParams {
+  /**
+   * only for Android OS
+   */
+  baseURL: string;
+  /**
+   * only for Android OS
+   */
+  biometricTitle: string;
   clientId: string;
   clientSecret: string;
   grantType: string;
@@ -45,7 +53,7 @@ export interface VerifyOTPResponse extends TokenInfo {}
 // 4.4 Renew Access Token
 export interface RenewAccessTokenParams {
   /**
-   * only for iOs
+   * only for iOS
    */
   refresh_token?: string;
 }
@@ -59,7 +67,7 @@ export interface RegisterDeviceParams {
    */
   biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
   /**
-   * only for iOs
+   * only for iOS
    */
   localizedReason: string;
 }
@@ -102,7 +110,7 @@ export interface AuthorisationPendingRequestParams {
    */
   biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
   /**
-   * only for iOs
+   * only for iOS
    */
   localizedReason: string;
   transactionID: string;
@@ -152,7 +160,7 @@ export enum QRFormat {
 
 export interface GenerateQRCodeParams {
   /**
-   * only for iOs
+   * only for iOS
    */
   clientId: string;
   /**
