@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import {
   AuthorisationDataTypes,
   AuthorisationPendingRequestParams,
@@ -228,9 +228,11 @@ const GetPendingAuthorisationRequestView = (
           source={require('../../asset/image/IMG_EMPTY_REQUEST.png')}
         />
         <Text style={styles.emptyText}>Không có yêu cầu cần ký. </Text>
-        <Text style={[styles.reloadRequestText, { color: themeColor }]}>
-          Tải lại yêu cầu
-        </Text>
+        <TouchableOpacity onPress={fetchPendingAuthorisation}>
+          <Text style={[styles.reloadRequestText, { color: themeColor }]}>
+            Tải lại yêu cầu
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -240,7 +242,7 @@ const GetPendingAuthorisationRequestView = (
       <View style={styles.container}>
         <Header {...headerProps} label="Uỷ quyền xác thực" goBack={goBack} />
         <View style={styles.contentContainer}>
-          {!pendingAuthoriastion ? renderRequestInfo() : renderEmptyRequest()}
+          {pendingAuthoriastion ? renderRequestInfo() : renderEmptyRequest()}
         </View>
         <Dialogue visible={isShowSuccess} onClose={handleDone}>
           <Text style={styles.contentStyle}>
