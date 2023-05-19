@@ -9,6 +9,7 @@ import {
   CustomError,
   Dialogue,
   DialogueConfirm,
+  Loading,
   authenticateClient,
   authenticateUser,
   verifyOTP,
@@ -126,6 +127,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       >
         <Text>{buttonLabel}</Text>
       </TouchableOpacity>
+      {isLoading && <Loading />}
       <Dialogue visible={isShowSuccess} onClose={handleDone}>
         <Text style={styles.contentStyle}>{successResponse}</Text>
       </Dialogue>
