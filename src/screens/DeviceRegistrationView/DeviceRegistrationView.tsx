@@ -17,7 +17,7 @@ import {
 import styles from './styles';
 
 const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
-  const { buttonLabel, onDone, ...rest } = props;
+  const { buttonLabel, onDone, children, ...rest } = props;
 
   const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
   const { themeColor } = cloudCAProviderContext;
@@ -105,13 +105,17 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
     onDone?.(allResult!);
   };
 
+  const renderChildren = () => {
+    return <>{children ? children : <Text>{buttonLabel}</Text>}</>;
+  };
+
   return (
     <>
       <TouchableOpacity
         onPress={() => handleShowRequestRegister(true)}
         {...rest}
       >
-        <Text>{buttonLabel}</Text>
+        {renderChildren()}
       </TouchableOpacity>
       {isLoading && <Loading />}
       <Dialogue visible={isShowSuccess} onClose={handleDone}>

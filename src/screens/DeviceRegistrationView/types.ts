@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { TouchableOpacityProps } from 'react-native';
 import type {
   AuthenticateClientResponse,
@@ -7,6 +8,7 @@ import type {
 
 export interface DeviceRegistrationProps extends TouchableOpacityProps {
   buttonLabel: string;
+  children?: React.ReactNode;
   onDone?: (allResponse: DeviceRegistrationResponse) => void;
 }
 

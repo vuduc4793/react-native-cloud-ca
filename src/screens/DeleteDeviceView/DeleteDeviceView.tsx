@@ -11,7 +11,7 @@ import {
 import styles from './styles';
 
 const DeleteDeviceView = (props: DeleteDeviceProps) => {
-  const { buttonLabel, deviceId, onDone, ...rest } = props;
+  const { buttonLabel, deviceId, onDone, children, ...rest } = props;
 
   const [isShowRequestDelete, setIsShowRequestDelete] =
     useState<boolean>(false);
@@ -43,10 +43,14 @@ const DeleteDeviceView = (props: DeleteDeviceProps) => {
     setIsShowRequestDelete(state);
   };
 
+  const renderChildren = () => {
+    return <>{children ? children : <Text>{buttonLabel}</Text>}</>;
+  };
+
   return (
     <>
       <TouchableOpacity onPress={() => handleShowRequestDelete(true)} {...rest}>
-        <Text>{buttonLabel}</Text>
+        {renderChildren()}
       </TouchableOpacity>
       <Dialogue visible={isShowSuccess} onClose={handleDone}>
         <Text style={styles.contentStyle}>Huỷ thiết bị thành công</Text>
