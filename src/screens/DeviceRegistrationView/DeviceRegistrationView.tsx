@@ -12,12 +12,14 @@ import {
   Loading,
   authenticateClient,
   authenticateUser,
+  registerDevice,
   verifyOTP,
 } from 'react-native-cloud-ca';
 import styles from './styles';
 
 const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
-  const { buttonLabel, onDone, children, ...rest } = props;
+  const { buttonLabel, onDone, children, registerDeviceParams, ...rest } =
+    props;
 
   const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
   const { themeColor } = cloudCAProviderContext;
@@ -90,13 +92,29 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         ...allResult,
         verifyOTPResponse: otpResult,
       });
-      setSuccessResponse('Đã đăng ký thiết bị thành công');
+      setOtpSms('');
       setIsShowOtp(false);
+      await onRegisterDevices();
+    } catch (error) {
+      setOtpSms('');
+      setErrorResponse((error as CustomError)?.message);
+      setIsShowError(true);
+      setIsShowOtp(false);
+    }
+  };
+
+  const onRegisterDevices = async () => {
+    try {
+      const result = await registerDevice(registerDeviceParams);
+      setAllResult({
+        ...allResult,
+        registerDeviceResponse: result,
+      });
+      setSuccessResponse('Đã đăng ký thiết bị thành công');
       setIsShowSuccess(true);
     } catch (error) {
       setErrorResponse((error as CustomError)?.message);
       setIsShowError(true);
-      setIsShowOtp(false);
     }
   };
 
