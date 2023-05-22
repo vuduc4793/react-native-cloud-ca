@@ -11,14 +11,18 @@ import {
   getUserProfile,
   validateToken,
 } from 'react-native-cloud-ca';
-import type { GetUsersProfileViewProps } from './types';
+import type {
+  AllGetUserProfileViewResponse,
+  GetUsersProfileViewProps,
+} from './types';
 
 const GetUsersProfileView = (props: GetUsersProfileViewProps) => {
-  const { goBack, headerProps } = props;
+  const { goBack, headerProps, onDone } = props;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isShowError, setIsShowError] = useState<boolean>(false);
   const [errorResponse, setErrorResponse] = useState<string>('');
   const [userInfo, setUserInfo] = useState<GetUserProfileResponse>();
+  const [allResult, setAllResult] = useState<AllGetUserProfileViewResponse>();
 
   useEffect(() => {
     (async () => {
@@ -28,13 +32,20 @@ const GetUsersProfileView = (props: GetUsersProfileViewProps) => {
         const result = await getUserProfile();
         setUserInfo(result);
         setIsLoading(false);
+        setAllResult({ getUserProfileResponse: result });
       } catch (error) {
         setIsShowError(true);
         setErrorResponse((error as CustomError)?.message);
         setIsLoading(false);
+        setAllResult({ error: error as CustomError });
       }
     })();
   }, []);
+
+  useEffect(() => {
+    onDone?.(allResult!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allResult]);
 
   return (
     <View style={styles.container}>

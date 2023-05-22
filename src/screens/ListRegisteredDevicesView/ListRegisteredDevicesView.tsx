@@ -79,13 +79,17 @@ const ListRegisteredDevicesView = (props: ListRegisteredDevicesViewProps) => {
     );
   };
 
+  const renderDeviceInfoView = () => {
+    return <DeviceInfoView onDone={props?.onDone} />;
+  };
+
   return (
     <NativeRouter>
       <Routes>
         <Route path="/" Component={renderRootView} />
         <Route
           path="/deviceInfo/:device_id/:device_name/:secure_element/:biometric"
-          Component={DeviceInfoView}
+          Component={renderDeviceInfoView}
         />
       </Routes>
     </NativeRouter>

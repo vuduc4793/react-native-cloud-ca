@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import type { DeleteDeviceProps } from './types';
+import type { AllDeleteDeviceResponse, DeleteDeviceProps } from './types';
 import { TouchableOpacity, Text } from 'react-native';
 import {
-  BaseResponse,
   CustomError,
   Dialogue,
   DialogueConfirm,
@@ -12,14 +11,16 @@ import {
 import styles from './styles';
 
 const DeleteDeviceView = (props: DeleteDeviceProps) => {
-  const { buttonLabel, deviceId, onDone, children, ...rest } = props;
+  const { buttonLabel, deviceId, onDone, children, buttonLabelStyle, ...rest } =
+    props;
 
   const [isShowRequestDelete, setIsShowRequestDelete] =
     useState<boolean>(false);
   const [isShowError, setIsShowError] = useState<boolean>(false);
   const [isShowSuccess, setIsShowSuccess] = useState<boolean>(false);
   const [errorResponse, setErrorResponse] = useState<string>('');
-  const [successResponse, setSuccessResponse] = useState<BaseResponse>();
+  const [successResponse, setSuccessResponse] =
+    useState<AllDeleteDeviceResponse>();
 
   const onDeleteDevice = async () => {
     handleShowRequestDelete(false);
@@ -28,11 +29,12 @@ const DeleteDeviceView = (props: DeleteDeviceProps) => {
       const deleteDeviceResult = await deleteDevice({
         deviceId: deviceId || '',
       });
-      setSuccessResponse(deleteDeviceResult);
+      setSuccessResponse({ deleteResponse: deleteDeviceResult });
       setIsShowSuccess(true);
     } catch (error) {
       setErrorResponse((error as CustomError)?.message);
       setIsShowError(true);
+      setSuccessResponse({ error: error as CustomError });
     }
   };
 
@@ -46,7 +48,15 @@ const DeleteDeviceView = (props: DeleteDeviceProps) => {
   };
 
   const renderChildren = () => {
-    return <>{children ? children : <Text>{buttonLabel}</Text>}</>;
+    return (
+      <>
+        {children ? (
+          children
+        ) : (
+          <Text style={buttonLabelStyle}>{buttonLabel}</Text>
+        )}
+      </>
+    );
   };
 
   return (

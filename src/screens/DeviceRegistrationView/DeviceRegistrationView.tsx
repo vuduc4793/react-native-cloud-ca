@@ -20,8 +20,14 @@ import styles from './styles';
 const MAX_LENGTH_OTP = 6;
 
 const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
-  const { buttonLabel, onDone, children, registerDeviceParams, ...rest } =
-    props;
+  const {
+    buttonLabel,
+    onDone,
+    children,
+    registerDeviceParams,
+    buttonLabelStyle,
+    ...rest
+  } = props;
 
   const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
   const { themeColor } = cloudCAProviderContext;
@@ -126,7 +132,15 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   };
 
   const renderChildren = () => {
-    return <>{children ? children : <Text>{buttonLabel}</Text>}</>;
+    return (
+      <>
+        {children ? (
+          children
+        ) : (
+          <Text style={buttonLabelStyle}>{buttonLabel}</Text>
+        )}
+      </>
+    );
   };
 
   return (

@@ -13,8 +13,10 @@ import {
 import { View, Image, Text } from 'react-native';
 import styles from './styles';
 import { useParams, useNavigate } from 'react-router-native';
+import type { DeviceInfoViewAllResponse, DeviceInfoViewProps } from './types';
 
-const DeviceInfoView = () => {
+const DeviceInfoView = (props: DeviceInfoViewProps) => {
+  const { onDone } = props;
   let { device_id, device_name } = useParams();
   let navigate = useNavigate();
   const [isShowRequestDelete, setIsShowRequestDelete] =
@@ -23,6 +25,7 @@ const DeviceInfoView = () => {
   const [isShowSuccess, setIsShowSuccess] = useState<boolean>(false);
   const [errorResponse, setErrorResponse] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [allResponse, setAllResponse] = useState<DeviceInfoViewAllResponse>();
 
   function onGoBack() {
     navigate(-1);
@@ -36,12 +39,14 @@ const DeviceInfoView = () => {
     setIsLoading(true);
     try {
       await validateToken();
-      await deleteDevice({ deviceId: device_id as string });
+      const result = await deleteDevice({ deviceId: device_id as string });
       setIsLoading(false);
       setIsShowRequestDelete(false);
       setIsShowSuccess(true);
+      setAllResponse({ deleteDeviceResponse: result });
     } catch (error) {
       setErrorResponse((error as CustomError)?.message);
+      setAllResponse({ error: error as CustomError });
       setIsLoading(false);
       setIsShowRequestDelete(false);
       setIsShowError(true);
@@ -50,7 +55,13 @@ const DeviceInfoView = () => {
 
   const handleDone = () => {
     setIsShowSuccess(false);
+    onDone?.(allResponse!);
     onGoBack();
+  };
+
+  const handleError = () => {
+    setIsShowError(false);
+    onDone?.(allResponse!);
   };
 
   return (
@@ -71,11 +82,7 @@ const DeviceInfoView = () => {
       <Dialogue visible={isShowSuccess} onClose={handleDone}>
         <Text style={styles.contentStyle}>Huỷ thiết bị thành công</Text>
       </Dialogue>
-      <Dialogue
-        modalType="ERROR"
-        onClose={() => setIsShowError(false)}
-        visible={isShowError}
-      >
+      <Dialogue modalType="ERROR" onClose={handleError} visible={isShowError}>
         <Text style={styles.contentStyle}>{errorResponse}</Text>
       </Dialogue>
       <DialogueConfirm

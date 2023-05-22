@@ -23,13 +23,16 @@ import {
   validateToken,
 } from 'react-native-cloud-ca';
 import styles from './styles';
-import type { GetPendingAuthorisationRequestViewProps } from './types';
+import type {
+  AllPendingAuthorisationRequestResponse,
+  GetPendingAuthorisationRequestViewProps,
+} from './types';
 import { Link, NativeRouter, Route, Routes } from 'react-router-native';
 
 const GetPendingAuthorisationRequestView = (
   props: GetPendingAuthorisationRequestViewProps
 ) => {
-  const { headerProps, authorisationPendingOptions, goBack } = props;
+  const { headerProps, authorisationPendingOptions, goBack, onDone } = props;
 
   const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
   const { themeColor } = cloudCAProviderContext;
@@ -45,6 +48,8 @@ const GetPendingAuthorisationRequestView = (
   const [requestDecoded, setRequestDecoded] =
     useState<AuthorisationDataTypes>();
   const [authorTimeleft, setAuthorTimeleft] = useState<string>('');
+  const [allResult, setAllResult] =
+    useState<AllPendingAuthorisationRequestResponse>();
 
   useEffect(() => {
     fetchPendingAuthorisation();
@@ -57,6 +62,7 @@ const GetPendingAuthorisationRequestView = (
       await validateToken();
       const result = await getPendingAuthorisationRequest();
       setPendingAuthoriastion(result);
+      setAllResult({ getPendingAuthorisationRequestResponse: result });
       if (result?.request) {
         const authorRequest = await decodeRequestBase64(result?.request);
         setRequestDecoded(authorRequest);
@@ -67,6 +73,7 @@ const GetPendingAuthorisationRequestView = (
       setIsShowError(true);
       setErrorResponse((error as CustomError)?.message);
       setIsLoading(false);
+      setAllResult({ error: error as CustomError });
     }
   };
 
@@ -102,13 +109,16 @@ const GetPendingAuthorisationRequestView = (
         request: pendingAuthoriastion?.request!,
         transactionID: pendingAuthoriastion?.transaction_id!,
       };
-      await authorisationPendingRequest(params);
+      const result = await authorisationPendingRequest(params);
+      setAllResult({ authorisationPendingRequestResponse: result });
       setIsLoading(false);
       setIsShowSuccess(true);
+      setIsShowRequest(false);
     } catch (error) {
       setIsShowError(true);
       setErrorResponse((error as CustomError)?.message);
       setIsLoading(false);
+      setAllResult({ error: error as CustomError });
     }
   };
 
@@ -121,13 +131,16 @@ const GetPendingAuthorisationRequestView = (
         request: pendingAuthoriastion?.request!,
         transactionID: pendingAuthoriastion?.transaction_id!,
       };
-      await cancelPendingRequest(params);
+      const result = await cancelPendingRequest(params);
+      setAllResult({ cancelPendingRequestResponse: result });
       setIsLoading(false);
       setIsShowSuccess(true);
+      setIsShowRequest(false);
     } catch (error) {
       setIsShowError(true);
       setErrorResponse((error as CustomError)?.message);
       setIsLoading(false);
+      setAllResult({ error: error as CustomError });
     }
   };
 
@@ -152,6 +165,13 @@ const GetPendingAuthorisationRequestView = (
   const handleDone = () => {
     setIsShowSuccess(false);
     fetchPendingAuthorisation();
+    onDone?.(allResult!);
+  };
+
+  const handleError = () => {
+    setIsShowError(false);
+    fetchPendingAuthorisation();
+    onDone?.(allResult!);
   };
 
   const renderDocumentItem = (item: DocumentTypes, index: number) => {
@@ -166,6 +186,9 @@ const GetPendingAuthorisationRequestView = (
     const documents = requestDecoded?.AuthorisationData?.Documents?.Document;
     return (
       <View style={styles.listDocumentContainer}>
+        <Text style={styles.totalFileDocuments}>
+          {`Danh sách tài liệu ký (${documents && documents?.length})`}
+        </Text>
         {documents
           ?.slice(0, 3)
           ?.map((item, index) => renderDocumentItem(item, index))}
@@ -258,11 +281,7 @@ const GetPendingAuthorisationRequestView = (
               : 'Bạn đã huỷ yêu cầu xác thực thành công.'}
           </Text>
         </Dialogue>
-        <Dialogue
-          modalType="ERROR"
-          onClose={() => setIsShowError(false)}
-          visible={isShowError}
-        >
+        <Dialogue modalType="ERROR" onClose={handleError} visible={isShowError}>
           <Text style={styles.contentStyle}>{errorResponse}</Text>
         </Dialogue>
         <DialogueConfirm

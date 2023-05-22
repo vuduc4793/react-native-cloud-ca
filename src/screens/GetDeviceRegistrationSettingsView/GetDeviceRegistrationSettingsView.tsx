@@ -11,17 +11,22 @@ import {
   getDeviceRegistrationSettings,
   validateToken,
 } from 'react-native-cloud-ca';
-import type { GetDeviceRegistrationSettingsViewProps } from './types';
+import type {
+  GetDeviceRegistrationSettingsAllResponse,
+  GetDeviceRegistrationSettingsViewProps,
+} from './types';
 
 const GetDeviceRegistrationSettingsView = (
   props: GetDeviceRegistrationSettingsViewProps
 ) => {
-  const { goBack, headerProps } = props;
+  const { goBack, headerProps, onDone } = props;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isShowError, setIsShowError] = useState<boolean>(false);
   const [errorResponse, setErrorResponse] = useState<string>('');
   const [deviceInfo, setDeviceInfo] =
     useState<GetDeviceRegistrationSettingsResponse>();
+  const [allResponse, setAllResponse] =
+    useState<GetDeviceRegistrationSettingsAllResponse>();
 
   useEffect(() => {
     (async () => {
@@ -30,14 +35,22 @@ const GetDeviceRegistrationSettingsView = (
         await validateToken();
         const result = await getDeviceRegistrationSettings();
         setDeviceInfo(result);
+        setAllResponse({ getDeviceRegistrationSettingsResponse: result });
         setIsLoading(false);
       } catch (error) {
         setIsShowError(true);
         setErrorResponse((error as CustomError)?.message);
+        setAllResponse({ error: error as CustomError });
         setIsLoading(false);
       }
     })();
   }, []);
+
+  useEffect(() => {
+    onDone?.(allResponse!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allResponse]);
+
   return (
     <View style={styles.container}>
       <Header

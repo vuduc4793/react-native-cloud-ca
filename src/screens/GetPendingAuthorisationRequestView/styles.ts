@@ -62,4 +62,10 @@ export default StyleSheet.create({
     lineHeight: 24,
     textDecorationLine: 'underline',
   },
+  totalFileDocuments: {
+    color: '#6C757D',
+    fontSize: 14,
+    lineHeight: 20.02,
+    marginBottom: 4,
+  },
 });
