@@ -15,12 +15,12 @@ const ListDocumentView = () => {
   const { documents } = useParams();
   const navigate = useNavigate();
   const [documentsData, setDocumentsData] = useState<Array<DocumentTypes>>(
-    JSON.parse(documents!) || []
+    JSON.parse(documents || '[]')
   );
   const [searchValue, setSearchValue] = useState<string>('');
 
   useEffect(() => {
-    const rootData = JSON.parse(documents!);
+    const rootData = JSON.parse(documents || '[]');
     if (searchValue?.length === 0) {
       setDocumentsData(rootData);
     }
