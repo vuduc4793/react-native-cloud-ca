@@ -20,6 +20,7 @@ import {
   DocumentTypes,
   ListDocumentView,
   CloudCAProviderContext,
+  validateToken,
 } from 'react-native-cloud-ca';
 import styles from './styles';
 import type { GetPendingAuthorisationRequestViewProps } from './types';
@@ -53,6 +54,7 @@ const GetPendingAuthorisationRequestView = (
   const fetchPendingAuthorisation = async () => {
     setIsLoading(true);
     try {
+      await validateToken();
       const result = await getPendingAuthorisationRequest();
       setPendingAuthoriastion(result);
       if (result?.request) {
@@ -92,6 +94,7 @@ const GetPendingAuthorisationRequestView = (
   const authorisationRequest = async () => {
     setIsLoading(true);
     try {
+      await validateToken();
       const params: AuthorisationPendingRequestParams = {
         biometricApiType: authorisationPendingOptions?.biometricApiType,
         hashAlgorithm: pendingAuthoriastion?.hash_algorithm!,
@@ -112,6 +115,7 @@ const GetPendingAuthorisationRequestView = (
   const cancelRequest = async () => {
     setIsLoading(true);
     try {
+      await validateToken();
       const params: CancelPendingRequestParams = {
         hashAlgorithm: pendingAuthoriastion?.hash_algorithm!,
         request: pendingAuthoriastion?.request!,
@@ -147,6 +151,7 @@ const GetPendingAuthorisationRequestView = (
 
   const handleDone = () => {
     setIsShowSuccess(false);
+    fetchPendingAuthorisation();
   };
 
   const renderDocumentItem = (item: DocumentTypes, index: number) => {

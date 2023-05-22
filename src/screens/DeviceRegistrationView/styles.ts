@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  avoidContainer: {
+    flex: 1,
+  },
   contentStyle: {
     fontSize: 14,
     color: '#44494D',

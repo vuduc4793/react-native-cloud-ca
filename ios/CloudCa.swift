@@ -33,6 +33,23 @@ class CloudCa: NSObject {
         
     }
     
+    
+    @objc(validateToken:withRejecter:)
+    func validateToken(
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock) -> Void {
+            let accessToken  = API.accessToken
+            let userToken = API.userToken
+            
+            if (accessToken.isEmpty || userToken.isEmpty) {
+                let error = NSError(domain: "Authen_Error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Bạn chưa đăng ký thiết bị với tài khoản hiện tại. Bạn hãy thực hiện bước đăng ký thiết bị."])
+                reject("Authen_Error", error.localizedDescription, error)
+                return
+            }
+            
+            resolve(["result": self.EVENT_SUCCEEDED])
+    }
+    
     /// 4.1 AuthenticateClient
     @objc(authenticateClient:withRejecter:)
     func authenticateClient(resolve: @escaping RCTPromiseResolveBlock,

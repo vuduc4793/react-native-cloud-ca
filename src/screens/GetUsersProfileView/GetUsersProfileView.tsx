@@ -9,6 +9,7 @@ import {
   InfoField,
   Loading,
   getUserProfile,
+  validateToken,
 } from 'react-native-cloud-ca';
 import type { GetUsersProfileViewProps } from './types';
 
@@ -23,6 +24,7 @@ const GetUsersProfileView = (props: GetUsersProfileViewProps) => {
     (async () => {
       setIsLoading(true);
       try {
+        await validateToken();
         const result = await getUserProfile();
         setUserInfo(result);
         setIsLoading(false);

@@ -9,6 +9,7 @@ import {
   InfoField,
   Loading,
   getDeviceRegistrationSettings,
+  validateToken,
 } from 'react-native-cloud-ca';
 import type { GetDeviceRegistrationSettingsViewProps } from './types';
 
@@ -26,6 +27,7 @@ const GetDeviceRegistrationSettingsView = (
     (async () => {
       setIsLoading(true);
       try {
+        await validateToken();
         const result = await getDeviceRegistrationSettings();
         setDeviceInfo(result);
         setIsLoading(false);
@@ -50,7 +52,7 @@ const GetDeviceRegistrationSettingsView = (
         />
         <InfoField
           title="Kích thước"
-          info={deviceInfo?.device_key_type || ''}
+          info={deviceInfo?.device_key_size?.toString() || ''}
         />
         <InfoField
           title="Yêu cầu xác thực sinh trắc học"

@@ -22,7 +22,7 @@ const Header = (props: HeaderProps) => {
   };
   return (
     <View style={styles.headerContainer}>
-      <StatusBar backgroundColor={headerTheme?.overlayColor || defaultColor} />
+      <StatusBar backgroundColor="transparent" translucent={true} />
       <Image
         {...headerTheme?.backgroundImageProps}
         style={[

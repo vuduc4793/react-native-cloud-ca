@@ -7,6 +7,7 @@ import {
   Header,
   Loading,
   listRegisteredDevices,
+  validateToken,
 } from 'react-native-cloud-ca';
 import {
   NativeRouter,
@@ -29,6 +30,7 @@ const RootViewContainer = (props: ListRegisteredDevicesViewProps) => {
     (async () => {
       setIsLoading(true);
       try {
+        await validateToken();
         const result = await listRegisteredDevices();
         setListDevices(result);
         setIsLoading(false);

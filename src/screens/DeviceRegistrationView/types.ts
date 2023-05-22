@@ -1,4 +1,6 @@
 import type React from 'react';
+import type { StyleProp } from 'react-native';
+import type { TextStyle } from 'react-native';
 import type { TouchableOpacityProps } from 'react-native';
 import type {
   AuthenticateClientResponse,
@@ -10,6 +12,7 @@ import type {
 
 export interface DeviceRegistrationProps extends TouchableOpacityProps {
   buttonLabel: string;
+  buttonLabelStyle: StyleProp<TextStyle>;
   children?: React.ReactNode;
   onDone?: (allResponse: DeviceRegistrationResponse) => void;
   registerDeviceParams: RegisterDeviceParams;

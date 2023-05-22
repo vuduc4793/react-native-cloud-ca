@@ -21,6 +21,7 @@ import type {
   RenewAccessTokenParams,
   RenewAccessTokenResponse,
   SetupSDKParams,
+  ValidateTokenTypes,
   VerifyOTPParams,
   VerifyOTPResponse,
   VerifyQRCodeParams,
@@ -237,6 +238,10 @@ export function decodeRequestBase64(
   );
 
   return jsonData;
+}
+
+export function validateToken(): Promise<ValidateTokenTypes> {
+  return CloudCa.validateToken();
 }
 
 export * from './hooks';

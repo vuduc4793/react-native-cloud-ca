@@ -16,6 +16,9 @@ import {
   verifyOTP,
 } from 'react-native-cloud-ca';
 import styles from './styles';
+import { KeyboardAvoidingView } from 'react-native';
+
+const MAX_LENGTH_OTP = 6;
 
 const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   const { buttonLabel, onDone, children, registerDeviceParams, ...rest } =
@@ -156,7 +159,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         visible={isShowRequestRegister}
       >
         <Text style={styles.contentStyle}>
-          Bạn có muốn đăng ký thiết bị này để uỷ quyền từ xa
+          Bạn có muốn đăng ký thiết bị này để uỷ quyền từ xa?
         </Text>
       </DialogueConfirm>
       <DialogueConfirm
@@ -166,26 +169,29 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         closeOnPress={() => setIsShowOtp(false)}
         confirmLabel="Tiếp tục"
         confirmOnPress={onConfirmOtp}
-        confirmDisable={!(otpSms?.length > 0)}
+        confirmDisable={!(otpSms?.length <= MAX_LENGTH_OTP)}
       >
-        <Text style={styles.contentStyle}>
-          Nhập mã xác thực được gửi về số điện thoại đã đăng ký
-        </Text>
-        <Text style={styles.otpLabel}>OTP</Text>
-        <View style={styles.otpContainer}>
-          <TextInput
-            value={otpSms}
-            onChangeText={setOtpSms}
-            style={styles.otpInputContainer}
-            keyboardType="number-pad"
-            selectionColor={'#121517'}
-          />
-          <TouchableOpacity disabled={otpTimeLeft !== 0} onPress={getOtp}>
-            <Text style={[styles.resendText, { color: themeColor }]}>
-              Gửi lại ({otpTimeLeft}s)
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView style={styles.avoidContainer}>
+          <Text style={styles.contentStyle}>
+            Nhập mã xác thực được gửi về số điện thoại đã đăng ký
+          </Text>
+          <Text style={styles.otpLabel}>OTP</Text>
+          <View style={styles.otpContainer}>
+            <TextInput
+              value={otpSms}
+              onChangeText={setOtpSms}
+              style={styles.otpInputContainer}
+              keyboardType="number-pad"
+              selectionColor={'#121517'}
+              maxLength={MAX_LENGTH_OTP}
+            />
+            <TouchableOpacity disabled={otpTimeLeft !== 0} onPress={getOtp}>
+              <Text style={[styles.resendText, { color: themeColor }]}>
+                Gửi lại ({otpTimeLeft}s)
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
       </DialogueConfirm>
     </>
   );

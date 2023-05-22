@@ -8,6 +8,7 @@ import {
   Loading,
   PrimaryButton,
   deleteDevice,
+  validateToken,
 } from 'react-native-cloud-ca';
 import { View, Image, Text } from 'react-native';
 import styles from './styles';
@@ -34,6 +35,7 @@ const DeviceInfoView = () => {
   const onDeleteDevice = async () => {
     setIsLoading(true);
     try {
+      await validateToken();
       await deleteDevice({ deviceId: device_id as string });
       setIsLoading(false);
       setIsShowRequestDelete(false);

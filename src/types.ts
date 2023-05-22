@@ -229,6 +229,8 @@ export interface AuthorisationDataTypes {
   };
 }
 
+export interface ValidateTokenTypes extends BaseResponse {}
+
 export interface DocumentTypes {
   $: {
     id: string;

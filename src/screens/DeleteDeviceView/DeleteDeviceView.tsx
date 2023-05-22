@@ -7,6 +7,7 @@ import {
   Dialogue,
   DialogueConfirm,
   deleteDevice,
+  validateToken,
 } from 'react-native-cloud-ca';
 import styles from './styles';
 
@@ -23,6 +24,7 @@ const DeleteDeviceView = (props: DeleteDeviceProps) => {
   const onDeleteDevice = async () => {
     handleShowRequestDelete(false);
     try {
+      await validateToken();
       const deleteDeviceResult = await deleteDevice({
         deviceId: deviceId || '',
       });
@@ -72,7 +74,7 @@ const DeleteDeviceView = (props: DeleteDeviceProps) => {
         visible={isShowRequestDelete}
       >
         <Text style={styles.contentStyle}>
-          Bạn có muốn xoá các thiết bị này không.
+          Bạn có chắc muốn huỷ đăng ký trên thiết bị này không?
         </Text>
       </DialogueConfirm>
     </>

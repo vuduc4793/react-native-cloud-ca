@@ -20,6 +20,10 @@ RCT_EXTERN_METHOD(initData:(NSString)clientId
                   withUserId: (NSString)userId
                   withResolver: (RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(validateToken: (RCTPromiseResolveBlock)resolve
+                  withRejecter:(RCTPromiseRejectBlock)reject)
+
 /// 4.1 AuthenticateClient
 RCT_EXTERN_METHOD(authenticateClient: (RCTPromiseResolveBlock)resolve
                   withRejecter: (RCTPromiseRejectBlock)reject)

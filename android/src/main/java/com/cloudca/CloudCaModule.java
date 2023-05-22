@@ -86,6 +86,25 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     }
   }
 
+  @ReactMethod
+  public void validateToken(Promise promise) {
+    try {
+      String accessToken  = CloudCA.get().getClientToken();
+      String userToken = CloudCA.get().getUserToken();
+
+      if (accessToken.isEmpty() || userToken.isEmpty()) {
+        promise.reject("Authen_Error", "Bạn chưa đăng ký thiết bị với tài khoản hiện tại. Bạn hãy thực hiện bước đăng ký thiết bị.");
+      } else {
+        WritableMap result = Arguments.createMap();
+        result.putString("result", SUCCEEDED);
+        promise.resolve(result);
+
+      }
+    } catch(Exception e) {
+      promise.reject("Authen_Error", "Bạn chưa đăng ký thiết bị với tài khoản hiện tại. Bạn hãy thực hiện bước đăng ký thiết bị.");
+    }
+  }
+
   // 4.1 AuthenticateClient
   @ReactMethod
   public void authenticateClient(Promise promise) {
