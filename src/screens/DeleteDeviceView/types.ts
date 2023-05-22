@@ -6,7 +6,7 @@ import type { BaseResponse } from 'react-native-cloud-ca';
 
 export interface DeleteDeviceProps extends TouchableOpacityProps {
   buttonLabel: string;
-  buttonLabelStyle: StyleProp<TextStyle>;
+  buttonLabelStyle?: StyleProp<TextStyle>;
   deviceId?: string;
   children?: React.ReactNode;
   onDone?: (deleteResponse: BaseResponse) => void;

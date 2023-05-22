@@ -63,7 +63,7 @@ const GetDeviceRegistrationSettingsView = (
           info={
             parseInt(deviceInfo?.allowed_devices!, 10) <= 0
               ? 'Không giới hạn'
-              : 'Hiển thị số đó'
+              : deviceInfo?.allowed_devices!
           }
         />
       </View>

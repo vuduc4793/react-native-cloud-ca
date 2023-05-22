@@ -12,7 +12,7 @@ import type {
 
 export interface DeviceRegistrationProps extends TouchableOpacityProps {
   buttonLabel: string;
-  buttonLabelStyle: StyleProp<TextStyle>;
+  buttonLabelStyle?: StyleProp<TextStyle>;
   children?: React.ReactNode;
   onDone?: (allResponse: DeviceRegistrationResponse) => void;
   registerDeviceParams: RegisterDeviceParams;

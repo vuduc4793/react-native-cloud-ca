@@ -16,7 +16,6 @@ import {
   verifyOTP,
 } from 'react-native-cloud-ca';
 import styles from './styles';
-import { KeyboardAvoidingView } from 'react-native';
 
 const MAX_LENGTH_OTP = 6;
 
@@ -166,32 +165,33 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         title="Xác thực người dùng"
         visible={isShowOtp}
         closeLabel="Bỏ qua"
-        closeOnPress={() => setIsShowOtp(false)}
+        closeOnPress={() => {
+          setOtpSms('');
+          setIsShowOtp(false);
+        }}
         confirmLabel="Tiếp tục"
         confirmOnPress={onConfirmOtp}
-        confirmDisable={!(otpSms?.length <= MAX_LENGTH_OTP)}
+        confirmDisable={otpSms?.length < MAX_LENGTH_OTP}
       >
-        <KeyboardAvoidingView style={styles.avoidContainer}>
-          <Text style={styles.contentStyle}>
-            Nhập mã xác thực được gửi về số điện thoại đã đăng ký
-          </Text>
-          <Text style={styles.otpLabel}>OTP</Text>
-          <View style={styles.otpContainer}>
-            <TextInput
-              value={otpSms}
-              onChangeText={setOtpSms}
-              style={styles.otpInputContainer}
-              keyboardType="number-pad"
-              selectionColor={'#121517'}
-              maxLength={MAX_LENGTH_OTP}
-            />
-            <TouchableOpacity disabled={otpTimeLeft !== 0} onPress={getOtp}>
-              <Text style={[styles.resendText, { color: themeColor }]}>
-                Gửi lại ({otpTimeLeft}s)
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
+        <Text style={styles.contentStyle}>
+          Nhập mã xác thực được gửi về số điện thoại đã đăng ký
+        </Text>
+        <Text style={styles.otpLabel}>OTP</Text>
+        <View style={styles.otpContainer}>
+          <TextInput
+            value={otpSms}
+            onChangeText={setOtpSms}
+            style={styles.otpInputContainer}
+            keyboardType="number-pad"
+            selectionColor={'#121517'}
+            maxLength={MAX_LENGTH_OTP}
+          />
+          <TouchableOpacity disabled={otpTimeLeft !== 0} onPress={getOtp}>
+            <Text style={[styles.resendText, { color: themeColor }]}>
+              Gửi lại ({otpTimeLeft}s)
+            </Text>
+          </TouchableOpacity>
+        </View>
       </DialogueConfirm>
     </>
   );
