@@ -9,23 +9,22 @@ import {
 } from 'react-native';
 import styles from './styles';
 import { DocumentTypes, Header } from 'react-native-cloud-ca';
-import { useNavigate, useParams } from 'react-router-native';
+import { useNavigate } from 'react-router-native';
+import type { ListDocumentViewProps } from './types';
 
-const ListDocumentView = () => {
-  const { documents } = useParams();
+const ListDocumentView = (props: ListDocumentViewProps) => {
+  const { documents } = props;
   const navigate = useNavigate();
-  const [documentsData, setDocumentsData] = useState<Array<DocumentTypes>>(
-    JSON.parse(documents || '[]')
-  );
+  const [documentsData, setDocumentsData] =
+    useState<Array<DocumentTypes>>(documents);
   const [searchValue, setSearchValue] = useState<string>('');
 
   useEffect(() => {
-    const rootData = JSON.parse(documents || '[]');
     if (searchValue?.length === 0) {
-      setDocumentsData(rootData);
+      setDocumentsData(documents);
     }
     const timer = setTimeout(() => {
-      const results = rootData.filter((document: DocumentTypes) => {
+      const results = documents.filter((document: DocumentTypes) => {
         return document.Name.includes(searchValue);
       });
       setDocumentsData(results);

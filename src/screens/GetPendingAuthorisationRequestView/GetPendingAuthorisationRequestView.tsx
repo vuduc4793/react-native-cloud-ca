@@ -193,10 +193,7 @@ const GetPendingAuthorisationRequestView = (
           ?.slice(0, 3)
           ?.map((item, index) => renderDocumentItem(item, index))}
         {documents && documents?.length > 3 && (
-          <Link
-            to={`/listDocumentView/${JSON.stringify(documents)}`}
-            underlayColor="rgba(0,0,0,.01)"
-          >
+          <Link to={`/listDocumentView`} underlayColor="rgba(0,0,0,.01)">
             <Text numberOfLines={1} style={styles.viewMoreText}>
               Xem thêm
             </Text>
@@ -307,14 +304,19 @@ const GetPendingAuthorisationRequestView = (
     );
   };
 
+  const renderListDocumentView = () => {
+    return (
+      <ListDocumentView
+        documents={requestDecoded?.AuthorisationData?.Documents?.Document!}
+      />
+    );
+  };
+
   return (
     <NativeRouter>
       <Routes>
         <Route path="/" Component={rootViewContainer} />
-        <Route
-          path="/listDocumentView/:documents"
-          Component={ListDocumentView}
-        />
+        <Route path="/listDocumentView" Component={renderListDocumentView} />
       </Routes>
     </NativeRouter>
   );
