@@ -170,7 +170,6 @@ const GetPendingAuthorisationRequestView = (
 
   const handleError = () => {
     setIsShowError(false);
-    fetchPendingAuthorisation();
     onDone?.(allResult!);
   };
 
