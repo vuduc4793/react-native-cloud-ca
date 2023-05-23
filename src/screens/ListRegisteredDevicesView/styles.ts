@@ -34,4 +34,9 @@ export default StyleSheet.create({
     height: 152,
     marginBottom: 36,
   },
+  contentStyle: {
+    fontSize: 14,
+    color: '#44494D',
+    textAlign: 'center',
+  },
 });

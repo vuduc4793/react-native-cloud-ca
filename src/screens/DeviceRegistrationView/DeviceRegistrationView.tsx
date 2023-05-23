@@ -74,7 +74,10 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       handleShowRequestRegister(false);
       setIsLoading(false);
     } catch (error) {
-      console.log('error', error);
+      setAllResult({
+        ...allResult,
+        error: error as CustomError,
+      });
       setErrorResponse((error as CustomError)?.message);
       handleShowRequestRegister(false);
       setIsShowError(true);
@@ -94,7 +97,10 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         authenticateUserResponse: authenticateUserResult,
       });
     } catch (error) {
-      console.log('error', error);
+      setAllResult({
+        ...allResult,
+        error: error as CustomError,
+      });
       setErrorResponse((error as CustomError)?.message);
       setIsShowError(true);
     }
@@ -128,6 +134,10 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       }
     } catch (error) {
       setOtpSms('');
+      setAllResult({
+        ...allResult,
+        error: error as CustomError,
+      });
       setErrorResponse((error as CustomError)?.message);
       setIsShowError(true);
       setIsShowOtp(false);
@@ -144,6 +154,10 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         registerDeviceResponse: result,
       });
     } catch (error) {
+      setAllResult({
+        ...allResult,
+        error: error as CustomError,
+      });
       console.log('error', error);
       setErrorResponse((error as CustomError)?.message);
       setIsShowError(true);

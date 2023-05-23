@@ -5,6 +5,7 @@ import type { TouchableOpacityProps } from 'react-native';
 import type {
   AuthenticateClientResponse,
   AuthenticateUserResponse,
+  CustomError,
   RegisterDeviceParams,
   RegisterDeviceResponse,
   VerifyOTPResponse,
@@ -23,4 +24,5 @@ export interface DeviceRegistrationResponse {
   authenticateUserResponse?: AuthenticateUserResponse;
   verifyOTPResponse?: VerifyOTPResponse;
   registerDeviceResponse?: RegisterDeviceResponse;
+  error?: CustomError;
 }

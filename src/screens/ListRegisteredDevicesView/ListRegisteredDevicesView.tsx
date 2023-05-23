@@ -16,6 +16,8 @@ import {
   listRegisteredDevices,
   validateToken,
   CloudCAProviderContext,
+  CustomError,
+  Dialogue,
 } from 'react-native-cloud-ca';
 import {
   NativeRouter,
@@ -24,20 +26,28 @@ import {
   Link,
   useLocation,
 } from 'react-router-native';
-import type { ListRegisteredDevicesViewProps } from './types';
+import type {
+  AllListRegisteredDevicesResponse,
+  ListRegisteredDevicesViewProps,
+} from './types';
 import { DeviceItem } from './components';
 
 const RootViewContainer = (props: ListRegisteredDevicesViewProps) => {
-  const { headerProps, goBack } = props;
+  const { headerProps, goBack, onDone } = props;
   const cloudCAProviderContext = React.useContext(CloudCAProviderContext);
   const { themeColor } = cloudCAProviderContext;
   const [listDevices, setListDevices] = useState<Array<DeviceInfo>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isShowError, setIsShowError] = useState<boolean>(false);
+  const [errorResponse, setErrorResponse] = useState<string>('');
+  const [allResult, setAllResult] =
+    useState<AllListRegisteredDevicesResponse>();
 
   let location = useLocation();
 
   useEffect(() => {
     fetchListRegisteredDevices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   const fetchListRegisteredDevices = async () => {
@@ -47,8 +57,14 @@ const RootViewContainer = (props: ListRegisteredDevicesViewProps) => {
       const result = await listRegisteredDevices();
       setListDevices(result);
       setIsLoading(false);
+      setAllResult({ ...allResult, listRegisteredDevicesResponse: result });
+      onDone?.(allResult!);
     } catch (error) {
+      setIsShowError(true);
+      setErrorResponse((error as CustomError)?.message);
       setIsLoading(false);
+      setAllResult({ ...allResult, error: error as CustomError });
+      onDone?.(allResult!);
     }
   };
 
@@ -79,6 +95,10 @@ const RootViewContainer = (props: ListRegisteredDevicesViewProps) => {
     );
   };
 
+  const handleError = () => {
+    setIsShowError(false);
+  };
+
   return (
     <View style={styles.container}>
       <Header {...headerProps} goBack={goBack} />
@@ -100,6 +120,9 @@ const RootViewContainer = (props: ListRegisteredDevicesViewProps) => {
           renderEmptyRequest()
         )}
       </>
+      <Dialogue modalType="ERROR" onClose={handleError} visible={isShowError}>
+        <Text style={styles.contentStyle}>{errorResponse}</Text>
+      </Dialogue>
       {isLoading && <Loading />}
     </View>
   );

@@ -92,6 +92,9 @@ export function authenticateUser(): Promise<AuthenticateUserResponse> {
 export function verifyOTP(params: VerifyOTPParams): Promise<VerifyOTPResponse> {
   const { otpMail, otpSms, biometricApiType } = params;
 
+  if (Platform.OS === 'ios') {
+    return CloudCa.verifyOTP(otpSms, otpMail);
+  }
   return CloudCa.verifyOTP(otpSms, otpMail, biometricApiType);
 }
 
