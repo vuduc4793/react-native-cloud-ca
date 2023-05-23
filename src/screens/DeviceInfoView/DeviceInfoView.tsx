@@ -45,7 +45,9 @@ const DeviceInfoView = (props: DeviceInfoViewProps) => {
       setIsShowSuccess(true);
       setAllResponse({ deleteDeviceResponse: result });
     } catch (error) {
-      setErrorResponse((error as CustomError)?.message);
+      setErrorResponse(
+        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+      );
       setAllResponse({ error: error as CustomError });
       setIsLoading(false);
       setIsShowRequestDelete(false);

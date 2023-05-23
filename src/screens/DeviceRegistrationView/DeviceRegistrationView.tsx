@@ -49,6 +49,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   const [otpSms, setOtpSms] = useState<string>('');
   const [otpTimeLeft, setOtpTimeLeft] = React.useState(0);
   const [allResult, setAllResult] = useState<DeviceRegistrationResponse>();
+  const [isOtpError, setIsOtpError] = useState<boolean>(false);
 
   React.useEffect(() => {
     if (otpTimeLeft === 0) return;
@@ -74,11 +75,14 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       handleShowRequestRegister(false);
       setIsLoading(false);
     } catch (error) {
+      setIsOtpError(false);
       setAllResult({
         ...allResult,
         error: error as CustomError,
       });
-      setErrorResponse((error as CustomError)?.message);
+      setErrorResponse(
+        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+      );
       handleShowRequestRegister(false);
       setIsShowError(true);
       setIsLoading(false);
@@ -97,11 +101,14 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         authenticateUserResponse: authenticateUserResult,
       });
     } catch (error) {
+      setIsOtpError(false);
       setAllResult({
         ...allResult,
         error: error as CustomError,
       });
-      setErrorResponse((error as CustomError)?.message);
+      setErrorResponse(
+        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+      );
       setIsShowError(true);
     }
   };
@@ -133,12 +140,15 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         await onRegisterDevices();
       }
     } catch (error) {
+      setIsOtpError(true);
       setOtpSms('');
       setAllResult({
         ...allResult,
         error: error as CustomError,
       });
-      setErrorResponse((error as CustomError)?.message);
+      setErrorResponse(
+        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+      );
       setIsShowError(true);
       setIsShowOtp(false);
     }
@@ -154,12 +164,14 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         registerDeviceResponse: result,
       });
     } catch (error) {
+      setIsOtpError(false);
       setAllResult({
         ...allResult,
         error: error as CustomError,
       });
-      console.log('error', error);
-      setErrorResponse((error as CustomError)?.message);
+      setErrorResponse(
+        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+      );
       setIsShowError(true);
     }
   };
@@ -171,6 +183,10 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
 
   const handleError = () => {
     setIsShowError(false);
+    if (isOtpError) {
+      setIsOtpError(false);
+      setIsShowOtp(true);
+    }
     onDone?.(allResult!);
   };
 
@@ -198,7 +214,12 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       <Dialogue visible={isShowSuccess} onClose={handleDone}>
         <Text style={styles.contentStyle}>{successResponse}</Text>
       </Dialogue>
-      <Dialogue modalType="ERROR" onClose={handleError} visible={isShowError}>
+      <Dialogue
+        modalType="ERROR"
+        onClose={handleError}
+        visible={isShowError}
+        animationType={isOtpError ? 'none' : 'fade'}
+      >
         <Text style={styles.contentStyle}>{errorResponse}</Text>
       </Dialogue>
       <DialogueConfirm
@@ -216,6 +237,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       </DialogueConfirm>
       <DialogueConfirm
         title="Xác thực người dùng"
+        animationType={isOtpError ? 'none' : 'fade'}
         visible={isShowOtp}
         closeLabel="Bỏ qua"
         closeOnPress={() => {

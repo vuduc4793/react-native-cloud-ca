@@ -5,11 +5,21 @@ import {
   CloudCAProvider,
   DeviceRegistrationView,
   PrimaryButton,
+  // initData,
   DeleteDeviceView,
 } from 'react-native-cloud-ca';
 
 export default function App() {
-  const onAuthen = () => {};
+  const onAuthen = () => {
+    // initData({
+    //   baseURL: BASE_URL,
+    //   biometricTitle: 'Unlock to add device',
+    //   clientId: CLIENT_ID,
+    //   clientSecret: CLIENT_SECRET,
+    //   grantType: GRANT_TYPE,
+    //   userId: USER_ID,
+    // });
+  };
 
   return (
     <SafeAreaView style={styles.container}>

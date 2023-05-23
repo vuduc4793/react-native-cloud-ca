@@ -6431,8 +6431,8 @@
           },
           {
             "kind": "Var",
-            "name": "accessToken",
-            "printedName": "accessToken",
+            "name": "clientToken",
+            "printedName": "clientToken",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -6442,8 +6442,8 @@
               }
             ],
             "declKind": "Var",
-            "usr": "c:@CM@GoSignSDK@objc(cs)API(cpy)accessToken",
-            "mangledName": "$s9GoSignSDK3APIC11accessTokenSSvpZ",
+            "usr": "c:@CM@GoSignSDK@objc(cs)API(cpy)clientToken",
+            "mangledName": "$s9GoSignSDK3APIC11clientTokenSSvpZ",
             "moduleName": "GoSignSDK",
             "static": true,
             "declAttributes": [
@@ -6465,8 +6465,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "c:@CM@GoSignSDK@objc(cs)API(cm)accessToken",
-                "mangledName": "$s9GoSignSDK3APIC11accessTokenSSvgZ",
+                "usr": "c:@CM@GoSignSDK@objc(cs)API(cm)clientToken",
+                "mangledName": "$s9GoSignSDK3APIC11clientTokenSSvgZ",
                 "moduleName": "GoSignSDK",
                 "static": true,
                 "declAttributes": [
@@ -14998,14 +14998,14 @@
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
       "kind": "StringLiteral",
-      "offset": 4339,
+      "offset": 3643,
       "length": 22,
       "value": "\"Unlock to add device\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/CloudCA.swift",
       "kind": "StringLiteral",
-      "offset": 8084,
+      "offset": 7388,
       "length": 22,
       "value": "\"Unlock to add device\""
     },

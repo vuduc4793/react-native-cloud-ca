@@ -25,7 +25,7 @@ const ListDocumentView = (props: ListDocumentViewProps) => {
     }
     const timer = setTimeout(() => {
       const results = documents.filter((document: DocumentTypes) => {
-        return document.Name.includes(searchValue);
+        return document.Name.toUpperCase().includes(searchValue.toUpperCase());
       });
       setDocumentsData(results);
       console.log(results);

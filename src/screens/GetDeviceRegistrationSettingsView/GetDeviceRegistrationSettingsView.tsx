@@ -39,7 +39,9 @@ const GetDeviceRegistrationSettingsView = (
         setIsLoading(false);
       } catch (error) {
         setIsShowError(true);
-        setErrorResponse((error as CustomError)?.message);
+        setErrorResponse(
+          `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+        );
         setAllResponse({ error: error as CustomError });
         setIsLoading(false);
       }

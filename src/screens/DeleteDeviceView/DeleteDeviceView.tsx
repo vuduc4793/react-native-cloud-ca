@@ -32,7 +32,9 @@ const DeleteDeviceView = (props: DeleteDeviceProps) => {
       setSuccessResponse({ deleteResponse: deleteDeviceResult });
       setIsShowSuccess(true);
     } catch (error) {
-      setErrorResponse((error as CustomError)?.message);
+      setErrorResponse(
+        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+      );
       setIsShowError(true);
       setSuccessResponse({ error: error as CustomError });
     }

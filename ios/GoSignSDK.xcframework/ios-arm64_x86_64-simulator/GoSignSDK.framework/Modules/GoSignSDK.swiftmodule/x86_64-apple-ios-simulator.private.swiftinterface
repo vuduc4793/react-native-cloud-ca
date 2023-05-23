@@ -132,7 +132,7 @@ public enum KeyAlgorithm {
   }
 }
 extension GoSignSDK.API {
-  @objc public static var accessToken: Swift.String {
+  @objc public static var clientToken: Swift.String {
     @objc get
   }
   @objc public static var userToken: Swift.String {

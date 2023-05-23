@@ -38,7 +38,7 @@ class CloudCa: NSObject {
     func validateToken(
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock) -> Void {
-            let accessToken  = API.accessToken
+            let accessToken  = API.clientToken
             let userToken = API.userToken
             
             if (accessToken.isEmpty || userToken.isEmpty) {
@@ -64,9 +64,9 @@ class CloudCa: NSObject {
                                              "expires_in": success.expiresIn]
                 resolve(result)
             case .failure(let failure):
-                reject("API_01_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
-                
             }
         }
     }
@@ -86,7 +86,8 @@ class CloudCa: NSObject {
                                              "token_info": tokenInfo]
                 resolve(result)
             case .failure(let failure):
-                reject("API_02_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -119,7 +120,8 @@ class CloudCa: NSObject {
                                              "expires_in": success.expiresIn ]
                 resolve(result)
             case .failure(let failure):
-                reject("API_03_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -140,7 +142,8 @@ class CloudCa: NSObject {
                                              "expires_in": success.expiresIn ]
                 resolve(result)
             case .failure(let failure):
-                reject("API_04_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -160,7 +163,8 @@ class CloudCa: NSObject {
                 
                 resolve(result)
             case .failure(let failure):
-                reject("API_05_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -186,7 +190,8 @@ class CloudCa: NSObject {
                 
                 resolve(listDevices)
             case .failure(let failure):
-                reject("API_06_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -206,7 +211,8 @@ class CloudCa: NSObject {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
-                reject("API_07_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -226,7 +232,8 @@ class CloudCa: NSObject {
                                              "hash_algorithm": success.hashAlgorithm ?? ""]
                 resolve(result)
             case .failure(let failure):
-                reject("API_08_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -249,7 +256,8 @@ class CloudCa: NSObject {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
-                reject("API_09_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -269,7 +277,8 @@ class CloudCa: NSObject {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
-                reject("API_10_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -290,7 +299,8 @@ class CloudCa: NSObject {
                                              "user_mobile": success.userMobile ?? ""]
                 resolve(result)
             case .failure(let failure):
-                reject("API_11_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -312,7 +322,8 @@ class CloudCa: NSObject {
                                              "clock_tolerance_on_auth_cert": success.clockToleranceOnAuthCERT ?? ""]
                 resolve(result)
             case .failure(let failure):
-                reject("API_12_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -333,7 +344,8 @@ class CloudCa: NSObject {
                                              "format": success.format ]
                 resolve(result)
             case .failure(let failure):
-                reject("API_13_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
             }
         }
@@ -354,7 +366,8 @@ class CloudCa: NSObject {
                                              "expires_in": success.expiresIn ]
                 resolve(result)
             case .failure(let failure):
-                reject("API_14_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -372,7 +385,8 @@ class CloudCa: NSObject {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
-                reject("API_15_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }
@@ -390,7 +404,8 @@ class CloudCa: NSObject {
             case .success(_):
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
-                reject("API_16_Failed",failure.localizedDescription, failure.asAFError)
+                let error = failure as! ServerResponseError
+                reject(error.codeDesc, error.errorDescription, failure.asAFError)
                 break
                 
             }

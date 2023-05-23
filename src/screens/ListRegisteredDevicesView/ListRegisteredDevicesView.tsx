@@ -61,7 +61,9 @@ const RootViewContainer = (props: ListRegisteredDevicesViewProps) => {
       onDone?.(allResult!);
     } catch (error) {
       setIsShowError(true);
-      setErrorResponse((error as CustomError)?.message);
+      setErrorResponse(
+        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+      );
       setIsLoading(false);
       setAllResult({ ...allResult, error: error as CustomError });
       onDone?.(allResult!);

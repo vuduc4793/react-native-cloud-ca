@@ -320,6 +320,6 @@ SWIFT_CLASS("_TtC9Alamofire15SessionDelegate")
 #pragma clang diagnostic pop
 #endif
 
-#else
-#error unsupported Swift architecture
+//#else
+//#error unsupported Swift architecture
 #endif

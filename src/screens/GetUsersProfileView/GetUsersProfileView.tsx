@@ -35,7 +35,9 @@ const GetUsersProfileView = (props: GetUsersProfileViewProps) => {
         setAllResult({ getUserProfileResponse: result });
       } catch (error) {
         setIsShowError(true);
-        setErrorResponse((error as CustomError)?.message);
+        setErrorResponse(
+          `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
+        );
         setIsLoading(false);
         setAllResult({ error: error as CustomError });
       }
@@ -55,7 +57,6 @@ const GetUsersProfileView = (props: GetUsersProfileViewProps) => {
         <InfoField title="Họ và tên" info={userInfo?.user_name || ''} />
         <InfoField title="Số điện thoại" info={userInfo?.user_mobile || ''} />
         <InfoField title="Email" info={userInfo?.user_email || ''} />
-        <InfoField title="Địa chỉ" info={''} />
       </View>
       <Dialogue
         modalType="ERROR"
