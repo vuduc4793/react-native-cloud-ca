@@ -1,6 +1,6 @@
 {
   "name": "react-native-cloud-ca",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "This is a module written in TypeScript that exports a set of functions that wrap native modules of a React Native library called react-native-cloud-ca.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
