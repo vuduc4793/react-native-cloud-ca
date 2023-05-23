@@ -47,6 +47,36 @@ sdkSetup({ baseUrl: '' })
 // ...
 ```
 
+- Init SDK:
+
+```js
+import { initData } from 'react-native-cloud-ca';
+
+const params: InitDataParams = { 
+    baseURL: "",
+    biometricTitle: "",
+    clientId: "",
+    clientSecret: "",
+    grantType: "",
+    userId: ""}
+const response = await initData(params);
+
+interface InitDataParams {
+  /**
+   * only for Android OS
+   */
+  baseURL: string;
+  /**
+   * only for Android OS
+   */
+  biometricTitle: string;
+  clientId: string;
+  clientSecret: string;
+  grantType: string;
+  userId: string;
+}
+```
+
 ## How to use API
 
 - 4.1 AuthenticateClient:
@@ -61,11 +91,7 @@ sdkSetup({ baseUrl: '' })
 import { authenticateClient } from 'react-native-cloud-ca';
 
 // ...
-authenticateClient({
-  clientId: 'clientId',
-  clientSecret: 'clientSecret',
-  grantType: 'grantType',
-})
+authenticateClient()
   .then((result) => {
     // Do something
   })
@@ -77,9 +103,6 @@ authenticateClient({
 
 ```js
 interface AuthenticateClientParams {
-  clientId: string;
-  clientSecret: string;
-  grantType: string;
 }
 
 interface AuthenticateClientResponse {
@@ -101,9 +124,7 @@ interface AuthenticateClientResponse {
 import { authenticateUser } from 'react-native-cloud-ca';
 
 // ...
-authenticateUser({
-  userId: 'userId',
-})
+authenticateUser()
   .then((result) => {
     // Do something
   })
@@ -115,7 +136,6 @@ authenticateUser({
 
 ```js
 interface AuthenticateUserParams {
-  userId: string;
 }
 
 interface TokenInfo {
@@ -144,9 +164,9 @@ import { verifyOTP } from 'react-native-cloud-ca';
 
 // ...
 verifyOTP({
-  userId: 'userId',
-  otpSms: 'otpSms',
-  otpMail: 'otpMail',
+  otpSms: "";
+  otpMail: "";
+  biometricApiType: 'AUTO';
 })
   .then((result) => {
     // Do something
@@ -159,12 +179,20 @@ verifyOTP({
 
 ```js
 interface VerifyOTPParams {
-  userId: string;
   otpSms: string;
   otpMail: string;
+  /**
+   * only for Android OS
+   */
+  biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
 }
 
 interface VerifyOTPResponse extends TokenInfo {}
+
+interface AndroidVerifyOTPResponse {
+  verifyOTPResponse: TokenInfo;
+  registerDeviceResponse: RegisterDeviceResponse;
+}
 ```
 
 - 4.4 Renew Access Token:

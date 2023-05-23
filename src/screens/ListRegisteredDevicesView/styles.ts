@@ -5,7 +5,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   numberOfDevices: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#121517',
     marginBottom: 12,
     marginTop: 34,
@@ -16,5 +16,22 @@ export default StyleSheet.create({
   },
   listConatiner: {
     flex: 1,
+  },
+  emptyContainer: {
+    alignItems: 'center',
+  },
+  emptyText: {
+    color: '#9099A0',
+    fontSize: 16,
+    marginBottom: 16,
+  },
+  reloadRequestText: {
+    textDecorationLine: 'underline',
+    fontSize: 16,
+  },
+  emptyImage: {
+    width: 185,
+    height: 152,
+    marginBottom: 36,
   },
 });

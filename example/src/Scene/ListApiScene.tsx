@@ -69,6 +69,7 @@ const ListApiScene = () => {
         verifyOTP({
           otpMail: '',
           otpSms: '',
+          biometricApiType: 'AUTO',
         })
           .then((response) => {
             setResult(JSON.stringify(response));

@@ -46,10 +46,17 @@ export interface AuthenticateUserResponse {
 export interface VerifyOTPParams {
   otpSms: string;
   otpMail: string;
+  /**
+   * only for Android OS
+   */
+  biometricApiType: 'FACE_ID' | 'FINGER_PRINT' | 'DEVICE_CREDENTIAL' | 'AUTO';
 }
 
 export interface VerifyOTPResponse extends TokenInfo {}
-
+export interface AndroidVerifyOTPResponse {
+  verifyOTPResponse: TokenInfo;
+  registerDeviceResponse: RegisterDeviceResponse;
+}
 // 4.4 Renew Access Token
 export interface RenewAccessTokenParams {
   /**

@@ -90,8 +90,9 @@ export function authenticateUser(): Promise<AuthenticateUserResponse> {
 
 // 4.3 Verify OTP
 export function verifyOTP(params: VerifyOTPParams): Promise<VerifyOTPResponse> {
-  const { otpMail, otpSms } = params;
-  return CloudCa.verifyOTP(otpSms, otpMail);
+  const { otpMail, otpSms, biometricApiType } = params;
+
+  return CloudCa.verifyOTP(otpSms, otpMail, biometricApiType);
 }
 
 // 4.4 Renew Access Token

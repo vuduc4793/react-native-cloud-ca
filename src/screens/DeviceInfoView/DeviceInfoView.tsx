@@ -86,15 +86,16 @@ const DeviceInfoView = (props: DeviceInfoViewProps) => {
         <Text style={styles.contentStyle}>{errorResponse}</Text>
       </Dialogue>
       <DialogueConfirm
+        modalType="WARNING"
         title="Thông báo"
         closeOnPress={() => handleShowRequestDelete(false)}
-        closeLabel="Đóng"
+        closeLabel="Quay lại"
         confirmOnPress={onDeleteDevice}
-        confirmLabel="Xoá"
+        confirmLabel="Hủy đăng ký"
         visible={isShowRequestDelete}
       >
         <Text style={styles.contentStyle}>
-          Bạn có muốn xoá các thiết bị này không.
+          Bạn có chắc muốn huỷ đăng ký trên thiết bị này không?
         </Text>
       </DialogueConfirm>
       {isLoading && <Loading />}

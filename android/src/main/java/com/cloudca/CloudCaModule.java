@@ -1,6 +1,7 @@
 package com.cloudca;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -157,7 +158,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
   }
   // 4.3 Verify OTP
   @ReactMethod
-  public void verifyOTP(String otpSms, String otpMail, Promise promise) {
+  public void verifyOTP(String otpSms, String otpMail, String biometricApiType, Promise promise) {
     VerifyOTPAPIRequest request = new VerifyOTPAPIRequest();
     List<VerifyOTPAPIRequest.OTPInfo> otpInfo = new ArrayList<>();
     if(StringUtils.valid(otpSms)) {
@@ -168,23 +169,43 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
     }
     request.setOtpInfo(otpInfo);
 
-    CloudCA.get().verifyOTP(request, new ServiceApiListener<TokenInfo>() {
-      @Override
-      public void onSuccess(TokenInfo data) {
-        WritableMap result = Arguments.createMap();
-        result.putString("access_token", data.getAccessToken());
-        result.putString("refresh_token", data.getRefreshToken());
-        result.putString("token_type", data.getTokenType());
-        result.putString("expires_in", data.getExpiresIn());
+    FragmentActivity activity = (FragmentActivity) getCurrentActivity();
+    BiometricApiType biometricType = BiometricApiType.valueOf(biometricApiType);
 
-        promise.resolve(result);
-      }
+    WritableMap tokenInfoData = Arguments.createMap();
+    CloudCA.Call<TokenInfo> tokenInfoCall = new CloudCA.Call<TokenInfo>() {
       @Override
-      public void onFail(ResponseError error) {
-        CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
+      public void onSuccess(TokenInfo tokenInfo) {
+        tokenInfoData.putString("access_token", tokenInfo.getAccessToken());
+        tokenInfoData.putString("refresh_token", tokenInfo.getRefreshToken());
+        tokenInfoData.putString("token_type", tokenInfo.getTokenType());
+        tokenInfoData.putString("expires_in", tokenInfo.getExpiresIn());
       }
-    });
+    };
+
+    ServiceLoadingApiListener<CertificateResponse> listener =
+      new ServiceLoadingApiListener<CertificateResponse>() {
+        @Override
+        public void showLoading() {
+        }
+        @Override
+        public void onSuccess(CertificateResponse data) {
+          WritableMap result = Arguments.createMap();
+          result.putString("alias", data.getAlias());
+          result.putString("certificate", data.getCertificate());
+          result.putMap("verifyOTPResponse", tokenInfoData);
+          promise.resolve(result);
+        }
+        @Override
+        public void hideLoading() {
+        }
+        @Override
+        public void onFail(ResponseError error) {
+          CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getErrorMessage());
+        }
+      };
+    CloudCA.get().verifyOTP(request, activity,  biometricType, tokenInfoCall, listener);
   }
   // 4.4 Renew Access Token
   @ReactMethod

@@ -3,8 +3,15 @@ import type {
   DeviceRegistrationProps,
   DeviceRegistrationResponse,
 } from './types';
-import { TouchableOpacity, Text, TextInput, View } from 'react-native';
 import {
+  TouchableOpacity,
+  Text,
+  TextInput,
+  View,
+  Platform,
+} from 'react-native';
+import {
+  AndroidVerifyOTPResponse,
   CloudCAProviderContext,
   CustomError,
   Dialogue,
@@ -95,14 +102,30 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
 
   const onConfirmOtp = async () => {
     try {
-      const otpResult = await verifyOTP({ otpSms: otpSms, otpMail: '' });
-      setAllResult({
-        ...allResult,
-        verifyOTPResponse: otpResult,
+      const otpResult = await verifyOTP({
+        otpSms: otpSms,
+        otpMail: '',
+        biometricApiType: registerDeviceParams?.biometricApiType,
       });
       setOtpSms('');
       setIsShowOtp(false);
-      await onRegisterDevices();
+      if (Platform.OS === 'android') {
+        setSuccessResponse('Đã đăng ký thiết bị thành công');
+        setIsShowSuccess(true);
+        const androidOtpResult =
+          otpResult as unknown as AndroidVerifyOTPResponse;
+        setAllResult({
+          ...allResult,
+          registerDeviceResponse: androidOtpResult?.registerDeviceResponse,
+          verifyOTPResponse: androidOtpResult?.verifyOTPResponse,
+        });
+      } else {
+        setAllResult({
+          ...allResult,
+          verifyOTPResponse: otpResult,
+        });
+        await onRegisterDevices();
+      }
     } catch (error) {
       setOtpSms('');
       setErrorResponse((error as CustomError)?.message);
@@ -114,13 +137,14 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   const onRegisterDevices = async () => {
     try {
       const result = await registerDevice(registerDeviceParams);
+      setSuccessResponse('Đã đăng ký thiết bị thành công');
+      setIsShowSuccess(true);
       setAllResult({
         ...allResult,
         registerDeviceResponse: result,
       });
-      setSuccessResponse('Đã đăng ký thiết bị thành công');
-      setIsShowSuccess(true);
     } catch (error) {
+      console.log('error', error);
       setErrorResponse((error as CustomError)?.message);
       setIsShowError(true);
     }
@@ -128,6 +152,11 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
 
   const handleDone = () => {
     setIsShowSuccess(false);
+    onDone?.(allResult!);
+  };
+
+  const handleError = () => {
+    setIsShowError(false);
     onDone?.(allResult!);
   };
 
@@ -155,11 +184,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
       <Dialogue visible={isShowSuccess} onClose={handleDone}>
         <Text style={styles.contentStyle}>{successResponse}</Text>
       </Dialogue>
-      <Dialogue
-        modalType="ERROR"
-        onClose={() => setIsShowError(false)}
-        visible={isShowError}
-      >
+      <Dialogue modalType="ERROR" onClose={handleError} visible={isShowError}>
         <Text style={styles.contentStyle}>{errorResponse}</Text>
       </Dialogue>
       <DialogueConfirm
