@@ -101,6 +101,7 @@ const GetPendingAuthorisationRequestView = (
   };
 
   const authorisationRequest = async () => {
+    setIsShowRequest(false);
     setIsLoading(true);
     try {
       await validateToken();
@@ -115,10 +116,8 @@ const GetPendingAuthorisationRequestView = (
       setAllResult({ authorisationPendingRequestResponse: result });
       setIsLoading(false);
       setIsShowSuccess(true);
-      setIsShowRequest(false);
     } catch (error) {
       setIsShowError(true);
-      setIsShowRequest(false);
       setErrorResponse(
         `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
       );
@@ -128,6 +127,7 @@ const GetPendingAuthorisationRequestView = (
   };
 
   const cancelRequest = async () => {
+    setIsShowRequest(false);
     setIsLoading(true);
     try {
       await validateToken();
@@ -140,10 +140,8 @@ const GetPendingAuthorisationRequestView = (
       setAllResult({ cancelPendingRequestResponse: result });
       setIsLoading(false);
       setIsShowSuccess(true);
-      setIsShowRequest(false);
     } catch (error) {
       setIsShowError(true);
-      setIsShowRequest(false);
       setErrorResponse(
         `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
       );
