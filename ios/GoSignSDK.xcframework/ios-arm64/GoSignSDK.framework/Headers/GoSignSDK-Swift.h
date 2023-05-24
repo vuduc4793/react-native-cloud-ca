@@ -290,6 +290,11 @@ SWIFT_CLASS("_TtC9GoSignSDK3API")
 
 
 
+
+@interface API (SWIFT_EXTENSION(GoSignSDK))
++ (void)clearToken;
+@end
+
 @class NSString;
 
 @interface API (SWIFT_EXTENSION(GoSignSDK))
@@ -524,6 +529,7 @@ SWIFT_CLASS("_TtC9GoSignSDK19ServerResponseError")
 @property (nonatomic, readonly, copy) NSString * _Nullable code;
 @property (nonatomic, readonly, copy) NSString * _Nullable codeDesc;
 - (nonnull instancetype)initWithError:(NSString * _Nullable)error errorDescription:(NSString * _Nullable)errorDescription code:(NSString * _Nullable)code codeDesc:(NSString * _Nullable)codeDesc OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull message;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

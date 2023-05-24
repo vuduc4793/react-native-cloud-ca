@@ -65,7 +65,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
             }
         }
@@ -87,7 +87,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -121,7 +121,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -143,7 +143,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -164,7 +164,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -191,7 +191,7 @@ class CloudCa: NSObject {
                 resolve(listDevices)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -212,7 +212,7 @@ class CloudCa: NSObject {
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -233,7 +233,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -257,7 +257,7 @@ class CloudCa: NSObject {
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -278,7 +278,7 @@ class CloudCa: NSObject {
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -300,7 +300,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -323,7 +323,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -345,7 +345,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
             }
         }
@@ -367,7 +367,7 @@ class CloudCa: NSObject {
                 resolve(result)
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -386,7 +386,7 @@ class CloudCa: NSObject {
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }
@@ -405,7 +405,7 @@ class CloudCa: NSObject {
                 resolve(["result": self.EVENT_SUCCEEDED])
             case .failure(let failure):
                 let error = failure as! ServerResponseError
-                reject(error.codeDesc, error.errorDescription, failure.asAFError)
+                reject(error.codeDesc, error.message, failure.asAFError)
                 break
                 
             }

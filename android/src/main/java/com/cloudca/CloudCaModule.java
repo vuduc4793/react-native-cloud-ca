@@ -123,7 +123,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
          @Override
          public void onFail(ResponseError error) {
            CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-           promise.reject(e.getErrorCode(), e.getErrorMessage());
+           promise.reject(e.getErrorCode(), e.getError());
          }
        });
   }
@@ -152,7 +152,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       });
   }
@@ -202,7 +202,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       };
     CloudCA.get().verifyOTP(request, activity,  biometricType, tokenInfoCall, listener);
@@ -225,7 +225,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       });
   }
@@ -257,7 +257,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
           @Override
           public void onFail(ResponseError error) {
             CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-            promise.reject(e.getErrorCode(), e.getErrorMessage());
+            promise.reject(e.getErrorCode(), e.getError());
           }
         };
 
@@ -294,7 +294,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       });
   }
@@ -312,7 +312,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       });
   }
@@ -332,7 +332,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
+        promise.reject(e.getErrorCode(), e.getError());
       }
     });
   }
@@ -380,7 +380,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       };
 
@@ -415,7 +415,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
+        promise.reject(e.getErrorCode(), e.getError());
       }
     });
   }
@@ -437,7 +437,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
+        promise.reject(e.getErrorCode(), e.getError());
       }
     });
   }
@@ -460,7 +460,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
+        promise.reject(e.getErrorCode(), e.getError());
       }
     });
   }
@@ -480,7 +480,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
       @Override
       public void onFail(ResponseError error) {
         CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-        promise.reject(e.getErrorCode(), e.getErrorMessage());
+        promise.reject(e.getErrorCode(), e.getError());
       }
     });
   }
@@ -507,7 +507,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       });
   }
@@ -525,7 +525,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       });
   }
@@ -543,7 +543,7 @@ public class CloudCaModule extends ReactContextBaseJavaModule {
         @Override
         public void onFail(ResponseError error) {
           CustomException e =  new CustomException(error.getErrorType(), error.getErrorMessage());
-          promise.reject(e.getErrorCode(), e.getErrorMessage());
+          promise.reject(e.getErrorCode(), e.getError());
         }
       });
   }

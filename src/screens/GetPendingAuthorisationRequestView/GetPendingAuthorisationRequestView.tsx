@@ -71,9 +71,7 @@ const GetPendingAuthorisationRequestView = (
       setIsLoading(false);
     } catch (error) {
       setIsShowError(true);
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       setIsLoading(false);
       setAllResult({ error: error as CustomError });
     }
@@ -118,9 +116,7 @@ const GetPendingAuthorisationRequestView = (
       setIsShowSuccess(true);
     } catch (error) {
       setIsShowError(true);
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       setIsLoading(false);
       setAllResult({ error: error as CustomError });
     }
@@ -142,9 +138,7 @@ const GetPendingAuthorisationRequestView = (
       setIsShowSuccess(true);
     } catch (error) {
       setIsShowError(true);
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       setIsLoading(false);
       setAllResult({ error: error as CustomError });
     }

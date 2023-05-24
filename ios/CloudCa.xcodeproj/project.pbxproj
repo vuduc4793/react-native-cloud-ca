@@ -11,7 +11,7 @@
 		FACBB86629B99C940041EEC6 /* KeychainSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACBB86229B99C910041EEC6 /* KeychainSwift.xcframework */; };
 		FACBB86729B99C940041EEC6 /* Moya.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACBB86329B99C920041EEC6 /* Moya.xcframework */; };
 		FACBB86929B99C940041EEC6 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACBB86529B99C940041EEC6 /* Alamofire.xcframework */; };
-		FAF5D7F02A1CC67000B9C0C8 /* GoSignSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF5D7EF2A1CC67000B9C0C8 /* GoSignSDK.xcframework */; };
+		FAF5D7F22A1E1BDA00B9C0C8 /* GoSignSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF5D7F12A1E1BD900B9C0C8 /* GoSignSDK.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,7 +34,7 @@
 		FACBB86229B99C910041EEC6 /* KeychainSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = KeychainSwift.xcframework; sourceTree = "<group>"; };
 		FACBB86329B99C920041EEC6 /* Moya.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Moya.xcframework; sourceTree = "<group>"; };
 		FACBB86529B99C940041EEC6 /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Alamofire.xcframework; sourceTree = "<group>"; };
-		FAF5D7EF2A1CC67000B9C0C8 /* GoSignSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoSignSDK.xcframework; sourceTree = "<group>"; };
+		FAF5D7F12A1E1BD900B9C0C8 /* GoSignSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoSignSDK.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +43,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FACBB86929B99C940041EEC6 /* Alamofire.xcframework in Frameworks */,
-				FAF5D7F02A1CC67000B9C0C8 /* GoSignSDK.xcframework in Frameworks */,
+				FAF5D7F22A1E1BDA00B9C0C8 /* GoSignSDK.xcframework in Frameworks */,
 				FACBB86629B99C940041EEC6 /* KeychainSwift.xcframework in Frameworks */,
 				FACBB86729B99C940041EEC6 /* Moya.xcframework in Frameworks */,
 			);
@@ -63,7 +63,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				FAF5D7EF2A1CC67000B9C0C8 /* GoSignSDK.xcframework */,
+				FAF5D7F12A1E1BD900B9C0C8 /* GoSignSDK.xcframework */,
 				FA66F1C829B4C82A006BCF51 /* CloudCa-Bridging-Header.h */,
 				FA66F1C629B4C810006BCF51 /* CloudCa.swift */,
 				FA66F1C129B4C779006BCF51 /* CloudCa.m */,

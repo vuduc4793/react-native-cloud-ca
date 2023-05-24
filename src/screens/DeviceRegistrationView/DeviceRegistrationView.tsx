@@ -80,9 +80,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         ...allResult,
         error: error as CustomError,
       });
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       handleShowRequestRegister(false);
       setIsShowError(true);
       setIsLoading(false);
@@ -106,9 +104,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         ...allResult,
         error: error as CustomError,
       });
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       setIsShowError(true);
     }
   };
@@ -146,9 +142,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         ...allResult,
         error: error as CustomError,
       });
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       setIsShowError(true);
       setIsShowOtp(false);
     }
@@ -172,9 +166,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         ...allResult,
         error: error as CustomError,
       });
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       setIsShowError(true);
     }
   };

@@ -35,9 +35,7 @@ const GetUsersProfileView = (props: GetUsersProfileViewProps) => {
         setAllResult({ getUserProfileResponse: result });
       } catch (error) {
         setIsShowError(true);
-        setErrorResponse(
-          `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-        );
+        setErrorResponse(`${(error as CustomError)?.message}`);
         setIsLoading(false);
         setAllResult({ error: error as CustomError });
       }

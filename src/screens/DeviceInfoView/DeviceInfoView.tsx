@@ -45,9 +45,7 @@ const DeviceInfoView = (props: DeviceInfoViewProps) => {
       setIsShowSuccess(true);
       setAllResponse({ deleteDeviceResponse: result });
     } catch (error) {
-      setErrorResponse(
-        `${(error as CustomError)?.code} - ${(error as CustomError)?.message}`
-      );
+      setErrorResponse(`${(error as CustomError)?.message}`);
       setAllResponse({ error: error as CustomError });
       setIsLoading(false);
       setIsShowRequestDelete(false);
@@ -94,6 +92,7 @@ const DeviceInfoView = (props: DeviceInfoViewProps) => {
         closeLabel="Quay lại"
         confirmOnPress={onDeleteDevice}
         confirmLabel="Hủy đăng ký"
+        confirmDisable={isLoading}
         visible={isShowRequestDelete}
       >
         <Text style={styles.contentStyle}>

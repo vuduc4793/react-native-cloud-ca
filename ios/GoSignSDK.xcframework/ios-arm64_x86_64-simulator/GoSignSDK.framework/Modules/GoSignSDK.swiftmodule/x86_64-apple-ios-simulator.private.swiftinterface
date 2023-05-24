@@ -24,6 +24,9 @@ extension Swift.Result where Success == () {
   @objc final public let code: Swift.String?
   @objc final public let codeDesc: Swift.String?
   @objc public init(error: Swift.String?, errorDescription: Swift.String?, code: Swift.String?, codeDesc: Swift.String?)
+  @objc public var message: Swift.String {
+    @objc get
+  }
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
@@ -144,6 +147,9 @@ extension GoSignSDK.API {
 }
 extension GoSignSDK.API {
   @objc public static var host: Swift.String
+}
+@objc extension GoSignSDK.API {
+  @objc public static func clearToken()
 }
 @objc @_inheritsConvenienceInitializers final public class API : ObjectiveC.NSObject {
   public static func authenticateClient(_ request: GoSignSDK.ClientAuthenticateAPIRequest, completion: @escaping (Swift.Result<GoSignSDK.AuthenticateClientAPIResponse, any Swift.Error>) -> Swift.Void)
