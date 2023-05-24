@@ -155,6 +155,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
   };
 
   const onRegisterDevices = async () => {
+    setIsLoading(true);
     try {
       const result = await registerDevice(registerDeviceParams);
       setSuccessResponse('Đã đăng ký thiết bị thành công');
@@ -163,7 +164,9 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         ...allResult,
         registerDeviceResponse: result,
       });
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setIsOtpError(false);
       setAllResult({
         ...allResult,
@@ -246,7 +249,7 @@ const DeviceRegistrationView = (props: DeviceRegistrationProps) => {
         }}
         confirmLabel="Tiếp tục"
         confirmOnPress={onConfirmOtp}
-        confirmDisable={otpSms?.length < MAX_LENGTH_OTP}
+        confirmDisable={otpSms?.length < MAX_LENGTH_OTP || isLoading}
       >
         <Text style={styles.contentStyle}>
           Nhập mã xác thực được gửi về số điện thoại đã đăng ký

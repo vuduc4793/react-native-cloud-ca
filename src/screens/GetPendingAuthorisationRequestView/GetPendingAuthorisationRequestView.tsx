@@ -298,6 +298,7 @@ const GetPendingAuthorisationRequestView = (
           closeLabel="Bỏ qua"
           confirmOnPress={onConfirmOnPress}
           confirmLabel="Tiếp tục"
+          confirmDisable={isLoading}
           visible={isShowRequest}
         >
           <Text style={styles.contentStyle}>
