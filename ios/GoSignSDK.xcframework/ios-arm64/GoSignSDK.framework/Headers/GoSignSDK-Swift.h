@@ -597,6 +597,6 @@ SWIFT_CLASS("_TtC9GoSignSDK22VerifyQRCodeAPIRequest")
 #pragma clang diagnostic pop
 #endif
 
-//#else
-//#error unsupported Swift architecture
+// #else
+// #error unsupported Swift architecture
 #endif

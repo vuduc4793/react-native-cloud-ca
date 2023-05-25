@@ -1838,7 +1838,6 @@
             "mangledName": "$s9GoSignSDK26DeviceRegistrationSettingsC13deviceKeySizeSivp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "HasInitialValue",
               "Final",
               "HasStorage",
               "AccessControl",
@@ -1889,7 +1888,6 @@
             "mangledName": "$s9GoSignSDK26DeviceRegistrationSettingsC21secureElementRequiredSbvp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "HasInitialValue",
               "Final",
               "HasStorage",
               "AccessControl",
@@ -1940,7 +1938,6 @@
             "mangledName": "$s9GoSignSDK26DeviceRegistrationSettingsC17biometricRequiredSbvp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "HasInitialValue",
               "Final",
               "HasStorage",
               "AccessControl",
@@ -3309,7 +3306,6 @@
             "mangledName": "$s9GoSignSDK25GenerateQRCodeAPIResponseC6formatAA8QRFormatOvp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "HasInitialValue",
               "Final",
               "HasStorage",
               "AccessControl",
@@ -7514,7 +7510,6 @@
             "mangledName": "$s9GoSignSDK9TokenInfoC9expiresInSivp",
             "moduleName": "GoSignSDK",
             "declAttributes": [
-              "HasInitialValue",
               "Final",
               "HasStorage",
               "AccessControl",
@@ -13489,106 +13484,85 @@
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
-      "kind": "IntegerLiteral",
-      "offset": 274,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
-      "kind": "BooleanLiteral",
-      "offset": 327,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
-      "kind": "BooleanLiteral",
-      "offset": 380,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 528,
+      "offset": 508,
       "length": 17,
       "value": "\"device_key_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 575,
+      "offset": 555,
       "length": 17,
       "value": "\"device_key_size\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 630,
+      "offset": 610,
       "length": 25,
       "value": "\"secure_element_required\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 689,
+      "offset": 669,
       "length": 20,
       "value": "\"biometric_required\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 740,
+      "offset": 720,
       "length": 17,
       "value": "\"allowed_devices\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 798,
+      "offset": 778,
       "length": 30,
       "value": "\"clock_tolerance_on_auth_cert\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 528,
+      "offset": 508,
       "length": 17,
       "value": "\"device_key_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 575,
+      "offset": 555,
       "length": 17,
       "value": "\"device_key_size\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 630,
+      "offset": 610,
       "length": 25,
       "value": "\"secure_element_required\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 689,
+      "offset": 669,
       "length": 20,
       "value": "\"biometric_required\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 740,
+      "offset": 720,
       "length": 17,
       "value": "\"allowed_devices\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/DeviceRegistrationSettings.swift",
       "kind": "StringLiteral",
-      "offset": 798,
+      "offset": 778,
       "length": 30,
       "value": "\"clock_tolerance_on_auth_cert\""
     },
@@ -13651,133 +13625,140 @@
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 919,
+      "offset": 912,
       "length": 9,
       "value": "\"qr_code\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 919,
+      "offset": 912,
       "length": 9,
       "value": "\"qr_code\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 1018,
+      "offset": 1011,
       "length": 3,
       "value": "1"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 1023,
+      "offset": 1016,
       "length": 3,
       "value": "2"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 1028,
+      "offset": 1021,
       "length": 4,
       "value": "3"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 1034,
+      "offset": 1027,
       "length": 4,
       "value": "4"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "IntegerLiteral",
-      "offset": 1040,
+      "offset": 1033,
       "length": 3,
       "value": "5"
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1193,
+      "offset": 1186,
       "length": 5,
       "value": "\"png\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1245,
+      "offset": 1238,
       "length": 5,
       "value": "\"jpg\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1297,
+      "offset": 1290,
       "length": 5,
       "value": "\"bmp\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1350,
+      "offset": 1343,
       "length": 6,
       "value": "\"jpeg\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1404,
+      "offset": 1397,
       "length": 6,
       "value": "\"wbmp\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1457,
+      "offset": 1450,
       "length": 5,
       "value": "\"gif\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1562,
+      "offset": 1500,
       "length": 5,
       "value": "\"png\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1614,
+      "offset": 1605,
+      "length": 5,
+      "value": "\"png\""
+    },
+    {
+      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
+      "kind": "StringLiteral",
+      "offset": 1657,
       "length": 5,
       "value": "\"jpg\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1666,
+      "offset": 1709,
       "length": 5,
       "value": "\"bmp\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1718,
+      "offset": 1761,
       "length": 6,
       "value": "\"jpeg\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1772,
+      "offset": 1815,
       "length": 6,
       "value": "\"wbmp\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/Model\/GenerateQRCodeModel.swift",
       "kind": "StringLiteral",
-      "offset": 1826,
+      "offset": 1869,
       "length": 5,
       "value": "\"gif\""
     },
@@ -14665,64 +14646,57 @@
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
-      "kind": "IntegerLiteral",
-      "offset": 24323,
-      "length": 3,
-      "value": "120"
-    },
-    {
-      "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24400,
+      "offset": 24394,
       "length": 14,
       "value": "\"access_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24443,
+      "offset": 24437,
       "length": 15,
       "value": "\"refresh_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24484,
+      "offset": 24478,
       "length": 12,
       "value": "\"token_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24522,
+      "offset": 24516,
       "length": 12,
       "value": "\"expires_in\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24400,
+      "offset": 24394,
       "length": 14,
       "value": "\"access_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24443,
+      "offset": 24437,
       "length": 15,
       "value": "\"refresh_token\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24484,
+      "offset": 24478,
       "length": 12,
       "value": "\"token_type\""
     },
     {
       "filePath": "\/Users\/ngohuan\/Desktop\/BiPlus\/Project\/CloudCA\/iOS\/sdkcloudca_ios\/GoSignSDK\/GoSignSDK\/TargetType\/API.swift",
       "kind": "StringLiteral",
-      "offset": 24522,
+      "offset": 24516,
       "length": 12,
       "value": "\"expires_in\""
     },

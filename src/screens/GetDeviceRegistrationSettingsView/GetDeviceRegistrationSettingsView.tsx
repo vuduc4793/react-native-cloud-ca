@@ -35,15 +35,19 @@ const GetDeviceRegistrationSettingsView = (
         await validateToken();
         const result = await getDeviceRegistrationSettings();
         setDeviceInfo(result);
-        setAllResponse({ getDeviceRegistrationSettingsResponse: result });
+        setAllResponse({
+          ...allResponse,
+          getDeviceRegistrationSettingsResponse: result,
+        });
         setIsLoading(false);
       } catch (error) {
         setIsShowError(true);
         setErrorResponse(`${(error as CustomError)?.message}`);
-        setAllResponse({ error: error as CustomError });
+        setAllResponse({ ...allResponse, error: error as CustomError });
         setIsLoading(false);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
