@@ -5,20 +5,26 @@ import {
   CloudCAProvider,
   DeviceRegistrationView,
   PrimaryButton,
-  // initData,
+  initData,
   DeleteDeviceView,
 } from 'react-native-cloud-ca';
 
+const CLIENT_ID = 'samples_test_client';
+const CLIENT_SECRET = '205640fd6ea8c7d80bb91c630b52d286d21ee511';
+const GRANT_TYPE = 'client_credentials';
+const USER_ID = 'MST_0123456787-475';
+const BASE_URL = 'https://remotesigning.viettel.vn';
+
 export default function App() {
   const onAuthen = () => {
-    // initData({
-    //   baseURL: BASE_URL,
-    //   biometricTitle: 'Unlock to add device',
-    //   clientId: CLIENT_ID,
-    //   clientSecret: CLIENT_SECRET,
-    //   grantType: GRANT_TYPE,
-    //   userId: USER_ID,
-    // });
+    initData({
+      baseURL: BASE_URL,
+      biometricTitle: 'Unlock to add device',
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      grantType: GRANT_TYPE,
+      userId: USER_ID,
+    });
   };
 
   return (
