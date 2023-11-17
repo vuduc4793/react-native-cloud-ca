@@ -67,7 +67,7 @@ dependencies {
   // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
-  implementation 'com.github.vuduc4793:Cloud-CA-Android-SDK:0.3.2'
+  implementation 'com.github.vuduc4793:Cloud-CA-Android-SDK:0.3.3'
   implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
   implementation 'com.squareup.okhttp3:okhttp:4.9.2'
   implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'

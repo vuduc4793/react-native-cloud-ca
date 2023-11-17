@@ -13,6 +13,15 @@ import Swift
 import UIKit
 import _Concurrency
 import _StringProcessing
+@objc public class AuthoriseaListPendingAPIRequest : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var requestId: Swift.String?
+  @objc public var request: Swift.String?
+  @objc public var hashAlgorithm: Swift.String?
+  @objc public init(requestId: Swift.String?, request: Swift.String?, hashAlgorithm: Swift.String?)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
 extension Swift.Result where Success == () {
   public static var success: Swift.Result<(), Failure> {
     get
@@ -41,6 +50,14 @@ extension Swift.Result where Success == () {
   @objc public init(userID: Swift.String? = nil, qrCode: Swift.String?)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
+}
+@_inheritsConvenienceInitializers @objc public class AuthoriseaListPendingAPIResponse : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var successRequests: [Swift.String]?
+  @objc public var failedRequests: [Swift.String]?
+  @objc override dynamic public init()
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
 }
 @objc public class DeleteDeviceForNotificationAPIRequest : ObjectiveC.NSObject, Swift.Codable {
   @objc public var deviceToken: Swift.String
@@ -151,6 +168,10 @@ extension GoSignSDK.API {
 @objc extension GoSignSDK.API {
   @objc public static func clearToken()
 }
+@objc extension GoSignSDK.API {
+  @objc public static func setDeviceName(_ name: Swift.String)
+  @objc public static func getDeviceName() -> Swift.String
+}
 @objc @_inheritsConvenienceInitializers final public class API : ObjectiveC.NSObject {
   public static func authenticateClient(_ request: GoSignSDK.ClientAuthenticateAPIRequest, completion: @escaping (Swift.Result<GoSignSDK.AuthenticateClientAPIResponse, any Swift.Error>) -> Swift.Void)
   public static func authenticateUser(_ userID: Swift.String, completion: @escaping (Swift.Result<GoSignSDK.AuthenticateUserAPIResponse, any Swift.Error>) -> Swift.Void)
@@ -168,6 +189,8 @@ extension GoSignSDK.API {
   public static func verifyQRCode(_ request: GoSignSDK.VerifyQRCodeAPIRequest, completion: @escaping (Swift.Result<GoSignSDK.TokenInfo, any Swift.Error>) -> Swift.Void)
   public static func registerDeviceForPushNotification(_ request: GoSignSDK.DevicePushNotificationAPIRequest, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
   public static func deleteDeviceForPushNotification(_ request: GoSignSDK.DeleteDeviceForNotificationAPIRequest, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
+  public static func getListPendingAuthorisationRequest(_ completion: @escaping (Swift.Result<[GoSignSDK.PendingAuthorisationAPIResponse], any Swift.Error>) -> Swift.Void)
+  public static func authoriseaPendingRequestList(localizedReason: Swift.String = "Unlock to add device", pendingAuthorisation: [GoSignSDK.PendingAuthorisationAPIResponse], completion: @escaping (Swift.Result<GoSignSDK.AuthoriseaListPendingAPIResponse, any Swift.Error>) -> Swift.Void)
   @objc override dynamic public init()
   @objc deinit
 }
@@ -227,6 +250,7 @@ extension GoSignSDK.API {
 }
 @objc public class RegisterDeviceAPIResponse : ObjectiveC.NSObject, Swift.Codable {
   @objc final public let alias: Swift.String?, certificate: Swift.String?
+  @objc public var deviceId: Swift.String?
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
@@ -265,6 +289,7 @@ extension GoSignSDK.API {
   @objc public var transactionID: Swift.String
   @objc public var request: Swift.String
   @objc public var hashAlgorithm: Swift.String
+  @objc public var isChecked: Swift.Bool
   @objc public init(transactionID: Swift.String? = nil, request: Swift.String? = nil, hashAlgorithm: Swift.String? = nil)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
@@ -317,15 +342,10 @@ public let ANAUTHORIZED_CODE: Swift.String
   @objc public var deviceName: Swift.String
   @objc public var secureElement: Swift.Bool
   @objc public var biometric: Swift.Bool
-  @objc public init(deviceID: Swift.String = UserDefaults.standard.deviceID, deviceName: Swift.String = UIDevice.current.model, secureElement: Swift.Bool = Device.hasSecureEnclave, biometric: Swift.Bool = Device.hasBiometrics)
+  @objc public init(deviceID: Swift.String? = nil, deviceName: Swift.String? = nil, secureElement: Swift.Bool = Device.hasSecureEnclave, biometric: Swift.Bool = Device.hasBiometrics)
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
-}
-@objc extension Foundation.UserDefaults {
-  @objc dynamic public var deviceID: Swift.String {
-    @objc get
-  }
 }
 @_inheritsConvenienceInitializers @objc public class Device : ObjectiveC.NSObject {
   @objc public static var hasSecureEnclave: Swift.Bool {
@@ -339,6 +359,15 @@ public let ANAUTHORIZED_CODE: Swift.String
   }
   @objc override dynamic public init()
   @objc deinit
+}
+@objc public class AuthorizationRequestModel : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var requestId: Swift.String?
+  @objc public var request: Swift.String?
+  @objc public var hashAlgorithm: Swift.String?
+  @objc public init(requestId: Swift.String?, request: Swift.String?, hashAlgorithm: Swift.String?)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
 }
 extension GoSignSDK.QRFormat : Swift.Equatable {}
 extension GoSignSDK.QRFormat : Swift.Hashable {}

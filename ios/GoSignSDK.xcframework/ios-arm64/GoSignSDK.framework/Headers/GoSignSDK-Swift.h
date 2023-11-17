@@ -305,6 +305,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSString * _Nonnull host
 
 
 @interface API (SWIFT_EXTENSION(GoSignSDK))
++ (void)setDeviceName:(NSString * _Nonnull)name;
++ (NSString * _Nonnull)getDeviceName SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface API (SWIFT_EXTENSION(GoSignSDK))
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull clientToken;)
 + (NSString * _Nonnull)clientToken SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull userToken;)
@@ -364,11 +370,41 @@ SWIFT_CLASS("_TtC9GoSignSDK27AuthenticateUserAPIResponse")
 @end
 
 
+SWIFT_CLASS("_TtC9GoSignSDK31AuthoriseaListPendingAPIRequest")
+@interface AuthoriseaListPendingAPIRequest : NSObject
+@property (nonatomic, copy) NSString * _Nullable requestId;
+@property (nonatomic, copy) NSString * _Nullable request;
+@property (nonatomic, copy) NSString * _Nullable hashAlgorithm;
+- (nonnull instancetype)initWithRequestId:(NSString * _Nullable)requestId request:(NSString * _Nullable)request hashAlgorithm:(NSString * _Nullable)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK32AuthoriseaListPendingAPIResponse")
+@interface AuthoriseaListPendingAPIResponse : NSObject
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable successRequests;
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable failedRequests;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC9GoSignSDK27AuthoriseaPendingAPIRequest")
 @interface AuthoriseaPendingAPIRequest : NSObject
 @property (nonatomic, copy) NSString * _Nullable request;
 @property (nonatomic, copy) NSString * _Nullable hashAlgorithm;
 - (nonnull instancetype)initWithRequest:(NSString * _Nullable)request hashAlgorithm:(NSString * _Nullable)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC9GoSignSDK25AuthorizationRequestModel")
+@interface AuthorizationRequestModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable requestId;
+@property (nonatomic, copy) NSString * _Nullable request;
+@property (nonatomic, copy) NSString * _Nullable hashAlgorithm;
+- (nonnull instancetype)initWithRequestId:(NSString * _Nullable)requestId request:(NSString * _Nullable)request hashAlgorithm:(NSString * _Nullable)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -421,7 +457,7 @@ SWIFT_CLASS("_TtC9GoSignSDK10DeviceInfo")
 @property (nonatomic, copy) NSString * _Nonnull deviceName;
 @property (nonatomic) BOOL secureElement;
 @property (nonatomic) BOOL biometric;
-- (nonnull instancetype)initWithDeviceID:(NSString * _Nonnull)deviceID deviceName:(NSString * _Nonnull)deviceName secureElement:(BOOL)secureElement biometric:(BOOL)biometric OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithDeviceID:(NSString * _Nullable)deviceID deviceName:(NSString * _Nullable)deviceName secureElement:(BOOL)secureElement biometric:(BOOL)biometric OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -499,6 +535,7 @@ SWIFT_CLASS("_TtC9GoSignSDK31PendingAuthorisationAPIResponse")
 @property (nonatomic, copy) NSString * _Nonnull transactionID;
 @property (nonatomic, copy) NSString * _Nonnull request;
 @property (nonatomic, copy) NSString * _Nonnull hashAlgorithm;
+@property (nonatomic) BOOL isChecked;
 - (nonnull instancetype)initWithTransactionID:(NSString * _Nullable)transactionID request:(NSString * _Nullable)request hashAlgorithm:(NSString * _Nullable)hashAlgorithm OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -519,6 +556,7 @@ SWIFT_CLASS("_TtC9GoSignSDK25RegisterDeviceAPIResponse")
 @interface RegisterDeviceAPIResponse : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nullable alias;
 @property (nonatomic, readonly, copy) NSString * _Nullable certificate;
+@property (nonatomic, copy) NSString * _Nullable deviceId;
 @end
 
 
@@ -553,10 +591,6 @@ SWIFT_CLASS("_TtC9GoSignSDK26UserAuthenticateAPIRequest")
 @end
 
 
-
-@interface NSUserDefaults (SWIFT_EXTENSION(GoSignSDK))
-@property (nonatomic, readonly, copy) NSString * _Nonnull deviceID;
-@end
 
 
 SWIFT_CLASS("_TtC9GoSignSDK22UserProfileAPIResponse")
@@ -597,6 +631,6 @@ SWIFT_CLASS("_TtC9GoSignSDK22VerifyQRCodeAPIRequest")
 #pragma clang diagnostic pop
 #endif
 
-// #else
-// #error unsupported Swift architecture
+#else
+#error unsupported Swift architecture
 #endif
